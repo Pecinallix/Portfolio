@@ -1,103 +1,123 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import React from 'react';
+import Header from '@/components/Header';
+import Home from '@/components/sections/Home';
+import About from '@/components/sections/About';
+import Skills from '@/components/sections/Skills';
+import Projects from '@/components/sections/Projects';
+import Contact from '@/components/sections/Contact';
+import useScrollToSection from '@/hooks/useScrollToSection';
+import { RiGithubFill, RiLinkedinBoxFill, RiMailFill } from 'react-icons/ri';
+import { Project, Skill } from '@/types/types';
+import styles from './page.module.css';
+
+const HomePortfolio: React.FC = () => {
+  const { scrollToSection } = useScrollToSection();
+
+  const handleProjectsClick = (): void => scrollToSection('projects');
+  const handleContactClick = (): void => scrollToSection('contact');
+
+  const devInfo = {
+    name: 'Seu Nome',
+    role: 'Desenvolvedor Front-end | UI/UX Designer',
+    tagline:
+      'Construindo experiências digitais modernas e intuitivas com paixão e propósito.',
+    about:
+      'Escreva aqui uma descrição detalhada sobre sua trajetória profissional, paixões e o que o motiva a trabalhar com desenvolvimento. Inclua informações sobre tecnologias que você gosta de explorar e sua abordagem para resolver problemas. Este é o espaço para a sua história, sua visão e seus objetivos.',
+    resumeUrl: '/resume.pdf',
+    email: 'seu.email@exemplo.com',
+    githubUrl: 'https://github.com/seu-usuario',
+    linkedinUrl: 'https://www.linkedin.com/in/seu-perfil',
+  };
+
+  const socialLinks = [
+    { icon: <RiGithubFill />, url: devInfo.githubUrl },
+    { icon: <RiLinkedinBoxFill />, url: devInfo.linkedinUrl },
+    { icon: <RiMailFill />, url: `mailto:${devInfo.email}` },
+  ];
+
+  const projects: Project[] = [
+    {
+      title: 'Projeto 1',
+      description:
+        'Breve descrição do projeto 1, o que ele faz e quais problemas resolve.',
+      technologies: ['React', 'TypeScript', 'CSS Modules'],
+      image: '/project-placeholder.png',
+      githubLink: '#',
+      liveLink: '#',
+    },
+    {
+      title: 'Projeto 2',
+      description:
+        'Breve descrição do projeto 2, focando em suas funcionalidades principais.',
+      technologies: ['Next.js', 'Tailwind CSS', 'Framer Motion'],
+      image: '/project-placeholder.png',
+      githubLink: '#',
+    },
+    {
+      title: 'Projeto 3',
+      description: 'Breve descrição do projeto 3 e o que o torna único.',
+      technologies: ['Vue.js', 'Vite', 'Pinia'],
+      image: '/project-placeholder.png',
+      githubLink: '#',
+      liveLink: '#',
+    },
+  ];
+
+  const skills: Skill[] = [
+    {
+      category: 'Linguagens',
+      items: ['JavaScript', 'TypeScript', 'HTML5', 'CSS3'],
+    },
+    {
+      category: 'Frameworks/Bibliotecas',
+      items: ['React', 'Next.js', 'Vue', 'Svelte'],
+    },
+    {
+      category: 'Gerenciamento de Estado',
+      items: ['Redux', 'Zustand', 'React Context'],
+    },
+    {
+      category: 'Estilização',
+      items: ['Styled Components', 'Tailwind CSS', 'Mantine UI'],
+    },
+    {
+      category: 'Testes',
+      items: ['Jest', 'React Testing Library', 'Vitest'],
+    },
+    {
+      category: 'Ferramentas',
+      items: ['Git', 'Docker', 'Webpack', 'Figma'],
+    },
+  ];
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+    <div className={styles.container}>
+      <Header
+        onNavLinkClick={scrollToSection}
+        socialLinks={socialLinks}
+        resumeUrl={devInfo.resumeUrl}
+      />
+      <main className={styles.main}>
+        <Home
+          name={devInfo.name}
+          role={devInfo.role}
+          tagline={devInfo.tagline}
+          onProjectsClick={handleProjectsClick}
+          onContactClick={handleContactClick}
         />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+        <About description={devInfo.about} />
+        <Skills skills={skills} />
+        <Projects projects={projects} />
+        <Contact
+          email={devInfo.email}
+          githubUrl={devInfo.githubUrl}
+          linkedinUrl={devInfo.linkedinUrl}
+        />
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
-}
+};
+
+export default HomePortfolio;
