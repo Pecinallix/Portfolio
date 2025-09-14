@@ -1,16 +1,17 @@
 'use client';
 
 import React from 'react';
-import Header from '@/components/Header';
-import Home from '@/components/sections/Home';
-import About from '@/components/sections/About';
-import Skills from '@/components/sections/Skills';
-import Projects from '@/components/sections/Projects';
-import Contact from '@/components/sections/Contact';
-import useScrollToSection from '@/hooks/useScrollToSection';
-import { RiGithubFill, RiLinkedinBoxFill, RiMailFill } from 'react-icons/ri';
+
 import { Project, Skill } from '@/types/types';
-import styles from './page.module.css';
+
+import useScrollToSection from '@/hooks/useScrollToSection';
+import Header from '@/components/Header/Header';
+import Home from '@/components/sections/Home/Home';
+import About from '@/components/sections/About/About';
+import Skills from '@/components/sections/Skills/Skills';
+import Projects from '@/components/sections/Projects/Projects';
+import Contact from '@/components/sections/Contact/Contact';
+import { RiGithubFill, RiLinkedinBoxFill, RiMailFill } from 'react-icons/ri';
 
 const HomePortfolio: React.FC = () => {
   const { scrollToSection } = useScrollToSection();
@@ -27,8 +28,8 @@ const HomePortfolio: React.FC = () => {
       'Escreva aqui uma descrição detalhada sobre sua trajetória profissional, paixões e o que o motiva a trabalhar com desenvolvimento. Inclua informações sobre tecnologias que você gosta de explorar e sua abordagem para resolver problemas. Este é o espaço para a sua história, sua visão e seus objetivos.',
     resumeUrl: '/resume.pdf',
     email: 'seu.email@exemplo.com',
-    githubUrl: 'https://github.com/seu-usuario',
-    linkedinUrl: 'https://www.linkedin.com/in/seu-perfil',
+    githubUrl: 'https://github.com/Pecinallix',
+    linkedinUrl: 'https://www.linkedin.com/in/icaropecinalli/',
   };
 
   const socialLinks = [
@@ -93,13 +94,13 @@ const HomePortfolio: React.FC = () => {
   ];
 
   return (
-    <div className={styles.container}>
+    <div>
       <Header
         onNavLinkClick={scrollToSection}
         socialLinks={socialLinks}
         resumeUrl={devInfo.resumeUrl}
       />
-      <main className={styles.main}>
+      <main>
         <Home
           name={devInfo.name}
           role={devInfo.role}
