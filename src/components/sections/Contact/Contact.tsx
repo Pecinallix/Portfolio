@@ -1,11 +1,10 @@
 'use client';
 
 import React, { useState, ChangeEvent, FormEvent } from 'react';
-import { motion } from 'framer-motion';
 import { RiGithubFill, RiLinkedinBoxFill, RiMailFill } from 'react-icons/ri';
-import styles from './Contact.module.css';
-import SectionTitle from '@/components/common/SectionTitle';
-import Button from '@/components/common/Button';
+
+import Button from '@/components/common/Button/Button';
+import SectionTitle from '@/components/common/SectionTitle/SectionTitle';
 
 interface ContactProps {
   email: string;
@@ -46,52 +45,43 @@ const Contact: React.FC<ContactProps> = ({ email, githubUrl, linkedinUrl }) => {
   };
 
   const socialLinks = [
-    { icon: <RiMailFill />, url: `mailto:${email}` },
-    { icon: <RiLinkedinBoxFill />, url: linkedinUrl },
-    { icon: <RiGithubFill />, url: githubUrl },
+    { icon: <RiMailFill className="h-7 w-7" />, url: `mailto:${email}` },
+    { icon: <RiLinkedinBoxFill className="h-7 w-7" />, url: linkedinUrl },
+    { icon: <RiGithubFill className="h-7 w-7" />, url: githubUrl },
   ];
 
   return (
-    <section id="contact" className={styles.contact}>
+    <section
+      id="contact"
+      className="py-20 px-4 md:px-12 bg-gray-950 text-gray-300"
+    >
       <SectionTitle title="Contato" />
-      <div className={styles.content}>
-        <motion.div
-          className={styles.info}
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h3>Vamos conversar?</h3>
-          <p>
+      <div className="container mx-auto max-w-4xl grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 mt-8">
+        <div className="flex flex-col space-y-4 text-center lg:text-left">
+          <h3 className="text-3xl font-bold text-white">Vamos conversar?</h3>
+          <p className="text-lg leading-relaxed">
             Estou sempre em busca de novos desafios e oportunidades. Sinta-se à
             vontade para me enviar uma mensagem.
           </p>
-          <div className={styles.socialLinks}>
+          <div className="flex justify-center lg:justify-start space-x-6 mt-4">
             {socialLinks.map((link, index) => (
-              <motion.a
+              <a
                 key={index}
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.1, color: 'var(--color-primary)' }}
-                whileTap={{ scale: 0.9 }}
+                className="text-gray-400 hover:text-indigo-600 transition-colors duration-200"
               >
                 {link.icon}
-              </motion.a>
+              </a>
             ))}
           </div>
-        </motion.div>
-        <motion.form
-          className={styles.form}
-          onSubmit={handleSubmit}
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className={styles.formGroup}>
-            <label htmlFor="name">Nome</label>
+        </div>
+        <form onSubmit={handleSubmit} className="flex flex-col space-y-6">
+          <div className="flex flex-col">
+            <label htmlFor="name" className="text-gray-400 font-semibold mb-2">
+              Nome
+            </label>
             <input
               type="text"
               id="name"
@@ -99,10 +89,13 @@ const Contact: React.FC<ContactProps> = ({ email, githubUrl, linkedinUrl }) => {
               value={formData.name}
               onChange={handleChange}
               required
+              className="bg-gray-800 border border-gray-700 rounded-lg py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-indigo-600 transition-all duration-200"
             />
           </div>
-          <div className={styles.formGroup}>
-            <label htmlFor="email">Email</label>
+          <div className="flex flex-col">
+            <label htmlFor="email" className="text-gray-400 font-semibold mb-2">
+              Email
+            </label>
             <input
               type="email"
               id="email"
@@ -110,32 +103,44 @@ const Contact: React.FC<ContactProps> = ({ email, githubUrl, linkedinUrl }) => {
               value={formData.email}
               onChange={handleChange}
               required
+              className="bg-gray-800 border border-gray-700 rounded-lg py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-indigo-600 transition-all duration-200"
             />
           </div>
-          <div className={styles.formGroup}>
-            <label htmlFor="message">Mensagem</label>
+          <div className="flex flex-col">
+            <label
+              htmlFor="message"
+              className="text-gray-400 font-semibold mb-2"
+            >
+              Mensagem
+            </label>
             <textarea
               id="message"
               name="message"
               value={formData.message}
               onChange={handleChange}
               required
+              rows={4}
+              className="bg-gray-800 border border-gray-700 rounded-lg py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-indigo-600 transition-all duration-200"
             />
           </div>
-          <Button type="submit" primary disabled={status === 'sending'}>
+          <Button
+            type="submit"
+            variant="primary"
+            disabled={status === 'sending'}
+          >
             {status === 'sending' ? 'Enviando...' : 'Enviar Mensagem'}
           </Button>
           {status === 'success' && (
-            <p className={styles.statusSuccess}>
+            <p className="text-green-500 text-center font-semibold mt-4">
               Mensagem enviada com sucesso!
             </p>
           )}
           {status === 'error' && (
-            <p className={styles.statusError}>
+            <p className="text-red-500 text-center font-semibold mt-4">
               Ocorreu um erro. Tente novamente mais tarde.
             </p>
           )}
-        </motion.form>
+        </form>
       </div>
     </section>
   );

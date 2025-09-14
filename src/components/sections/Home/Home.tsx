@@ -1,9 +1,7 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
-import styles from './Home.module.css';
-import Button from '@/components/common/Button';
+import Button from '@/components/common/Button/Button';
 
 interface HomeProps {
   name: string;
@@ -20,43 +18,34 @@ const Home: React.FC<HomeProps> = ({
   onProjectsClick,
   onContactClick,
 }) => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 },
-  };
-
   return (
-    <section id="home" className={styles.home}>
-      <motion.div
-        className={styles.content}
-        variants={containerVariants}
-        initial="hidden"
-        animate="show"
-      >
-        <motion.h1 variants={itemVariants}>
-          Olá, eu sou <span className={styles.name}>{name}</span>.
-        </motion.h1>
-        <motion.h2 variants={itemVariants}>{role}</motion.h2>
-        <motion.p variants={itemVariants}>{tagline}</motion.p>
-        <motion.div className={styles.buttons} variants={itemVariants}>
-          <Button onClick={onProjectsClick} primary>
+    <section
+      id="home"
+      className="flex flex-col items-center justify-center min-h-screen text-center p-8 bg-gray-950 text-gray-200"
+    >
+      <div className="flex flex-col items-center max-w-4xl space-y-4">
+        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">
+          Olá, eu sou{' '}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-600">
+            {name}
+          </span>
+          .
+        </h1>
+        <h2 className="text-xl md:text-2xl font-semibold text-gray-400">
+          {role}
+        </h2>
+        <p className="text-lg md:text-xl max-w-2xl leading-relaxed text-gray-300">
+          {tagline}
+        </p>
+        <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-8">
+          <Button onClick={onProjectsClick} variant="primary">
             Conheça meus projetos
           </Button>
           <Button onClick={onContactClick} variant="secondary">
             Entre em contato
           </Button>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </section>
   );
 };

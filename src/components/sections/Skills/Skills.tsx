@@ -1,62 +1,44 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
-import styles from './Skills.module.css';
-import SectionTitle from '@/components/common/SectionTitle';
 import { Skill } from '@/types/types';
+import SectionTitle from '@/components/common/SectionTitle/SectionTitle';
 
 interface SkillsProps {
   skills: Skill[];
 }
 
 const Skills: React.FC<SkillsProps> = ({ skills }) => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    show: { opacity: 1, scale: 1 },
-  };
-
   return (
-    <section id="skills" className={styles.skills}>
+    <section
+      id="skills"
+      className="py-20 px-4 md:px-12 bg-gray-950 text-gray-300"
+    >
       <SectionTitle title="Habilidades" />
-      <motion.div
-        className={styles.skillsGrid}
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true }}
-      >
-        {skills.map((skill, index) => (
-          <motion.div
-            key={index}
-            className={styles.skillCategory}
-            variants={itemVariants}
-          >
-            <h3 className={styles.categoryTitle}>{skill.category}</h3>
-            <ul className={styles.skillList}>
-              {skill.items.map((item, i) => (
-                <motion.li
-                  key={i}
-                  whileHover={{ scale: 1.05 }}
-                  className={styles.skillItem}
-                >
-                  {item}
-                </motion.li>
-              ))}
-            </ul>
-          </motion.div>
-        ))}
-      </motion.div>
+      <div className="container mx-auto max-w-4xl mt-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {skills.map((skill, index) => (
+            <div
+              key={index}
+              className="bg-gray-800 p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300"
+            >
+              <h3 className="text-xl font-bold mb-4 text-white">
+                {skill.category}
+              </h3>
+              <ul className="flex flex-wrap gap-2">
+                {skill.items.map((item, i) => (
+                  <li
+                    key={i}
+                    className="bg-gray-700 text-gray-200 px-3 py-1 rounded-full text-sm font-medium transition-colors duration-200 hover:bg-indigo-600"
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
     </section>
   );
 };

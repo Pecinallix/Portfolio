@@ -13,7 +13,6 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Button: React.FC<ButtonProps> = ({
   children,
-  primary = false,
   variant = 'primary',
   href,
   target,
