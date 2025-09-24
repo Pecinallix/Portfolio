@@ -1,122 +1,33 @@
 'use client';
 
-import React from 'react';
-
-import { Project, Skill } from '@/types/types';
-
-import useScrollToSection from '@/hooks/useScrollToSection';
 import Header from '@/components/Header/Header';
-import Home from '@/components/sections/Home/Home';
+import { motion } from 'framer-motion';
 import About from '@/components/sections/About/About';
-import Skills from '@/components/sections/Skills/Skills';
 import Projects from '@/components/sections/Projects/Projects';
 import Contact from '@/components/sections/Contact/Contact';
-import { RiGithubFill, RiLinkedinBoxFill, RiMailFill } from 'react-icons/ri';
+import Hero from '@/components/sections/Hero/Hero';
+import Footer from '@/components/sections/Footer/Footer';
 
 const HomePortfolio: React.FC = () => {
-  const { scrollToSection } = useScrollToSection();
-
-  const handleProjectsClick = (): void => scrollToSection('projects');
-  const handleContactClick = (): void => scrollToSection('contact');
-
-  const devInfo = {
-    name: 'Seu Nome',
-    role: 'Desenvolvedor Front-end | UI/UX Designer',
-    tagline:
-      'Construindo experiências digitais modernas e intuitivas com paixão e propósito.',
-    about:
-      'Escreva aqui uma descrição detalhada sobre sua trajetória profissional, paixões e o que o motiva a trabalhar com desenvolvimento. Inclua informações sobre tecnologias que você gosta de explorar e sua abordagem para resolver problemas. Este é o espaço para a sua história, sua visão e seus objetivos.',
-    resumeUrl: '/resume.pdf',
-    email: 'seu.email@exemplo.com',
-    githubUrl: 'https://github.com/Pecinallix',
-    linkedinUrl: 'https://www.linkedin.com/in/icaropecinalli/',
-  };
-
-  const socialLinks = [
-    { icon: <RiGithubFill />, url: devInfo.githubUrl },
-    { icon: <RiLinkedinBoxFill />, url: devInfo.linkedinUrl },
-    { icon: <RiMailFill />, url: `mailto:${devInfo.email}` },
-  ];
-
-  const projects: Project[] = [
-    {
-      title: 'Projeto 1',
-      description:
-        'Breve descrição do projeto 1, o que ele faz e quais problemas resolve.',
-      technologies: ['React', 'TypeScript', 'CSS Modules'],
-      image: '/project-placeholder.png',
-      githubLink: '#',
-      liveLink: '#',
-    },
-    {
-      title: 'Projeto 2',
-      description:
-        'Breve descrição do projeto 2, focando em suas funcionalidades principais.',
-      technologies: ['Next.js', 'Tailwind CSS', 'Framer Motion'],
-      image: '/project-placeholder.png',
-      githubLink: '#',
-    },
-    {
-      title: 'Projeto 3',
-      description: 'Breve descrição do projeto 3 e o que o torna único.',
-      technologies: ['Vue.js', 'Vite', 'Pinia'],
-      image: '/project-placeholder.png',
-      githubLink: '#',
-      liveLink: '#',
-    },
-  ];
-
-  const skills: Skill[] = [
-    {
-      category: 'Linguagens',
-      items: ['JavaScript', 'TypeScript', 'HTML5', 'CSS3'],
-    },
-    {
-      category: 'Frameworks/Bibliotecas',
-      items: ['React', 'Next.js', 'Vue', 'Svelte'],
-    },
-    {
-      category: 'Gerenciamento de Estado',
-      items: ['Redux', 'Zustand', 'React Context'],
-    },
-    {
-      category: 'Estilização',
-      items: ['Styled Components', 'Tailwind CSS', 'Mantine UI'],
-    },
-    {
-      category: 'Testes',
-      items: ['Jest', 'React Testing Library', 'Vitest'],
-    },
-    {
-      category: 'Ferramentas',
-      items: ['Git', 'Docker', 'Webpack', 'Figma'],
-    },
-  ];
-
   return (
-    <div>
-      <Header
-        onNavLinkClick={scrollToSection}
-        socialLinks={socialLinks}
-        resumeUrl={devInfo.resumeUrl}
-      />
-      <main>
-        <Home
-          name={devInfo.name}
-          role={devInfo.role}
-          tagline={devInfo.tagline}
-          onProjectsClick={handleProjectsClick}
-          onContactClick={handleContactClick}
-        />
-        <About description={devInfo.about} />
-        <Skills skills={skills} />
-        <Projects projects={projects} />
-        <Contact
-          email={devInfo.email}
-          githubUrl={devInfo.githubUrl}
-          linkedinUrl={devInfo.linkedinUrl}
-        />
-      </main>
+    <div className="relative min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="relative z-10"
+      >
+        <Header />
+
+        <main>
+          <Hero />
+          <About />
+          <Projects />
+          <Contact />
+        </main>
+
+        <Footer />
+      </motion.div>
     </div>
   );
 };

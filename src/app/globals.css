@@ -1,56 +1,89 @@
-:root {
-  --font-inter: 'Inter', sans-serif;
-  --color-background-dark: #121212;
-  --color-surface-dark: #1e1e1e;
-  --color-text-light: #e0e0e0;
-  --color-text-secondary: #a0a0a0;
-  --color-primary: #8b5cf6; /* Roxo */
-  --color-secondary: #3b82f6; /* Azul */
-  --color-accent: #f59e0b; /* Amarelo/Laranja */
-}
+@import 'tailwindcss';
 
-/* Base */
 * {
-  box-sizing: border-box;
-  padding: 0;
   margin: 0;
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-  font-family: var(--font-inter);
-  background-color: var(--color-background-dark);
-  color: var(--color-text-light);
+  padding: 0;
+  box-sizing: border-box;
   scroll-behavior: smooth;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-button {
-  cursor: pointer;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 600;
-  line-height: 1.2;
-}
-
-p {
+body {
+  font-family: 'Inter', sans-serif;
   line-height: 1.6;
+  color: #1a202c;
 }
 
-ul,
-li {
-  list-style: none;
+.font-display {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Animações personalizadas */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(102, 126, 234, 0.6);
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 4s ease infinite;
+}
+
+/* Efeitos de hover personalizados */
+.hover-lift {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-glow);
+}
+
+/* Gradientes de texto */
+.text-gradient {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-secondary {
+  background: var(--gradient-secondary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
