@@ -39,7 +39,7 @@ export default function Projects() {
   const fetchGitHubProjects = async () => {
     try {
       const response = await fetch(
-        `https://api.github.com/users/${GITHUB_CONFIG.username}/repos?sort=updated&per_page=100`
+        `https://api.github.com/users/${GITHUB_CONFIG.username}/repos?sort=updated&per_page=100`,
       );
 
       if (!response.ok) {
@@ -59,7 +59,7 @@ export default function Projects() {
         // Filtrar por tópicos se configurado
         if (GITHUB_CONFIG.filterByTopics.length > 0) {
           return repo.topics.some((topic) =>
-            GITHUB_CONFIG.filterByTopics.includes(topic)
+            GITHUB_CONFIG.filterByTopics.includes(topic),
           );
         }
 
@@ -69,10 +69,10 @@ export default function Projects() {
       // Se tem repositórios em destaque, priorizar eles
       if (GITHUB_CONFIG.featuredRepos.length > 0) {
         const featured = filteredRepos.filter((repo) =>
-          GITHUB_CONFIG.featuredRepos.includes(repo.name)
+          GITHUB_CONFIG.featuredRepos.includes(repo.name),
         );
         const others = filteredRepos.filter(
-          (repo) => !GITHUB_CONFIG.featuredRepos.includes(repo.name)
+          (repo) => !GITHUB_CONFIG.featuredRepos.includes(repo.name),
         );
         filteredRepos = [...featured, ...others];
       }
@@ -164,72 +164,80 @@ export default function Projects() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="group relative bg-gray-800 rounded-lg overflow-hidden hover:transform hover:scale-105 transition-all duration-300"
+                  className="group relative bg-gray-800 rounded-xl overflow-hidden border border-gray-700 hover:border-purple-500 transition-all duration-300"
                 >
-                  {/* Project Header */}
-                  <div className="relative p-6 bg-linear-to-br from-gray-800 to-gray-900">
-                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-purple-400 transition-colors">
-                      {project.title}
-                    </h3>
+                  {/* Gradient Background Accent */}
+                  <div className="absolute top-0 left-0 right-0 h-2 bg-linear-to-r from-purple-500 via-pink-500 to-blue-500"></div>
 
-                    {/* Stats */}
-                    <div className="flex items-center gap-4 text-gray-400 text-sm mb-4">
-                      <div className="flex items-center gap-1">
-                        <Star className="w-4 h-4" />
-                        <span>{project.stars}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <GitFork className="w-4 h-4" />
-                        <span>{project.forks}</span>
+                  {/* Project Content */}
+                  <div className="relative p-6 pt-8">
+                    {/* Title and Stats */}
+                    <div className="mb-4">
+                      <h3 className="text-xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors">
+                        {project.title}
+                      </h3>
+
+                      <div className="flex items-center gap-4 text-gray-400 text-sm">
+                        <div className="flex items-center gap-1">
+                          <Star className="w-4 h-4" />
+                          <span>{project.stars}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <GitFork className="w-4 h-4" />
+                          <span>{project.forks}</span>
+                        </div>
                       </div>
                     </div>
 
-                    <p className="text-gray-400 mb-4 line-clamp-3">
+                    {/* Description */}
+                    <p className="text-gray-400 mb-4 line-clamp-3 min-h-[4.5rem]">
                       {project.description}
                     </p>
 
                     {/* Technologies */}
-                    {project.technologies.length > 0 && (
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {project.technologies.map((tech, techIndex) => (
+                    <div className="flex flex-wrap gap-2 mb-6 min-h-[2.5rem]">
+                      {project.technologies.length > 0 ? (
+                        project.technologies.map((tech, techIndex) => (
                           <span
                             key={techIndex}
-                            className="px-3 py-1 bg-gray-700 text-purple-400 text-sm rounded-full"
+                            className="px-3 py-1 bg-gray-900 text-purple-400 text-xs font-medium rounded-full border border-gray-700"
                           >
                             {tech}
                           </span>
-                        ))}
-                      </div>
-                    )}
+                        ))
+                      ) : (
+                        <span className="text-gray-600 text-xs">Sem tags</span>
+                      )}
+                    </div>
 
                     {/* Links */}
-                    <div className="flex gap-4">
+                    <div className="flex gap-3 pt-4 border-t border-gray-700">
                       <a
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+                        className="flex items-center gap-2 px-4 py-2 bg-gray-900 text-gray-300 hover:text-white hover:bg-gray-700 rounded-lg transition-all text-sm font-medium"
                       >
-                        <Github className="w-5 h-5" />
-                        <span>Code</span>
+                        <Github className="w-4 h-4" />
+                        <span>Código</span>
                       </a>
                       {project.demo && (
                         <a
                           href={project.demo}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 text-gray-400 hover:text-purple-400 transition-colors"
+                          className="flex items-center gap-2 px-4 py-2 bg-purple-500/10 text-purple-400 hover:bg-purple-500/20 rounded-lg transition-all text-sm font-medium"
                         >
-                          <ExternalLink className="w-5 h-5" />
+                          <ExternalLink className="w-4 h-4" />
                           <span>Demo</span>
                         </a>
                       )}
                     </div>
                   </div>
 
-                  {/* Gradient border effect */}
-                  <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-                    <div className="absolute inset-0 rounded-lg border-2 border-purple-500"></div>
+                  {/* Hover Glow Effect */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                    <div className="absolute inset-0 bg-gradient-to-t from-purple-500/5 to-transparent"></div>
                   </div>
                 </motion.div>
               ))}

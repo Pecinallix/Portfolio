@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import ThemeToggle from './ThemeToggle';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,7 +23,7 @@ export default function Header() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-sm border-b border-gray-800"
+      className="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 light:bg-white/95 backdrop-blur-sm border-b border-gray-800 light:border-gray-200 transition-colors"
     >
       <nav className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
@@ -37,18 +38,19 @@ export default function Header() {
           </motion.a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-4">
             {navItems.map((item, index) => (
               <motion.a
                 key={index}
                 href={item.href}
-                className="text-gray-300 hover:text-purple-400 transition-colors font-medium relative group"
+                className="text-gray-300 light:text-gray-700 hover:text-purple-400 transition-colors font-medium relative group px-3"
                 whileHover={{ y: -2 }}
               >
                 {item.name}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-linear-to-r from-purple-500 to-pink-500 group-hover:w-full transition-all duration-300"></span>
               </motion.a>
             ))}
+            <ThemeToggle />
             <motion.a
               href="#contact"
               className="px-6 py-2 bg-linear-to-r from-purple-500 to-pink-500 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition-all"
@@ -59,14 +61,17 @@ export default function Header() {
             </motion.a>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={toggleMenu}
-            className="md:hidden text-white p-2 hover:bg-gray-800 rounded-lg transition-colors"
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          {/* Mobile Menu Button & Theme Toggle */}
+          <div className="md:hidden flex items-center gap-3">
+            <ThemeToggle />
+            <button
+              onClick={toggleMenu}
+              className="text-white light:text-gray-900 p-2 hover:bg-gray-800 light:hover:bg-gray-200 rounded-lg transition-colors"
+              aria-label="Toggle menu"
+            >
+              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}

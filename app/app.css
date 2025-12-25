@@ -9,10 +9,39 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Dark mode (padrão) */
 html,
 body {
-  @apply bg-gray-950;
+  @apply bg-gray-950 text-white transition-colors duration-300;
   color-scheme: dark;
+}
+
+/* Light mode */
+html.light,
+html.light body {
+  @apply bg-gray-50 text-gray-900 transition-colors duration-300;
+  color-scheme: light;
+}
+
+/* Light mode variants */
+.light {
+  /* Backgrounds */
+  & .bg-gray-900 { @apply bg-white; }
+  & .bg-gray-800 { @apply bg-gray-100; }
+  & .bg-gray-950 { @apply bg-gray-50; }
+
+  /* Text colors */
+  & .text-white { @apply text-gray-900; }
+  & .text-gray-300 { @apply text-gray-700; }
+  & .text-gray-400 { @apply text-gray-600; }
+  & .text-gray-500 { @apply text-gray-500; }
+
+  /* Borders */
+  & .border-gray-800 { @apply border-gray-200; }
+  & .border-gray-700 { @apply border-gray-300; }
+
+  /* Specific components */
+  & .bg-gray-900\/95 { @apply bg-white/95; }
 }
 
 /* Custom animations */
@@ -48,13 +77,17 @@ html {
   scroll-padding-top: 80px;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar - Dark mode */
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 ::-webkit-scrollbar-track {
   background: #1f2937;
+}
+
+.light ::-webkit-scrollbar-track {
+  background: #e5e7eb;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -70,6 +103,7 @@ html {
 .line-clamp-3 {
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
