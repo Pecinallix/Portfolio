@@ -17,13 +17,21 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const savedTheme = localStorage.getItem('theme') as Theme | null;
     if (savedTheme) {
       setTheme(savedTheme);
-      document.documentElement.classList.toggle('light', savedTheme === 'light');
+      document.documentElement.classList.toggle(
+        'light',
+        savedTheme === 'light',
+      );
     } else {
       // Verificar preferência do sistema
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const prefersDark = window.matchMedia(
+        '(prefers-color-scheme: dark)',
+      ).matches;
       const systemTheme = prefersDark ? 'dark' : 'light';
       setTheme(systemTheme);
-      document.documentElement.classList.toggle('light', systemTheme === 'light');
+      document.documentElement.classList.toggle(
+        'light',
+        systemTheme === 'light',
+      );
     }
   }, []);
 
