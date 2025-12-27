@@ -30,7 +30,7 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="py-20 bg-gray-900 light:bg-white">
+    <section id="about" className="py-20 dark:bg-gray-900 light:bg-white">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -42,7 +42,7 @@ export default function About() {
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
             Sobre Mim
           </h2>
-          <div className="w-20 h-1 bg-linear-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
+          <div className="w-20 h-1 bg-linear-to-r from-blue-500 to-cyan-500 mx-auto rounded-full"></div>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center mb-12 md:mb-16">
@@ -53,8 +53,8 @@ export default function About() {
             viewport={{ once: true }}
           >
             <div className="relative">
-              <div className="absolute -inset-1 bg-linear-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25"></div>
-              <div className="relative bg-gray-800 light:bg-gray-50 rounded-lg p-8">
+              <div className="absolute -inset-1 bg-linear-to-r from-blue-600 to-cyan-600 rounded-lg blur opacity-25"></div>
+              <div className="relative dark:bg-gray-800 light:bg-gray-50 rounded-lg p-8">
                 <p className="text-gray-300 text-lg leading-relaxed mb-4">
                   Olá! Sou Ícaro Pecinalli, desenvolvedor apaixonado por
                   tecnologia e inovação, com foco em criar aplicações web
@@ -89,9 +89,9 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-gray-800 light:bg-gray-50 p-6 rounded-lg hover:bg-gray-700 light:hover:bg-gray-100 transition-all hover:scale-105"
+                className="dark:bg-gray-800 light:bg-gray-50 p-6 rounded-lg dark:hover:bg-gray-700 light:hover:bg-gray-100 transition-all hover:scale-105"
               >
-                <feature.icon className="w-10 h-10 text-purple-400 light:text-purple-600 mb-3" />
+                <feature.icon className="w-10 h-10 text-cyan-400 light:text-blue-600 mb-3" />
                 <h3 className="text-white font-semibold mb-2">
                   {feature.title}
                 </h3>
@@ -108,20 +108,20 @@ export default function About() {
           viewport={{ once: true }}
           className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 text-center"
         >
-          <div className="bg-gray-800 light:bg-gray-50 p-4 sm:p-6 rounded-lg">
-            <div className="text-3xl sm:text-4xl font-bold text-purple-400 light:text-purple-600 mb-1 sm:mb-2">3+</div>
+          <div className="dark:bg-gray-800 light:bg-gray-50 p-4 sm:p-6 rounded-lg">
+            <div className="text-3xl sm:text-4xl font-bold text-cyan-400 light:text-blue-600 mb-1 sm:mb-2">3+</div>
             <div className="text-gray-400 light:text-gray-600 text-sm sm:text-base">Anos de Experiência</div>
           </div>
-          <div className="bg-gray-800 light:bg-gray-50 p-4 sm:p-6 rounded-lg">
-            <div className="text-3xl sm:text-4xl font-bold text-purple-400 light:text-purple-600 mb-1 sm:mb-2">16+</div>
+          <div className="dark:bg-gray-800 light:bg-gray-50 p-4 sm:p-6 rounded-lg">
+            <div className="text-3xl sm:text-4xl font-bold text-cyan-400 light:text-blue-600 mb-1 sm:mb-2">16+</div>
             <div className="text-gray-400 light:text-gray-600 text-sm sm:text-base">Projetos Concluídos</div>
           </div>
-          <div className="bg-gray-800 light:bg-gray-50 p-4 sm:p-6 rounded-lg">
-            <div className="text-3xl sm:text-4xl font-bold text-purple-400 light:text-purple-600 mb-1 sm:mb-2">8+</div>
+          <div className="dark:bg-gray-800 light:bg-gray-50 p-4 sm:p-6 rounded-lg">
+            <div className="text-3xl sm:text-4xl font-bold text-cyan-400 light:text-blue-600 mb-1 sm:mb-2">8+</div>
             <div className="text-gray-400 light:text-gray-600 text-sm sm:text-base">Clientes Satisfeitos</div>
           </div>
-          <div className="bg-gray-800 light:bg-gray-50 p-4 sm:p-6 rounded-lg">
-            <div className="text-3xl sm:text-4xl font-bold text-purple-400 light:text-purple-600 mb-1 sm:mb-2">100%</div>
+          <div className="dark:bg-gray-800 light:bg-gray-50 p-4 sm:p-6 rounded-lg">
+            <div className="text-3xl sm:text-4xl font-bold text-cyan-400 light:text-blue-600 mb-1 sm:mb-2">100%</div>
             <div className="text-gray-400 light:text-gray-600 text-sm sm:text-base">Dedicação</div>
           </div>
         </motion.div>

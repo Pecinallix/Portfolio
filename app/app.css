@@ -1,8 +1,19 @@
 @import "tailwindcss";
 
+@variant light (.light &);
+
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+/* Melhorias de tipografia */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1;
+  letter-spacing: -0.011em;
 }
 
 html {
@@ -19,7 +30,8 @@ body {
 /* Light mode */
 html.light,
 html.light body {
-  @apply bg-gray-50 text-gray-900 transition-colors duration-300;
+  @apply bg-gray-50 transition-colors duration-300;
+  color: #1e293b; /* Slate-800 - tom suave de preto */
   color-scheme: light;
 }
 
@@ -30,12 +42,12 @@ html.light body {
   & .bg-gray-800 { @apply bg-gray-50; }
   & .bg-gray-950 { @apply bg-white; }
 
-  /* Text colors */
-  & .text-white { @apply text-gray-900; }
-  & .text-gray-300 { @apply text-gray-600; }
-  & .text-gray-400 { @apply text-gray-500; }
-  & .text-gray-500 { @apply text-gray-600; }
-  & .text-gray-600 { @apply text-gray-700; }
+  /* Text colors - tons suaves de preto para melhor legibilidade */
+  & .text-white { color: #1e293b; } /* Slate-800 */
+  & .text-gray-300 { color: #475569; } /* Slate-600 */
+  & .text-gray-400 { color: #64748b; } /* Slate-500 */
+  & .text-gray-500 { color: #475569; } /* Slate-600 */
+  & .text-gray-600 { color: #334155; } /* Slate-700 */
 
   /* Borders */
   & .border-gray-800 { @apply border-gray-200; }
@@ -51,9 +63,9 @@ html.light body {
 
   /* Special backgrounds */
   & .bg-gray-900.rounded-lg { @apply bg-gray-50; }
-  & .bg-purple-500\/10 { @apply bg-purple-100; }
-  & .hover\:bg-purple-500\/20:hover { @apply bg-purple-200; }
-  & .hover\:bg-purple-500:hover { @apply bg-purple-600; }
+  & .bg-cyan-500\/10 { @apply bg-cyan-100; }
+  & .hover\:bg-cyan-500\/20:hover { @apply bg-cyan-200; }
+  & .hover\:bg-cyan-500:hover { @apply bg-cyan-600; }
 }
 
 /* Custom animations */
@@ -103,12 +115,12 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #a855f7, #ec4899);
+  background: linear-gradient(to bottom, #3b82f6, #06b6d4);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, #9333ea, #db2777);
+  background: linear-gradient(to bottom, #2563eb, #0891b2);
 }
 
 /* Line clamp utility */

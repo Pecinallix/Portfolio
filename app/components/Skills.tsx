@@ -54,7 +54,7 @@ export default function Skills() {
   ];
 
   return (
-    <section id="skills" className="py-20 bg-gray-800 light:bg-gray-50">
+    <section id="skills" className="py-20 dark:bg-gray-800 light:bg-gray-50">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -66,7 +66,7 @@ export default function Skills() {
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
             Habilidades & Tecnologias
           </h2>
-          <div className="w-20 h-1 bg-linear-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
+          <div className="w-20 h-1 bg-linear-to-r from-blue-500 to-cyan-500 mx-auto rounded-full"></div>
         </motion.div>
 
         {/* Skills with progress bars */}
@@ -78,9 +78,9 @@ export default function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
               viewport={{ once: true }}
-              className="bg-gray-900 light:bg-white p-6 rounded-lg"
+              className="dark:bg-gray-900 light:bg-white p-6 rounded-lg"
             >
-              <h3 className="text-2xl font-bold text-purple-400 light:text-purple-600 mb-6">
+              <h3 className="text-2xl font-bold text-cyan-400 light:text-blue-600 mb-6">
                 {category.category}
               </h3>
               <div className="space-y-4">
@@ -92,13 +92,13 @@ export default function Skills() {
                       </span>
                       <span className="text-gray-400">{skill.level}%</span>
                     </div>
-                    <div className="w-full bg-gray-700 light:bg-gray-200 rounded-full h-2 overflow-hidden">
+                    <div className="w-full dark:bg-gray-700 light:bg-gray-200 rounded-full h-2 overflow-hidden">
                       <motion.div
                         initial={{ width: 0 }}
                         whileInView={{ width: `${skill.level}%` }}
                         transition={{ duration: 1, delay: skillIndex * 0.1 }}
                         viewport={{ once: true }}
-                        className="h-full bg-linear-to-r from-purple-500 to-pink-500 light:from-purple-600 light:to-pink-600 rounded-full"
+                        className="h-full bg-linear-to-r from-blue-500 to-cyan-500 light:from-blue-600 light:to-cyan-600 rounded-full"
                       />
                     </div>
                   </div>
@@ -114,9 +114,9 @@ export default function Skills() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="bg-gray-900 light:bg-white p-8 rounded-lg"
+          className="dark:bg-gray-900 light:bg-white p-8 rounded-lg dark:border-gray-700 light:border-gray-200"
         >
-          <h3 className="text-xl sm:text-2xl font-bold text-white light:text-gray-900 mb-4 sm:mb-6 text-center">
+          <h3 className="text-xl sm:text-2xl font-bold dark:text-white light:text-slate-800 mb-4 sm:mb-6 text-center">
             Tecnologias que Trabalho
           </h3>
           <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
@@ -128,7 +128,7 @@ export default function Skills() {
                 transition={{ duration: 0.3, delay: index * 0.05 }}
                 viewport={{ once: true }}
                 whileHover={{ scale: 1.1 }}
-                className="px-3 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base bg-gray-800 light:bg-gray-100 text-purple-400 light:text-purple-600 rounded-full font-medium hover:bg-purple-500 hover:text-white light:hover:bg-purple-600 transition-all cursor-default"
+                className="px-3 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base dark:bg-gray-800 light:bg-blue-50 dark:text-cyan-400 light:text-blue-700 rounded-full font-medium dark:border-gray-700 light:border-blue-200 dark:hover:bg-blue-500 dark:hover:text-white dark:hover:border-blue-500 light:hover:bg-blue-600 light:hover:border-blue-600 transition-all cursor-default"
               >
                 {tech}
               </motion.span>

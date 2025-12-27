@@ -23,14 +23,14 @@ export default function Header() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-sm border-b border-gray-800 light:border-gray-200 transition-colors"
+      className="fixed top-0 left-0 right-0 z-50 dark:bg-gray-900/95 light:bg-white/95 backdrop-blur-sm border-b dark:border-gray-800 light:border-gray-200 transition-colors"
     >
       <nav className="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <motion.a
             href="#home"
-            className="text-xl sm:text-2xl font-bold bg-linear-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent"
+            className="text-xl sm:text-2xl font-bold bg-linear-to-r from-blue-400 to-cyan-500 bg-clip-text text-transparent"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -43,17 +43,17 @@ export default function Header() {
               <motion.a
                 key={index}
                 href={item.href}
-                className="text-gray-300 light:text-gray-700 hover:text-purple-400 transition-colors font-medium relative group px-3"
+                className="dark:text-gray-300 light:text-gray-700 hover:text-cyan-400 transition-colors font-medium relative group px-3"
                 whileHover={{ y: -2 }}
               >
                 {item.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-linear-to-r from-purple-500 to-pink-500 group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-linear-to-r from-blue-500 to-cyan-500 group-hover:w-full transition-all duration-300"></span>
               </motion.a>
             ))}
             <ThemeToggle />
             <motion.a
               href="#contact"
-              className="px-6 py-2 bg-linear-to-r from-purple-500 to-pink-500 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition-all"
+              className="px-6 py-2 bg-linear-to-r from-blue-600 to-cyan-600 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transition-all"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -66,7 +66,7 @@ export default function Header() {
             <ThemeToggle />
             <button
               onClick={toggleMenu}
-              className="text-white light:text-gray-900 p-2 hover:bg-gray-800 light:hover:bg-gray-200 rounded-lg transition-colors"
+              className="dark:text-white light:text-slate-800 p-2 dark:hover:bg-gray-800 light:hover:bg-gray-200 rounded-lg transition-colors"
               aria-label="Toggle menu"
             >
               {isOpen ? (
@@ -94,7 +94,7 @@ export default function Header() {
                 key={index}
                 href={item.href}
                 onClick={closeMenu}
-                className="block text-gray-300 hover:text-purple-400 transition-colors font-medium py-2"
+                className="block dark:text-gray-300 light:text-gray-700 hover:text-cyan-400 transition-colors font-medium py-2"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: isOpen ? 1 : 0, x: isOpen ? 0 : -20 }}
                 transition={{ delay: index * 0.1 }}
@@ -105,7 +105,7 @@ export default function Header() {
             <motion.a
               href="#contact"
               onClick={closeMenu}
-              className="block w-full text-center px-6 py-3 bg-linear-to-r from-purple-500 to-pink-500 text-white rounded-full font-semibold"
+              className="block w-full text-center px-6 py-3 bg-linear-to-r from-blue-600 to-cyan-600 text-white rounded-full font-semibold"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: isOpen ? 1 : 0, x: isOpen ? 0 : -20 }}
               transition={{ delay: navItems.length * 0.1 }}

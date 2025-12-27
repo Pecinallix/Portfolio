@@ -8,7 +8,7 @@ import Contact from '../components/Contact';
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: 'Ícaro Pecinalli - Desenvolvedor Full Stack' },
+    { title: 'Ícaro Pecinalli - Portfólio {(Dev)}' },
     {
       name: 'description',
       content:
@@ -35,7 +35,7 @@ export default function Home() {
             reservados.
           </p>
           <p className="text-gray-500 text-sm mt-2">
-            Feito com React Router e Tailwind CSS
+            Feito com React Router e Tailwind CSS 💙
           </p>
         </div>
       </footer>

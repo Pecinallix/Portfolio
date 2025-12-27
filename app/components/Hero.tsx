@@ -5,13 +5,13 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gray-900"
+      className="min-h-screen flex items-center justify-center relative dark:bg-gray-900 light:bg-gray-50"
     >
       {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 light:opacity-30 animate-blob"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 light:opacity-30 animate-blob animation-delay-2000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 light:opacity-30 animate-blob animation-delay-4000"></div>
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-10 -right-40 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 light:opacity-30 animate-blob"></div>
+        <div className="absolute -bottom-10 -left-40 w-80 h-80 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 light:opacity-30 animate-blob animation-delay-1000 z-10"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-teal-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 light:opacity-30 animate-blob animation-delay-2000"></div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
@@ -21,7 +21,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="text-base sm:text-lg md:text-xl text-purple-400 mb-3 sm:mb-4 font-mono">
+            <h2 className="text-base sm:text-lg md:text-xl text-cyan-400 mb-3 sm:mb-4 font-mono">
               Olá, eu sou
             </h2>
           </motion.div>
@@ -33,7 +33,7 @@ export default function Hero() {
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 sm:mb-6 px-4"
           >
             Ícaro Pecinalli
-            <span className="block bg-linear-to-r from-purple-400 via-pink-500 to-blue-500 bg-clip-text text-transparent mt-2">
+            <span className="block bg-linear-to-r from-blue-400 via-cyan-500 to-teal-500 bg-clip-text text-transparent mt-2">
               Desenvolvedor de Software
             </span>
           </motion.h1>
@@ -58,23 +58,23 @@ export default function Hero() {
               href="https://github.com/Pecinallix"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2.5 sm:p-3 bg-gray-800 light:bg-gray-100 hover:bg-gray-700 light:hover:bg-gray-200 rounded-full transition-all hover:scale-110"
+              className="p-2.5 sm:p-3 dark:bg-gray-800 light:bg-gray-100 dark:hover:bg-gray-700 light:hover:bg-gray-200 rounded-full transition-all hover:scale-110"
             >
-              <Github className="w-5 h-5 sm:w-6 sm:h-6 text-white light:text-gray-900" />
+              <Github className="w-5 h-5 sm:w-6 sm:h-6 dark:text-white light:text-slate-800" />
             </a>
             <a
               href="https://www.linkedin.com/in/icaropecinalli/"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2.5 sm:p-3 bg-gray-800 light:bg-gray-100 hover:bg-gray-700 light:hover:bg-gray-200 rounded-full transition-all hover:scale-110"
+              className="p-2.5 sm:p-3 dark:bg-gray-800 light:bg-gray-100 dark:hover:bg-gray-700 light:hover:bg-gray-200 rounded-full transition-all hover:scale-110"
             >
-              <Linkedin className="w-5 h-5 sm:w-6 sm:h-6 text-white light:text-gray-900" />
+              <Linkedin className="w-5 h-5 sm:w-6 sm:h-6 dark:text-white light:text-slate-800" />
             </a>
             <a
               href="mailto:icaropecinalli@gmail.com"
-              className="p-2.5 sm:p-3 bg-gray-800 light:bg-gray-100 hover:bg-gray-700 light:hover:bg-gray-200 rounded-full transition-all hover:scale-110"
+              className="p-2.5 sm:p-3 dark:bg-gray-800 light:bg-gray-100 dark:hover:bg-gray-700 light:hover:bg-gray-200 rounded-full transition-all hover:scale-110"
             >
-              <Mail className="w-5 h-5 sm:w-6 sm:h-6 text-white light:text-gray-900" />
+              <Mail className="w-5 h-5 sm:w-6 sm:h-6 dark:text-white light:text-slate-800" />
             </a>
           </motion.div>
 
@@ -86,13 +86,13 @@ export default function Hero() {
           >
             <a
               href="#projects"
-              className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-linear-to-r from-purple-500 to-pink-500 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition-all hover:scale-105 text-center"
+              className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-linear-to-r from-blue-600 to-cyan-600 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-all hover:scale-105 text-center"
             >
               Ver Projetos
             </a>
             <a
               href="#contact"
-              className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-transparent border-2 border-purple-500 text-purple-400 rounded-full font-semibold hover:bg-purple-500/10 transition-all hover:scale-105 text-center"
+              className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-transparent border-2 border-cyan-500 text-cyan-400 rounded-full font-semibold hover:bg-cyan-500/10 transition-all hover:scale-105 text-center"
             >
               Entre em Contato
             </a>
