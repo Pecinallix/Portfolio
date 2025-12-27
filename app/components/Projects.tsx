@@ -122,7 +122,7 @@ export default function Projects() {
 
   if (loading) {
     return (
-      <section id="projects" className="py-20 bg-gray-900">
+      <section id="projects" className="py-20 bg-gray-900 light:bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center">
             <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500"></div>
@@ -134,7 +134,7 @@ export default function Projects() {
   }
 
   return (
-    <section id="projects" className="py-20 bg-gray-900">
+    <section id="projects" className="py-20 bg-gray-900 light:bg-white">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -156,7 +156,7 @@ export default function Projects() {
 
         {projects.length > 0 ? (
           <>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {projects.map((project, index) => (
                 <motion.div
                   key={index}
@@ -164,10 +164,10 @@ export default function Projects() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="group relative bg-gray-800 rounded-xl overflow-hidden border border-gray-700 hover:border-purple-500 transition-all duration-300"
+                  className="group relative bg-gray-800 light:bg-white rounded-xl overflow-hidden border border-gray-700 light:border-gray-200 hover:border-purple-500 transition-all duration-300"
                 >
                   {/* Gradient Background Accent */}
-                  <div className="absolute top-0 left-0 right-0 h-2 bg-linear-to-r from-purple-500 via-pink-500 to-blue-500"></div>
+                  <div className="absolute top-0 left-0 right-0 h-2 bg-linear-to-r from-purple-500 via-pink-500 to-blue-500 light:from-purple-600 light:via-pink-600 light:to-blue-600"></div>
 
                   {/* Project Content */}
                   <div className="relative p-6 pt-8">
@@ -190,17 +190,17 @@ export default function Projects() {
                     </div>
 
                     {/* Description */}
-                    <p className="text-gray-400 mb-4 line-clamp-3 min-h-[4.5rem]">
+                    <p className="text-gray-400 mb-4 line-clamp-3 min-h-18">
                       {project.description}
                     </p>
 
                     {/* Technologies */}
-                    <div className="flex flex-wrap gap-2 mb-6 min-h-[2.5rem]">
+                    <div className="flex flex-wrap gap-2 mb-6 min-h-10">
                       {project.technologies.length > 0 ? (
                         project.technologies.map((tech, techIndex) => (
                           <span
                             key={techIndex}
-                            className="px-3 py-1 bg-gray-900 text-purple-400 text-xs font-medium rounded-full border border-gray-700"
+                            className="px-3 py-1 bg-gray-900 light:bg-gray-50 text-purple-400 light:text-purple-600 text-xs font-medium rounded-full border border-gray-700 light:border-gray-200"
                           >
                             {tech}
                           </span>
@@ -211,12 +211,12 @@ export default function Projects() {
                     </div>
 
                     {/* Links */}
-                    <div className="flex gap-3 pt-4 border-t border-gray-700">
+                    <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-gray-700">
                       <a
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-4 py-2 bg-gray-900 text-gray-300 hover:text-white hover:bg-gray-700 rounded-lg transition-all text-sm font-medium"
+                        className="flex items-center justify-center gap-2 px-4 py-2 bg-gray-900 light:bg-gray-50 text-gray-300 light:text-gray-700 hover:text-white light:hover:text-gray-900 hover:bg-gray-700 light:hover:bg-gray-100 rounded-lg transition-all text-sm font-medium"
                       >
                         <Github className="w-4 h-4" />
                         <span>Código</span>
@@ -226,7 +226,7 @@ export default function Projects() {
                           href={project.demo}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 px-4 py-2 bg-purple-500/10 text-purple-400 hover:bg-purple-500/20 rounded-lg transition-all text-sm font-medium"
+                          className="flex items-center justify-center gap-2 px-4 py-2 bg-purple-500/10 light:bg-purple-100 text-purple-400 light:text-purple-600 hover:bg-purple-500/20 light:hover:bg-purple-200 rounded-lg transition-all text-sm font-medium"
                         >
                           <ExternalLink className="w-4 h-4" />
                           <span>Demo</span>
@@ -237,7 +237,7 @@ export default function Projects() {
 
                   {/* Hover Glow Effect */}
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-                    <div className="absolute inset-0 bg-gradient-to-t from-purple-500/5 to-transparent"></div>
+                    <div className="absolute inset-0 bg-linear-to-t from-purple-500/5 to-transparent"></div>
                   </div>
                 </motion.div>
               ))}
