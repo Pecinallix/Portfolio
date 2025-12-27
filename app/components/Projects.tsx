@@ -160,33 +160,69 @@ export default function Projects() {
               {projects.map((project, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
+                  initial={{ opacity: 0, y: 50, rotateX: -20 }}
+                  whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                  transition={{
+                    duration: 0.6,
+                    delay: index * 0.1,
+                    type: 'spring' as const,
+                    stiffness: 100,
+                  }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  whileHover={{
+                    y: -10,
+                    rotateY: 2,
+                    rotateX: -2,
+                    transition: { duration: 0.3 },
+                  }}
                   className="group relative dark:bg-gray-800 light:bg-white rounded-xl overflow-hidden dark:border-gray-700 light:border-gray-200 hover:border-cyan-500 transition-all duration-300"
+                  style={{ transformStyle: 'preserve-3d' }}
                 >
-                  {/* Gradient Background Accent */}
-                  <div className="absolute top-0 left-0 right-0 h-2 bg-linear-to-r from-blue-500 via-cyan-500 to-teal-500 light:from-blue-600 light:via-cyan-600 light:to-teal-600"></div>
+                  {/* Gradient Background Accent with animation */}
+                  <motion.div
+                    className="absolute top-0 left-0 right-0 h-2 bg-linear-to-r from-blue-500 via-cyan-500 to-teal-500 light:from-blue-600 light:via-cyan-600 light:to-teal-600"
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    transition={{ duration: 0.8, delay: index * 0.1 + 0.3 }}
+                    viewport={{ once: true }}
+                  />
 
                   {/* Project Content */}
                   <div className="relative p-6 pt-8">
                     {/* Title and Stats */}
                     <div className="mb-4">
-                      <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors">
+                      <motion.h3
+                        className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors"
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1 + 0.2 }}
+                        viewport={{ once: true }}
+                      >
                         {project.title}
-                      </h3>
+                      </motion.h3>
 
-                      <div className="flex items-center gap-4 text-gray-400 text-sm">
-                        <div className="flex items-center gap-1">
+                      <motion.div
+                        className="flex items-center gap-4 text-gray-400 text-sm"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ delay: index * 0.1 + 0.3 }}
+                        viewport={{ once: true }}
+                      >
+                        <motion.div
+                          className="flex items-center gap-1"
+                          whileHover={{ scale: 1.1, color: '#22d3ee' }}
+                        >
                           <Star className="w-4 h-4" />
                           <span>{project.stars}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
+                        </motion.div>
+                        <motion.div
+                          className="flex items-center gap-1"
+                          whileHover={{ scale: 1.1, color: '#22d3ee' }}
+                        >
                           <GitFork className="w-4 h-4" />
                           <span>{project.forks}</span>
-                        </div>
-                      </div>
+                        </motion.div>
+                      </motion.div>
                     </div>
 
                     {/* Description */}
@@ -211,28 +247,44 @@ export default function Projects() {
                     </div>
 
                     {/* Links */}
-                    <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-gray-700">
-                      <a
+                    <motion.div
+                      className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-gray-700"
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 + 0.5 }}
+                      viewport={{ once: true }}
+                    >
+                      <motion.a
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2 px-4 py-2 dark:bg-gray-900 light:bg-gray-50 dark:text-gray-300 light:text-gray-700 dark:hover:text-white light:hover:text-gray-900 dark:hover:bg-gray-700 light:hover:bg-gray-100 rounded-lg transition-all text-sm font-medium"
+                        className="flex items-center justify-center gap-2 px-4 py-2 dark:bg-gray-900 light:bg-gray-50 dark:text-gray-300 light:text-gray-700 rounded-lg text-sm font-medium relative overflow-hidden group/btn"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                       >
-                        <Github className="w-4 h-4" />
-                        <span>Código</span>
-                      </a>
+                        <motion.span
+                          className="absolute inset-0 bg-linear-to-r from-gray-700 to-gray-600 opacity-0 group-hover/btn:opacity-100 transition-opacity"
+                        />
+                        <Github className="w-4 h-4 relative z-10 group-hover/btn:text-white transition-colors" />
+                        <span className="relative z-10 group-hover/btn:text-white transition-colors">Código</span>
+                      </motion.a>
                       {project.demo && (
-                        <a
+                        <motion.a
                           href={project.demo}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center justify-center gap-2 px-4 py-2 dark:bg-cyan-500/10 light:bg-cyan-100 dark:text-cyan-400 light:text-cyan-600 dark:hover:bg-cyan-500/20 light:hover:bg-cyan-200 rounded-lg transition-all text-sm font-medium"
+                          className="flex items-center justify-center gap-2 px-4 py-2 dark:bg-cyan-500/10 light:bg-cyan-100 dark:text-cyan-400 light:text-cyan-600 rounded-lg text-sm font-medium relative overflow-hidden group/btn"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
                         >
-                          <ExternalLink className="w-4 h-4" />
-                          <span>Demo</span>
-                        </a>
+                          <motion.span
+                            className="absolute inset-0 bg-linear-to-r from-cyan-500 to-blue-500 opacity-0 group-hover/btn:opacity-100 transition-opacity"
+                          />
+                          <ExternalLink className="w-4 h-4 relative z-10 group-hover/btn:text-white transition-colors" />
+                          <span className="relative z-10 group-hover/btn:text-white transition-colors">Demo</span>
+                        </motion.a>
                       )}
-                    </div>
+                    </motion.div>
                   </div>
 
                   {/* Hover Glow Effect */}

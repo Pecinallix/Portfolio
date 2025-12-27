@@ -1,6 +1,9 @@
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 
 export default function Skills() {
+  const progressRef = useRef(null);
+  const isInView = useInView(progressRef, { once: true, amount: 0.3 });
   const skillCategories = [
     {
       category: 'Frontend',
@@ -70,38 +73,100 @@ export default function Skills() {
         </motion.div>
 
         {/* Skills with progress bars */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16">
+        <div ref={progressRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16">
           {skillCategories.map((category, categoryIndex) => (
             <motion.div
               key={categoryIndex}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
-              viewport={{ once: true }}
-              className="dark:bg-gray-900 light:bg-white p-6 rounded-lg"
+              initial={{ opacity: 0, y: 50, rotateX: -15 }}
+              whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+              transition={{
+                duration: 0.6,
+                delay: categoryIndex * 0.15,
+                type: 'spring' as const,
+                stiffness: 100,
+              }}
+              viewport={{ once: true, amount: 0.3 }}
+              className="dark:bg-gray-900 light:bg-white p-6 rounded-lg relative group"
+              whileHover={{ scale: 1.02 }}
+              style={{ transformStyle: 'preserve-3d' }}
             >
-              <h3 className="text-2xl font-bold text-cyan-400 light:text-blue-600 mb-6">
+              <motion.div
+                className="absolute inset-0 rounded-lg bg-linear-to-br from-blue-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity"
+              />
+              <motion.h3
+                className="text-2xl font-bold text-cyan-400 light:text-blue-600 mb-6 relative z-10"
+                initial={{ x: -20, opacity: 0 }}
+                whileInView={{ x: 0, opacity: 1 }}
+                transition={{ delay: categoryIndex * 0.15 + 0.2 }}
+                viewport={{ once: true }}
+              >
                 {category.category}
-              </h3>
-              <div className="space-y-4">
+              </motion.h3>
+              <div className="space-y-4 relative z-10">
                 {category.skills.map((skill, skillIndex) => (
-                  <div key={skillIndex}>
+                  <motion.div
+                    key={skillIndex}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{
+                      delay: categoryIndex * 0.15 + skillIndex * 0.1,
+                      duration: 0.4,
+                    }}
+                    viewport={{ once: true }}
+                  >
                     <div className="flex justify-between mb-2">
                       <span className="text-gray-300 font-medium">
                         {skill.name}
                       </span>
-                      <span className="text-gray-400">{skill.level}%</span>
-                    </div>
-                    <div className="w-full dark:bg-gray-700 light:bg-gray-200 rounded-full h-2 overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${skill.level}%` }}
-                        transition={{ duration: 1, delay: skillIndex * 0.1 }}
+                      <motion.span
+                        className="text-gray-400 font-mono"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{
+                          delay: categoryIndex * 0.15 + skillIndex * 0.1 + 0.5,
+                        }}
                         viewport={{ once: true }}
-                        className="h-full bg-linear-to-r from-blue-500 to-cyan-500 light:from-blue-600 light:to-cyan-600 rounded-full"
-                      />
+                      >
+                        {skill.level}%
+                      </motion.span>
                     </div>
-                  </div>
+                    <div className="w-full dark:bg-gray-700 light:bg-gray-200 rounded-full h-2 overflow-hidden relative">
+                      <motion.div
+                        initial={{ width: 0, opacity: 0 }}
+                        whileInView={{ width: `${skill.level}%`, opacity: 1 }}
+                        transition={{
+                          width: {
+                            duration: 1.2,
+                            delay: categoryIndex * 0.15 + skillIndex * 0.1 + 0.2,
+                            ease: 'easeOut',
+                          },
+                          opacity: {
+                            duration: 0.3,
+                            delay: categoryIndex * 0.15 + skillIndex * 0.1,
+                          },
+                        }}
+                        viewport={{ once: true }}
+                        className="h-full bg-linear-to-r from-blue-500 to-cyan-500 light:from-blue-600 light:to-cyan-600 rounded-full relative overflow-hidden"
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        <motion.div
+                          className="absolute inset-0 bg-white/30"
+                          animate={{
+                            x: ['-100%', '100%'],
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: 'linear',
+                            delay: categoryIndex * 0.15 + skillIndex * 0.1 + 1,
+                          }}
+                          style={{
+                            background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)',
+                          }}
+                        />
+                      </motion.div>
+                    </div>
+                  </motion.div>
                 ))}
               </div>
             </motion.div>
@@ -123,14 +188,27 @@ export default function Skills() {
             {technologies.map((tech, index) => (
               <motion.span
                 key={index}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.1 }}
-                className="px-3 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base dark:bg-gray-800 light:bg-blue-50 dark:text-cyan-400 light:text-blue-700 rounded-full font-medium dark:border-gray-700 light:border-blue-200 dark:hover:bg-blue-500 dark:hover:text-white dark:hover:border-blue-500 light:hover:bg-blue-600 light:hover:border-blue-600 transition-all cursor-default"
+                initial={{ opacity: 0, scale: 0, rotate: -180 }}
+                whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+                transition={{
+                  type: 'spring' as const,
+                  stiffness: 200,
+                  damping: 15,
+                  delay: index * 0.03,
+                }}
+                viewport={{ once: true, amount: 0.1 }}
+                whileHover={{
+                  scale: 1.15,
+                  rotate: [0, -5, 5, -5, 0],
+                  transition: { duration: 0.3 },
+                }}
+                whileTap={{ scale: 0.95 }}
+                className="px-3 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base dark:bg-gray-800 light:bg-blue-50 dark:text-cyan-400 light:text-blue-700 rounded-full font-medium dark:border-gray-700 light:border-blue-200 dark:hover:bg-blue-500 dark:hover:text-white dark:hover:border-blue-500 light:hover:bg-blue-600 light:hover:text-white light:hover:border-blue-600 transition-all cursor-pointer relative overflow-hidden group"
               >
-                {tech}
+                <motion.span
+                  className="absolute inset-0 bg-linear-to-r from-blue-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity"
+                />
+                <span className="relative z-10">{tech}</span>
               </motion.span>
             ))}
           </div>
