@@ -154,14 +154,19 @@ export default function Contact() {
             viewport={{ once: true }}
           >
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                viewport={{ once: true }}
+              >
                 <label
                   htmlFor="name"
                   className="block text-white mb-2 font-medium"
                 >
                   Nome
                 </label>
-                <input
+                <motion.input
                   type="text"
                   id="name"
                   name="name"
@@ -170,17 +175,23 @@ export default function Contact() {
                   required
                   className="w-full px-4 py-3 dark:bg-gray-900 light:bg-white dark:text-white light:text-slate-800 rounded-lg focus:outline-none focus:ring-2 dark:focus:ring-cyan-500 light:focus:ring-cyan-600 transition-all dark:border-gray-700 light:border-gray-200"
                   placeholder="Seu nome"
+                  whileFocus={{ scale: 1.02 }}
                 />
-              </div>
+              </motion.div>
 
-              <div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                viewport={{ once: true }}
+              >
                 <label
                   htmlFor="email"
                   className="block dark:text-white light:text-slate-800 mb-2 font-medium"
                 >
                   Email
                 </label>
-                <input
+                <motion.input
                   type="email"
                   id="email"
                   name="email"
@@ -189,17 +200,23 @@ export default function Contact() {
                   required
                   className="w-full px-4 py-3 dark:bg-gray-900 light:bg-white dark:text-white light:text-slate-800 rounded-lg focus:outline-none focus:ring-2 dark:focus:ring-cyan-500 light:focus:ring-cyan-600 transition-all dark:border-gray-700 light:border-gray-200"
                   placeholder="seu@email.com"
+                  whileFocus={{ scale: 1.02 }}
                 />
-              </div>
+              </motion.div>
 
-              <div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                viewport={{ once: true }}
+              >
                 <label
                   htmlFor="subject"
                   className="block dark:text-white light:text-slate-800 mb-2 font-medium"
                 >
                   Assunto
                 </label>
-                <input
+                <motion.input
                   type="text"
                   id="subject"
                   name="subject"
@@ -208,17 +225,23 @@ export default function Contact() {
                   required
                   className="w-full px-4 py-3 dark:bg-gray-900 light:bg-white dark:text-white light:text-slate-800 rounded-lg focus:outline-none focus:ring-2 dark:focus:ring-cyan-500 light:focus:ring-cyan-600 transition-all dark:border-gray-700 light:border-gray-200"
                   placeholder="Como posso ajudar?"
+                  whileFocus={{ scale: 1.02 }}
                 />
-              </div>
+              </motion.div>
 
-              <div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                viewport={{ once: true }}
+              >
                 <label
                   htmlFor="message"
                   className="block dark:text-white light:text-slate-800 mb-2 font-medium"
                 >
                   Mensagem
                 </label>
-                <textarea
+                <motion.textarea
                   id="message"
                   name="message"
                   value={formData.message}
@@ -227,16 +250,32 @@ export default function Contact() {
                   rows={6}
                   className="w-full px-4 py-3 dark:bg-gray-900 light:bg-white dark:text-white light:text-slate-800 rounded-lg focus:outline-none focus:ring-2 dark:focus:ring-cyan-500 light:focus:ring-cyan-600 transition-all resize-none dark:border-gray-700 light:border-gray-200"
                   placeholder="Escreva sua mensagem..."
+                  whileFocus={{ scale: 1.02 }}
                 />
-              </div>
+              </motion.div>
 
-              <button
+              <motion.button
                 type="submit"
-                className="w-full px-6 sm:px-8 py-3 sm:py-4 bg-linear-to-r from-blue-600 to-cyan-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transition-all hover:scale-105 flex items-center justify-center gap-2"
+                className="w-full px-6 sm:px-8 py-3 sm:py-4 bg-linear-to-r from-blue-600 to-cyan-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transition-all flex items-center justify-center gap-2 relative overflow-hidden group"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <Send className="w-5 h-5" />
-                Enviar Mensagem
-              </button>
+                <motion.span
+                  className="absolute inset-0 bg-linear-to-r from-cyan-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity"
+                />
+                <motion.div
+                  animate={{ rotate: [0, 15, -15, 0] }}
+                  transition={{ duration: 0.5 }}
+                  className="relative z-10"
+                >
+                  <Send className="w-5 h-5" />
+                </motion.div>
+                <span className="relative z-10">Enviar Mensagem</span>
+              </motion.button>
             </form>
           </motion.div>
         </div>

@@ -1,10 +1,19 @@
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ThemeToggle from './ThemeToggle';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navItems = [
     { name: 'Início', href: '#home' },
@@ -19,22 +28,29 @@ export default function Header() {
   const closeMenu = () => setIsOpen(false);
 
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="fixed top-0 left-0 right-0 z-50 dark:bg-gray-900/95 light:bg-white/95 backdrop-blur-sm border-b dark:border-gray-800 light:border-gray-200 transition-colors"
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b transition-all duration-300 ${
+        isScrolled
+          ? 'dark:bg-gray-900/95 light:bg-white/95 dark:border-gray-700 light:border-gray-300 shadow-lg shadow-black/10'
+          : 'dark:bg-gray-900/80 light:bg-white/80 dark:border-gray-800 light:border-gray-200'
+      }`}
     >
       <nav className="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between rounded-4xl">
           {/* Logo */}
           <motion.a
             href="#home"
-            className="text-xl sm:text-2xl font-bold bg-linear-to-r from-blue-400 to-cyan-500 bg-clip-text text-transparent"
+            className="text-xl sm:text-2xl font-bold bg-linear-to-r from-blue-500 to-cyan-200 bg-clip-text  relative group"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            {'<Dev />'}
+            <motion.span
+              className="absolute -inset-2 bg-linear-to-r from-blue-500/10 to-cyan-500/10 rounded-full opacity-0 group-hover:opacity-100 blur"
+              layoutId="logo-glow"
+            />
+            <span className="relative light:text-gray-700 dark:text-amber-50">
+              {'<Dev />'}
+            </span>
           </motion.a>
 
           {/* Desktop Navigation */}
@@ -44,37 +60,82 @@ export default function Header() {
                 key={index}
                 href={item.href}
                 className="dark:text-gray-300 light:text-gray-700 hover:text-cyan-400 transition-colors font-medium relative group px-3"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: index * 0.1 + 0.3,
+                  type: 'spring' as const,
+                  stiffness: 100,
+                }}
                 whileHover={{ y: -2 }}
               >
                 {item.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-linear-to-r from-blue-500 to-cyan-500 group-hover:w-full transition-all duration-300"></span>
+                <motion.span
+                  className="absolute bottom-0 left-0 h-0.5 bg-linear-to-r from-blue-500 to-cyan-500"
+                  initial={{ width: 0 }}
+                  whileHover={{ width: '100%' }}
+                  transition={{ duration: 0.3 }}
+                />
               </motion.a>
             ))}
-            <ThemeToggle />
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.8, type: 'spring' as const }}
+            >
+              <ThemeToggle />
+            </motion.div>
             <motion.a
               href="#contact"
-              className="px-6 py-2 bg-linear-to-r from-blue-600 to-cyan-600 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transition-all"
-              whileHover={{ scale: 1.05 }}
+              className="px-6 py-2 bg-linear-to-r from-blue-600 to-cyan-600 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transition-all relative overflow-hidden group"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                delay: 0.5,
+                type: 'spring' as const,
+                stiffness: 260,
+                damping: 20,
+              }}
+              whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
               whileTap={{ scale: 0.95 }}
             >
-              Contratar
+              <motion.span className="absolute inset-0 bg-linear-to-r from-cyan-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <span className="relative z-10 light:text-white dark:text-gray-700">
+                Contratar
+              </span>
             </motion.a>
           </div>
 
           {/* Mobile Menu Button & Theme Toggle */}
           <div className="md:hidden flex items-center gap-3">
-            <ThemeToggle />
-            <button
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.5, type: 'spring' as const }}
+            >
+              <ThemeToggle />
+            </motion.div>
+            <motion.button
               onClick={toggleMenu}
               className="dark:text-white light:text-slate-800 p-2 dark:hover:bg-gray-800 light:hover:bg-gray-200 rounded-lg transition-colors"
               aria-label="Toggle menu"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              initial={{ opacity: 0, rotate: -180 }}
+              animate={{ opacity: 1, rotate: 0 }}
+              transition={{ delay: 0.6, type: 'spring' as const }}
             >
-              {isOpen ? (
-                <X className="w-6 h-6" />
-              ) : (
-                <Menu className="w-6 h-6" />
-              )}
-            </button>
+              <motion.div
+                animate={{ rotate: isOpen ? 90 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                {isOpen ? (
+                  <X className="w-6 h-6" />
+                ) : (
+                  <Menu className="w-6 h-6" />
+                )}
+              </motion.div>
+            </motion.button>
           </div>
         </div>
 
@@ -115,6 +176,6 @@ export default function Header() {
           </div>
         </motion.div>
       </nav>
-    </motion.header>
+    </header>
   );
 }
