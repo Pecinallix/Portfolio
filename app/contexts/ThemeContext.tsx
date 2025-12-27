@@ -13,13 +13,13 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>('dark');
 
   useEffect(() => {
-    // Verificar preferÃªncia salva no localStorage
+    // Verificar preferência salva no localStorage
     const savedTheme = localStorage.getItem('theme') as Theme | null;
     if (savedTheme) {
       setTheme(savedTheme);
       document.documentElement.classList.toggle('light', savedTheme === 'light');
     } else {
-      // Verificar preferÃªncia do sistema
+      // Verificar preferência do sistema
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       const systemTheme = prefersDark ? 'dark' : 'light';
       setTheme(systemTheme);

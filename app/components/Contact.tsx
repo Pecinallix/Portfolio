@@ -49,7 +49,7 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-gray-800">
+    <section id="contact" className="py-20 bg-gray-800 light:bg-gray-50">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -68,7 +68,7 @@ export default function Contact() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
           {/* Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -93,10 +93,10 @@ export default function Contact() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="flex items-start gap-4 p-4 bg-gray-900 rounded-lg hover:bg-gray-700 transition-all group"
+                  className="flex items-start gap-4 p-4 bg-gray-900 light:bg-white rounded-lg hover:bg-gray-700 light:hover:bg-gray-50 transition-all group"
                 >
-                  <div className="p-3 bg-purple-500/10 rounded-lg group-hover:bg-purple-500/20 transition-colors">
-                    <info.icon className="w-6 h-6 text-purple-400" />
+                  <div className="p-3 bg-purple-500/10 light:bg-purple-100 rounded-lg group-hover:bg-purple-500/20 light:group-hover:bg-purple-200 transition-colors">
+                    <info.icon className="w-6 h-6 text-purple-400 light:text-purple-600" />
                   </div>
                   <div>
                     <h4 className="text-white font-semibold mb-1">
@@ -113,15 +113,15 @@ export default function Contact() {
               <h4 className="text-white font-semibold mb-4">
                 Me siga nas redes
               </h4>
-              <div className="flex gap-4">
+              <div className="flex gap-3 sm:gap-4">
                 <a
                   href="https://github.com/Pecinallix"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 bg-gray-900 rounded-lg hover:bg-purple-500 transition-all hover:scale-110"
+                  className="p-3 bg-gray-900 light:bg-white rounded-lg hover:bg-purple-500 light:hover:bg-purple-600 transition-all hover:scale-110 border light:border-gray-200 group"
                 >
                   <svg
-                    className="w-6 h-6 text-white"
+                    className="w-6 h-6 text-white light:text-gray-900 group-hover:text-white"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
@@ -132,10 +132,10 @@ export default function Contact() {
                   href="https://www.linkedin.com/in/icaropecinalli/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 bg-gray-900 rounded-lg hover:bg-purple-500 transition-all hover:scale-110"
+                  className="p-3 bg-gray-900 light:bg-white rounded-lg hover:bg-purple-500 light:hover:bg-purple-600 transition-all hover:scale-110 border light:border-gray-200"
                 >
                   <svg
-                    className="w-6 h-6 text-white"
+                    className="w-6 h-6 text-white light:text-gray-900 group-hover:text-white"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
@@ -168,7 +168,7 @@ export default function Contact() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-gray-900 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all"
+                  className="w-full px-4 py-3 bg-gray-900 light:bg-white text-white light:text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 light:focus:ring-purple-600 transition-all border light:border-gray-200"
                   placeholder="Seu nome"
                 />
               </div>
@@ -176,7 +176,7 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-white mb-2 font-medium"
+                  className="block text-white light:text-gray-900 mb-2 font-medium"
                 >
                   Email
                 </label>
@@ -187,7 +187,7 @@ export default function Contact() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-gray-900 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all"
+                  className="w-full px-4 py-3 bg-gray-900 light:bg-white text-white light:text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 light:focus:ring-purple-600 transition-all border light:border-gray-200"
                   placeholder="seu@email.com"
                 />
               </div>
@@ -195,7 +195,7 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="subject"
-                  className="block text-white mb-2 font-medium"
+                  className="block text-white light:text-gray-900 mb-2 font-medium"
                 >
                   Assunto
                 </label>
@@ -206,7 +206,7 @@ export default function Contact() {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-gray-900 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all"
+                  className="w-full px-4 py-3 bg-gray-900 light:bg-white text-white light:text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 light:focus:ring-purple-600 transition-all border light:border-gray-200"
                   placeholder="Como posso ajudar?"
                 />
               </div>
@@ -214,7 +214,7 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="message"
-                  className="block text-white mb-2 font-medium"
+                  className="block text-white light:text-gray-900 mb-2 font-medium"
                 >
                   Mensagem
                 </label>
@@ -225,14 +225,14 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   rows={6}
-                  className="w-full px-4 py-3 bg-gray-900 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all resize-none"
+                  className="w-full px-4 py-3 bg-gray-900 light:bg-white text-white light:text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 light:focus:ring-purple-600 transition-all resize-none border light:border-gray-200"
                   placeholder="Escreva sua mensagem..."
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full px-8 py-4 bg-linear-to-r from-purple-500 to-pink-500 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition-all hover:scale-105 flex items-center justify-center gap-2"
+                className="w-full px-6 sm:px-8 py-3 sm:py-4 bg-linear-to-r from-purple-500 to-pink-500 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition-all hover:scale-105 flex items-center justify-center gap-2"
               >
                 <Send className="w-5 h-5" />
                 Enviar Mensagem

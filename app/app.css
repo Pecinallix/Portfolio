@@ -27,21 +27,33 @@ html.light body {
 .light {
   /* Backgrounds */
   & .bg-gray-900 { @apply bg-white; }
-  & .bg-gray-800 { @apply bg-gray-100; }
-  & .bg-gray-950 { @apply bg-gray-50; }
+  & .bg-gray-800 { @apply bg-gray-50; }
+  & .bg-gray-950 { @apply bg-white; }
 
   /* Text colors */
   & .text-white { @apply text-gray-900; }
-  & .text-gray-300 { @apply text-gray-700; }
-  & .text-gray-400 { @apply text-gray-600; }
-  & .text-gray-500 { @apply text-gray-500; }
+  & .text-gray-300 { @apply text-gray-600; }
+  & .text-gray-400 { @apply text-gray-500; }
+  & .text-gray-500 { @apply text-gray-600; }
+  & .text-gray-600 { @apply text-gray-700; }
 
   /* Borders */
   & .border-gray-800 { @apply border-gray-200; }
-  & .border-gray-700 { @apply border-gray-300; }
+  & .border-gray-700 { @apply border-gray-200; }
 
   /* Specific components */
   & .bg-gray-900\/95 { @apply bg-white/95; }
+  & .bg-white\/75 { @apply bg-white/95; }
+
+  /* Hover states */
+  & .hover\:bg-gray-700:hover { @apply bg-gray-100; }
+  & .hover\:bg-gray-800:hover { @apply bg-gray-100; }
+
+  /* Special backgrounds */
+  & .bg-gray-900.rounded-lg { @apply bg-gray-50; }
+  & .bg-purple-500\/10 { @apply bg-purple-100; }
+  & .hover\:bg-purple-500\/20:hover { @apply bg-purple-200; }
+  & .hover\:bg-purple-500:hover { @apply bg-purple-600; }
 }
 
 /* Custom animations */
