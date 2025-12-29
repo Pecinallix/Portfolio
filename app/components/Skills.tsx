@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export default function Skills() {
+  const { t } = useLanguage();
   const skillCategories = [
     {
       category: 'Frontend',
@@ -64,7 +66,7 @@ export default function Skills() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Habilidades & Tecnologias
+            {t('skills.title')}
           </h2>
           <div className="w-20 h-1 bg-linear-to-r from-blue-500 to-cyan-500 mx-auto rounded-full"></div>
         </motion.div>
@@ -129,7 +131,7 @@ export default function Skills() {
           className="dark:bg-gray-900 light:bg-white p-8 rounded-lg dark:border-gray-700 light:border-gray-200"
         >
           <h3 className="text-xl sm:text-2xl font-bold dark:text-white light:text-slate-800 mb-4 sm:mb-6 text-center">
-            Tecnologias que Trabalho
+            {t('skills.subtitle')}
           </h3>
           <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
             {technologies.map((tech, index) => (

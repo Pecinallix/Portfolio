@@ -1,6 +1,8 @@
 import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export default function Hero() {
+  const { t } = useLanguage();
   const socialIcons = [
     {
       href: 'https://github.com/Pecinallix',
@@ -35,20 +37,19 @@ export default function Hero() {
         <div className="text-center">
           <div>
             <h2 className="text-base sm:text-lg md:text-xl text-cyan-400 mb-3 sm:mb-4 font-mono">
-              Olá, eu sou
+              {t('hero.greeting')}
             </h2>
           </div>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 sm:mb-6 px-4">
             Ícaro Pecinalli
             <span className="block bg-linear-to-r from-blue-400 via-cyan-500 to-teal-500 bg-clip-text text-transparent mt-2">
-              Desenvolvedor de Software
+              {t('hero.title')}
             </span>
           </h1>
 
           <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-8 sm:mb-12 max-w-3xl mx-auto px-4">
-            Criando experiências digitais incríveis com código limpo e design
-            moderno
+            {t('hero.description')}
           </p>
 
           <div className="flex items-center justify-center gap-4 sm:gap-6 mb-8 sm:mb-12">
@@ -71,13 +72,13 @@ export default function Hero() {
               href="#projects"
               className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-linear-to-r from-blue-600 to-cyan-600 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-all hover:scale-105 text-center"
             >
-              Ver Projetos
+              {t('hero.cta')}
             </a>
             <a
               href="#contact"
               className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-transparent border-2 border-cyan-500 text-cyan-400 rounded-full font-semibold hover:bg-cyan-500/10 transition-all hover:scale-105 text-center"
             >
-              Entre em Contato
+              {t('hero.contact')}
             </a>
           </div>
         </div>
