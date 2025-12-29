@@ -1,4 +1,4 @@
-import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
+import { ArrowDown, Github, Linkedin, Mail, Download } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 export default function Hero() {
@@ -73,6 +73,14 @@ export default function Hero() {
               className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-linear-to-r from-blue-600 to-cyan-600 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-all hover:scale-105 text-center"
             >
               {t('hero.cta')}
+            </a>
+            <a
+              href="/curriculo.pdf"
+              download="Icaro_Pecinalli_Curriculo.pdf"
+              className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-transparent border-2 border-blue-500 text-blue-400 rounded-full font-semibold hover:bg-blue-500/10 transition-all hover:scale-105 text-center flex items-center justify-center gap-2"
+            >
+              <Download className="w-5 h-5" />
+              {t('hero.download')}
             </a>
             <a
               href="#contact"
