@@ -10,6 +10,7 @@ import {
 import type { Route } from "./+types/root";
 import "./app.css";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { LanguageProvider } from "./contexts/LanguageContext";
 import MotionWrapper from "./components/MotionWrapper";
 
 export const links: Route.LinksFunction = () => [
@@ -36,9 +37,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <ThemeProvider>
-          <MotionWrapper>
-            {children}
-          </MotionWrapper>
+          <LanguageProvider>
+            <MotionWrapper>
+              {children}
+            </MotionWrapper>
+          </LanguageProvider>
         </ThemeProvider>
         <ScrollRestoration />
         <Scripts />

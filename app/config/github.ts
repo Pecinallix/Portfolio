@@ -11,7 +11,7 @@ export const GITHUB_CONFIG = {
     // 'nome-do-repositorio-2',
   ] as string[],
 
-  maxProjects: 6,
+  maxProjects: 8,
 
   // Filtrar por tópicos/tags específicos (opcional)
   filterByTopics: [

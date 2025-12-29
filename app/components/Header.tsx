@@ -2,10 +2,13 @@ import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import ThemeToggle from './ThemeToggle';
+import LanguageToggle from './LanguageToggle';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,11 +19,11 @@ export default function Header() {
   }, []);
 
   const navItems = [
-    { name: 'Início', href: '#home' },
-    { name: 'Sobre', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Projetos', href: '#projects' },
-    { name: 'Contato', href: '#contact' },
+    { name: t('nav.home'), href: '#home' },
+    { name: t('nav.about'), href: '#about' },
+    { name: t('nav.skills'), href: '#skills' },
+    { name: t('nav.projects'), href: '#projects' },
+    { name: t('nav.contact'), href: '#contact' },
   ];
 
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -81,6 +84,13 @@ export default function Header() {
             <motion.div
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.7, type: 'spring' as const }}
+            >
+              <LanguageToggle />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.8, type: 'spring' as const }}
             >
               <ThemeToggle />
@@ -91,7 +101,7 @@ export default function Header() {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
-                delay: 0.5,
+                delay: 0.9,
                 type: 'spring' as const,
                 stiffness: 260,
                 damping: 20,
@@ -101,13 +111,20 @@ export default function Header() {
             >
               <motion.span className="absolute inset-0 bg-linear-to-r from-cyan-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity" />
               <span className="relative z-10 light:text-white dark:text-gray-700">
-                Contratar
+                {t('nav.hire')}
               </span>
             </motion.a>
           </div>
 
-          {/* Mobile Menu Button & Theme Toggle */}
-          <div className="md:hidden flex items-center gap-3">
+          {/* Mobile Menu Button & Toggles */}
+          <div className="md:hidden flex items-center gap-2">
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.4, type: 'spring' as const }}
+            >
+              <LanguageToggle />
+            </motion.div>
             <motion.div
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -171,7 +188,7 @@ export default function Header() {
               animate={{ opacity: isOpen ? 1 : 0, x: isOpen ? 0 : -20 }}
               transition={{ delay: navItems.length * 0.1 }}
             >
-              Contratar
+              {t('nav.hire')}
             </motion.a>
           </div>
         </motion.div>
