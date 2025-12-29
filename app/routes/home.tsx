@@ -1,10 +1,12 @@
 import type { Route } from './+types/home';
+import { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
 import About from '../components/About';
 import Skills from '../components/Skills';
 import Projects from '../components/Projects';
 import Contact from '../components/Contact';
+import WelcomeScreen from '../components/WelcomeScreen';
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -18,6 +20,28 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
+  const [showWelcome, setShowWelcome] = useState(true);
+  const [hasSeenWelcome, setHasSeenWelcome] = useState(false);
+
+  useEffect(() => {
+    // Verifica se o usuário já viu a tela de boas-vindas nesta sessão
+    const welcomed = sessionStorage.getItem('hasSeenWelcome');
+    if (welcomed === 'true') {
+      setShowWelcome(false);
+      setHasSeenWelcome(true);
+    }
+  }, []);
+
+  const handleWelcomeComplete = () => {
+    setShowWelcome(false);
+    setHasSeenWelcome(true);
+    sessionStorage.setItem('hasSeenWelcome', 'true');
+  };
+
+  if (showWelcome && !hasSeenWelcome) {
+    return <WelcomeScreen onComplete={handleWelcomeComplete} />;
+  }
+
   return (
     <div className="min-h-screen">
       <Header />
