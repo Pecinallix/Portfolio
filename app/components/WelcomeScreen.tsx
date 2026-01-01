@@ -2,6 +2,21 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 
+interface Firework {
+  id: number;
+  x: number;
+  y: number;
+  color: string;
+  particles: Particle[];
+}
+
+interface Particle {
+  id: number;
+  angle: number;
+  velocity: number;
+  size: number;
+}
+
 interface WelcomeScreenProps {
   onComplete: () => void;
 }
@@ -9,9 +24,50 @@ interface WelcomeScreenProps {
 export default function WelcomeScreen({ onComplete }: WelcomeScreenProps) {
   const { t } = useLanguage();
   const [step, setStep] = useState(0);
+  const [fireworks, setFireworks] = useState<Firework[]>([]);
 
   useEffect(() => {
-    // Animação por etapas
+    const colors = [
+      '#3b82f6',
+      '#06b6d4',
+      '#14b8a6',
+      '#f59e0b',
+      '#ec4899',
+      '#a855f7',
+      '#ef4444',
+    ];
+
+    const createFirework = () => {
+      const newFirework: Firework = {
+        id: Date.now() + Math.random(),
+        x: Math.random() * 80 + 10,
+        y: Math.random() * 50 + 10,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        particles: Array.from({ length: 50 }, (_, i) => ({
+          id: i,
+          angle: (Math.PI * 2 * i) / 50 + (Math.random() - 0.5) * 0.3,
+          velocity: Math.random() * 2 + 2.5,
+          size: Math.random() * 2 + 1,
+        })),
+      };
+
+      setFireworks((prev) => [...prev, newFirework]);
+
+      setTimeout(() => {
+        setFireworks((prev) => prev.filter((fw) => fw.id !== newFirework.id));
+      }, 2000);
+    };
+
+    const interval = setInterval(() => {
+      if (step >= 1) {
+        createFirework();
+      }
+    }, 500);
+
+    return () => clearInterval(interval);
+  }, [step]);
+
+  useEffect(() => {
     const timer1 = setTimeout(() => setStep(1), 500);
     const timer2 = setTimeout(() => setStep(2), 1500);
     const timer3 = setTimeout(() => setStep(3), 2500);
@@ -34,7 +90,6 @@ export default function WelcomeScreen({ onComplete }: WelcomeScreenProps) {
         transition={{ duration: 0.5 }}
         className="fixed inset-0 z-50 flex items-center justify-center dark:bg-gray-900 light:bg-gray-50 overflow-hidden"
       >
-        {/* Animated background elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div
             animate={{
@@ -62,9 +117,7 @@ export default function WelcomeScreen({ onComplete }: WelcomeScreenProps) {
           />
         </div>
 
-        {/* Content */}
         <div className="relative z-10 flex flex-col items-center justify-center space-y-8">
-          {/* Logo/Name animation */}
           <AnimatePresence mode="wait">
             {step >= 0 && (
               <motion.div
@@ -89,13 +142,12 @@ export default function WelcomeScreen({ onComplete }: WelcomeScreenProps) {
                     ease: 'linear',
                   }}
                 >
-                  IP
+                  Feliz Ano Novo!
                 </motion.h1>
               </motion.div>
             )}
           </AnimatePresence>
 
-          {/* Subtitle animation */}
           <AnimatePresence mode="wait">
             {step >= 1 && (
               <motion.div
@@ -120,7 +172,6 @@ export default function WelcomeScreen({ onComplete }: WelcomeScreenProps) {
             )}
           </AnimatePresence>
 
-          {/* Role animation */}
           <AnimatePresence mode="wait">
             {step >= 2 && (
               <motion.div
@@ -141,7 +192,6 @@ export default function WelcomeScreen({ onComplete }: WelcomeScreenProps) {
             )}
           </AnimatePresence>
 
-          {/* Loading bar */}
           <AnimatePresence mode="wait">
             {step >= 1 && (
               <motion.div
@@ -160,7 +210,6 @@ export default function WelcomeScreen({ onComplete }: WelcomeScreenProps) {
             )}
           </AnimatePresence>
 
-          {/* Loading text */}
           <AnimatePresence mode="wait">
             {step >= 2 && (
               <motion.p
@@ -180,30 +229,119 @@ export default function WelcomeScreen({ onComplete }: WelcomeScreenProps) {
           </AnimatePresence>
         </div>
 
-        {/* Particles effect */}
-        {step >= 1 && (
-          <div className="absolute inset-0 pointer-events-none">
-            {[...Array(20)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-2 h-2 bg-cyan-400 rounded-full opacity-50"
-                initial={{
-                  x: Math.random() * window.innerWidth,
-                  y: Math.random() * window.innerHeight,
+        <div className="absolute inset-0 pointer-events-none overflow-hidden z-20">
+          {fireworks.map((firework) => {
+            const colorVariants = [
+              firework.color,
+              `${firework.color}dd`,
+              `${firework.color}aa`,
+            ];
+
+            return (
+              <div
+                key={firework.id}
+                className="absolute"
+                style={{
+                  left: `${firework.x}%`,
+                  top: `${firework.y}%`,
                 }}
-                animate={{
-                  y: [null, Math.random() * window.innerHeight],
-                  x: [null, Math.random() * window.innerWidth],
-                }}
-                transition={{
-                  duration: Math.random() * 3 + 2,
-                  repeat: Infinity,
-                  ease: 'linear',
-                }}
-              />
-            ))}
-          </div>
-        )}
+              >
+                <motion.div
+                  className="absolute rounded-full -translate-x-1/2 -translate-y-1/2"
+                  style={{
+                    backgroundColor: firework.color,
+                    boxShadow: `0 0 40px ${firework.color}, 0 0 80px ${firework.color}, 0 0 120px ${firework.color}`,
+                  }}
+                  initial={{ scale: 0, opacity: 1, width: 8, height: 8 }}
+                  animate={{
+                    scale: [0, 4, 2, 0],
+                    opacity: [1, 0.9, 0.5, 0],
+                  }}
+                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                />
+
+                {firework.particles.map((particle) => {
+                  const colorVariant =
+                    colorVariants[
+                      Math.floor(Math.random() * colorVariants.length)
+                    ];
+                  const distance = particle.velocity * 60;
+                  const endX = Math.cos(particle.angle) * distance;
+                  const endY = Math.sin(particle.angle) * distance + 40;
+
+                  return (
+                    <motion.div
+                      key={particle.id}
+                      className="absolute rounded-full"
+                      style={{
+                        backgroundColor: colorVariant,
+                        boxShadow: `0 0 8px ${firework.color}, 0 0 16px ${firework.color}`,
+                        width: particle.size * 2,
+                        height: particle.size * 2,
+                      }}
+                      initial={{
+                        x: 0,
+                        y: 0,
+                        scale: 0,
+                        opacity: 0,
+                      }}
+                      animate={{
+                        x: endX,
+                        y: endY,
+                        scale: [0, 1.5, 1, 0.3],
+                        opacity: [0, 1, 0.9, 0],
+                      }}
+                      transition={{
+                        duration: 2,
+                        ease: [0.33, 1, 0.68, 1],
+                        times: [0, 0.1, 0.5, 1],
+                      }}
+                    />
+                  );
+                })}
+
+                {firework.particles.slice(0, 25).map((particle) => {
+                  const distance = particle.velocity * 40;
+                  const angleOffset = Math.random() * 0.5 - 0.25;
+                  const endX =
+                    Math.cos(particle.angle + angleOffset) * distance;
+                  const endY =
+                    Math.sin(particle.angle + angleOffset) * distance + 25;
+
+                  return (
+                    <motion.div
+                      key={`trail-${particle.id}`}
+                      className="absolute rounded-full"
+                      style={{
+                        backgroundColor: `${firework.color}88`,
+                        boxShadow: `0 0 4px ${firework.color}`,
+                        width: particle.size,
+                        height: particle.size,
+                      }}
+                      initial={{
+                        x: 0,
+                        y: 0,
+                        scale: 0,
+                        opacity: 0,
+                      }}
+                      animate={{
+                        x: endX,
+                        y: endY,
+                        scale: [0, 1, 0.5, 0],
+                        opacity: [0, 0.7, 0.5, 0],
+                      }}
+                      transition={{
+                        duration: 1.8,
+                        delay: 0.1,
+                        ease: [0.33, 1, 0.68, 1],
+                      }}
+                    />
+                  );
+                })}
+              </div>
+            );
+          })}
+        </div>
       </motion.div>
     </AnimatePresence>
   );
