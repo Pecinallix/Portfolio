@@ -24,7 +24,6 @@ export default function Home() {
   const [hasSeenWelcome, setHasSeenWelcome] = useState(false);
 
   useEffect(() => {
-    // Verifica se o usuário já viu a tela de boas-vindas nesta sessão
     const welcomed = sessionStorage.getItem('hasSeenWelcome');
     if (welcomed === 'true') {
       setShowWelcome(false);

@@ -28,7 +28,7 @@ export const translations = {
 
     // Hero
     'hero.greeting': 'Olá! Sou',
-    'hero.title': 'Desenvolvedor Full Stack',
+    'hero.title': 'Desenvolvedor Front End',
     'hero.description':
       'Transformo ideias em soluções digitais inovadoras com código limpo e design moderno.',
     'hero.cta': 'Ver Projetos',
@@ -40,7 +40,7 @@ export const translations = {
     'about.intro1':
       'Olá! Sou Ícaro Pecinalli, desenvolvedor apaixonado por tecnologia e inovação, com foco em criar aplicações web modernas e eficientes que fazem a diferença.',
     'about.intro2':
-      'Com experiência em desenvolvimento full stack, domino tecnologias como React, Node.js, TypeScript e outras ferramentas modernas. Estou sempre em busca de novos desafios e oportunidades para crescer profissionalmente.',
+      'Com experiência em desenvolvimento Front End, domino tecnologias como React, Node.js, TypeScript e outras ferramentas modernas. Estou sempre em busca de novos desafios e oportunidades para crescer profissionalmente.',
     'about.intro3':
       'Meu objetivo é transformar ideias em soluções digitais de alta qualidade, combinando código limpo, boas práticas e uma experiência de usuário excepcional.',
     'about.feature1.title': 'Código Limpo',
@@ -113,7 +113,7 @@ export const translations = {
 
     // Hero
     'hero.greeting': "Hello! I'm",
-    'hero.title': 'Full Stack Developer',
+    'hero.title': 'Front End Developer',
     'hero.description':
       'I transform ideas into innovative digital solutions with clean code and modern design.',
     'hero.cta': 'View Projects',
@@ -125,7 +125,7 @@ export const translations = {
     'about.intro1':
       "Hello! I'm Ícaro Pecinalli, a developer passionate about technology and innovation, focused on creating modern and efficient web applications that make a difference.",
     'about.intro2':
-      "With full stack development experience, I master technologies like React, Node.js, TypeScript and other modern tools. I'm always looking for new challenges and opportunities to grow professionally.",
+      "With Front End development experience, I master technologies like React, Node.js, TypeScript and other modern tools. I'm always looking for new challenges and opportunities to grow professionally.",
     'about.intro3':
       'My goal is to transform ideas into high-quality digital solutions, combining clean code, best practices and exceptional user experience.',
     'about.feature1.title': 'Clean Code',
@@ -198,7 +198,7 @@ export const translations = {
 
     // Hero
     'hero.greeting': 'Bonjour! Je suis',
-    'hero.title': 'Développeur Full Stack',
+    'hero.title': 'Développeur Front End',
     'hero.description':
       'Je transforme les idées en solutions numériques innovantes avec du code propre et un design moderne.',
     'hero.cta': 'Voir les projets',
@@ -210,7 +210,7 @@ export const translations = {
     'about.intro1':
       "Bonjour! Je suis Ícaro Pecinalli, développeur passionné par la technologie et l'innovation, axé sur la création d'applications web modernes et efficaces qui font la différence.",
     'about.intro2':
-      "Avec une expérience en développement full stack, je maîtrise des technologies comme React, Node.js, TypeScript et d'autres outils modernes. Je suis toujours à la recherche de nouveaux défis et d'opportunités de croissance professionnelle.",
+      "Avec une expérience en développement Front End, je maîtrise des technologies comme React, Node.js, TypeScript et d'autres outils modernes. Je suis toujours à la recherche de nouveaux défis et d'opportunités de croissance professionnelle.",
     'about.intro3':
       'Mon objectif est de transformer les idées en solutions numériques de haute qualité, en combinant code propre, bonnes pratiques et expérience utilisateur exceptionnelle.',
     'about.feature1.title': 'Code Propre',
@@ -275,7 +275,6 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>('pt');
 
   useEffect(() => {
-    // Carregar idioma salvo do localStorage
     const savedLanguage = localStorage.getItem('language') as Language;
     if (savedLanguage && ['pt', 'en', 'fr'].includes(savedLanguage)) {
       setLanguageState(savedLanguage);
