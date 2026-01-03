@@ -142,7 +142,7 @@ export default function WelcomeScreen({ onComplete }: WelcomeScreenProps) {
                     ease: 'linear',
                   }}
                 >
-                  Feliz Ano Novo!
+                  {t('welcome.msg')}
                 </motion.h1>
               </motion.div>
             )}

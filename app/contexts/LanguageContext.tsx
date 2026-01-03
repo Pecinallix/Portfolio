@@ -25,6 +25,7 @@ export const translations = {
 
     // Welcome
     'welcome.loading': 'Carregando...',
+    'welcome.msg': 'Bem-Vindo!',
 
     // Hero
     'hero.greeting': 'Olá! Sou',
@@ -38,7 +39,7 @@ export const translations = {
     // About
     'about.title': 'Sobre Mim',
     'about.intro1':
-      'Olá! Sou Ícaro Pecinalli, desenvolvedor apaixonado por tecnologia e inovação, com foco em criar aplicações web modernas e eficientes que fazem a diferença.',
+      'Olá! Sou Ýcaro Pecinalli, desenvolvedor apaixonado por tecnologia e inovação, com foco em criar aplicações web modernas e eficientes que fazem a diferença.',
     'about.intro2':
       'Com experiência em desenvolvimento Front End, domino tecnologias como React, Node.js, TypeScript e outras ferramentas modernas. Estou sempre em busca de novos desafios e oportunidades para crescer profissionalmente.',
     'about.intro3':
@@ -110,6 +111,7 @@ export const translations = {
 
     // Welcome
     'welcome.loading': 'Loading...',
+    'welcome.msg': 'Welcome!',
 
     // Hero
     'hero.greeting': "Hello! I'm",
@@ -123,7 +125,7 @@ export const translations = {
     // About
     'about.title': 'About Me',
     'about.intro1':
-      "Hello! I'm Ícaro Pecinalli, a developer passionate about technology and innovation, focused on creating modern and efficient web applications that make a difference.",
+      "Hello! I'm Ýcaro Pecinalli, a developer passionate about technology and innovation, focused on creating modern and efficient web applications that make a difference.",
     'about.intro2':
       "With Front End development experience, I master technologies like React, Node.js, TypeScript and other modern tools. I'm always looking for new challenges and opportunities to grow professionally.",
     'about.intro3':
@@ -195,6 +197,7 @@ export const translations = {
 
     // Welcome
     'welcome.loading': 'Chargement...',
+    'welcome.msg': 'Accueillir!',
 
     // Hero
     'hero.greeting': 'Bonjour! Je suis',
@@ -208,7 +211,7 @@ export const translations = {
     // About
     'about.title': 'À propos de moi',
     'about.intro1':
-      "Bonjour! Je suis Ícaro Pecinalli, développeur passionné par la technologie et l'innovation, axé sur la création d'applications web modernes et efficaces qui font la différence.",
+      "Bonjour! Je suis Ýcaro Pecinalli, développeur passionné par la technologie et l'innovation, axé sur la création d'applications web modernes et efficaces qui font la différence.",
     'about.intro2':
       "Avec une expérience en développement Front End, je maîtrise des technologies comme React, Node.js, TypeScript et d'autres outils modernes. Je suis toujours à la recherche de nouveaux défis et d'opportunités de croissance professionnelle.",
     'about.intro3':
