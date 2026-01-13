@@ -112,7 +112,7 @@ export default function Hero() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
           >
-            Ícaro Pecinalli
+            Ýcaro Pecinalli
             <motion.span
               className="block bg-linear-to-r from-blue-400 via-cyan-500 to-teal-500 bg-clip-text text-transparent mt-2"
               initial={{ opacity: 0, x: -20 }}
@@ -193,7 +193,7 @@ export default function Hero() {
             </motion.a>
             <motion.a
               href="#contact"
-              className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-transparent border-2 border-cyan-500 text-cyan-400 rounded-full font-semibold hover:bg-cyan-500/10 transition-colors text-center"
+              className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-transparent border-2 border-cyan-500 text-cyan-400 light:text-cyan-700 rounded-full font-semibold hover:bg-cyan-500/10 transition-colors text-center"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.98 }}
               transition={{ type: 'spring', stiffness: 300 }}

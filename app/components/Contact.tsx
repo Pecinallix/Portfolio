@@ -115,9 +115,7 @@ export default function Contact() {
             <h3 className="text-2xl font-bold text-white mb-6">
               {t('contact.info')}
             </h3>
-            <p className="text-gray-400 mb-8">
-              {t('contact.description')}
-            </p>
+            <p className="text-gray-400 mb-8">{t('contact.description')}</p>
 
             <div className="space-y-6">
               {contactInfo.map((info, index) => (
@@ -316,7 +314,9 @@ export default function Contact() {
                     >
                       <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full" />
                     </motion.div>
-                    <span className="relative z-10">{t('contact.form.sending')}</span>
+                    <span className="relative z-10">
+                      {t('contact.form.sending')}
+                    </span>
                   </>
                 ) : (
                   <>
@@ -327,7 +327,9 @@ export default function Contact() {
                     >
                       <Send className="w-5 h-5" />
                     </motion.div>
-                    <span className="relative z-10">{t('contact.form.send')}</span>
+                    <span className="relative z-10">
+                      {t('contact.form.send')}
+                    </span>
                   </>
                 )}
               </motion.button>
