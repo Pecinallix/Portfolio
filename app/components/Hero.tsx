@@ -112,7 +112,7 @@ export default function Hero() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
           >
-            Ýcaro Pecinalli
+            Ícaro Pecinalli
             <motion.span
               className="block bg-linear-to-r from-blue-400 via-cyan-500 to-teal-500 bg-clip-text text-transparent mt-2"
               initial={{ opacity: 0, x: -20 }}
