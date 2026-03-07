@@ -29,7 +29,7 @@ export const translations = {
 
     // Hero
     'hero.greeting': 'Olá! Sou',
-    'hero.title': 'Desenvolvedor Front End',
+    'hero.title': 'Desenvolvedor Full Stack',
     'hero.description':
       'Transformo ideias em soluções digitais inovadoras com código limpo e design moderno.',
     'hero.cta': 'Ver Projetos',
@@ -65,8 +65,20 @@ export const translations = {
     'skills.title': 'Habilidades & Tecnologias',
     'skills.subtitle': 'Tecnologias que Trabalho',
 
+    // Featured Projects
+    'featured.title': 'Projetos Ativos',
+    'featured.subtitle': 'Projetos pessoais que estao no ar e em constante evolucao',
+    'featured.visit': 'Visitar',
+    'featured.status.live': 'Online',
+    'featured.secretForest.desc':
+      'Jogo web interativo estilo aventura ambientado em uma floresta misteriosa. Explore, descubra segredos e viva uma experiencia imersiva direto no navegador.',
+    'featured.promoRadar.desc':
+      'Bots automatizados que buscam as melhores promocoes 24h por dia, 7 dias por semana, e postam em tempo real no grupo do WhatsApp.',
+    'featured.shopeeApi.desc':
+      'API REST publicada no RapidAPI para consultar ofertas e flash sales da Shopee. Disponivel para desenvolvedores integrarem em seus projetos.',
+
     // Projects
-    'projects.title': 'Projetos em Destaque',
+    'projects.title': 'Repositorios GitHub',
     'projects.subtitle':
       'Meus projetos mais recentes do GitHub, demonstrando minhas habilidades e expertise',
     'projects.viewProject': 'Ver Projeto',
@@ -115,7 +127,7 @@ export const translations = {
 
     // Hero
     'hero.greeting': "Hello! I'm",
-    'hero.title': 'Front End Developer',
+    'hero.title': 'Full Stack Developer',
     'hero.description':
       'I transform ideas into innovative digital solutions with clean code and modern design.',
     'hero.cta': 'View Projects',
@@ -151,8 +163,20 @@ export const translations = {
     'skills.title': 'Skills & Technologies',
     'skills.subtitle': 'Technologies I Work With',
 
+    // Featured Projects
+    'featured.title': 'Active Projects',
+    'featured.subtitle': 'Personal projects that are live and constantly evolving',
+    'featured.visit': 'Visit',
+    'featured.status.live': 'Live',
+    'featured.secretForest.desc':
+      'Interactive adventure-style web game set in a mysterious forest. Explore, discover secrets and live an immersive experience right in your browser.',
+    'featured.promoRadar.desc':
+      'Automated bots that search for the best deals 24/7 and post them in real time to a WhatsApp group.',
+    'featured.shopeeApi.desc':
+      'REST API published on RapidAPI to query Shopee deals and flash sales. Available for developers to integrate into their projects.',
+
     // Projects
-    'projects.title': 'Featured Projects',
+    'projects.title': 'GitHub Repositories',
     'projects.subtitle':
       'My latest GitHub projects, showcasing my skills and expertise',
     'projects.viewProject': 'View Project',
@@ -201,7 +225,7 @@ export const translations = {
 
     // Hero
     'hero.greeting': 'Bonjour! Je suis',
-    'hero.title': 'Développeur Front End',
+    'hero.title': 'Développeur Full Stack',
     'hero.description':
       'Je transforme les idées en solutions numériques innovantes avec du code propre et un design moderne.',
     'hero.cta': 'Voir les projets',
@@ -237,10 +261,22 @@ export const translations = {
     'skills.title': 'Compétences & Technologies',
     'skills.subtitle': 'Technologies avec lesquelles je travaille',
 
+    // Featured Projects
+    'featured.title': 'Projets Actifs',
+    'featured.subtitle': 'Projets personnels en ligne et en constante evolution',
+    'featured.visit': 'Visiter',
+    'featured.status.live': 'En ligne',
+    'featured.secretForest.desc':
+      "Jeu web interactif de style aventure dans une foret mysterieuse. Explorez, decouvrez des secrets et vivez une experience immersive directement dans votre navigateur.",
+    'featured.promoRadar.desc':
+      'Bots automatises qui recherchent les meilleures promotions 24h/24, 7j/7, et les publient en temps reel dans un groupe WhatsApp.',
+    'featured.shopeeApi.desc':
+      'API REST publiee sur RapidAPI pour consulter les offres et flash sales de Shopee. Disponible pour les developpeurs a integrer dans leurs projets.',
+
     // Projects
-    'projects.title': 'Projets en vedette',
+    'projects.title': 'Depots GitHub',
     'projects.subtitle':
-      'Mes derniers projets GitHub, démontrant mes compétences et mon expertise',
+      'Mes derniers projets GitHub, demontrant mes competences et mon expertise',
     'projects.viewProject': 'Voir le projet',
     'projects.viewMore': 'Voir plus sur GitHub',
     'projects.noTags': 'Pas de tags',

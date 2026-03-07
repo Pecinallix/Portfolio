@@ -27,7 +27,16 @@ interface Project {
   technologies: string[];
   stars: number;
   forks: number;
+  language: string | null;
 }
+
+const languageColors: Record<string, string> = {
+  TypeScript: '#3178c6',
+  JavaScript: '#f1e05a',
+  HTML: '#e34c26',
+  CSS: '#563d7c',
+  Python: '#3572A5',
+};
 
 export default function Projects() {
   const { t } = useLanguage();
@@ -50,25 +59,17 @@ export default function Projects() {
 
       const repos: GitHubRepo[] = await response.json();
 
-      // Filtrar e mapear repositórios
       let filteredRepos = repos.filter((repo) => {
-        // Excluir repositórios da lista de exclusão
         if (GITHUB_CONFIG.excludeRepos.includes(repo.name)) return false;
-
-        // Excluir forks
         if (repo.fork) return false;
-
-        // Filtrar por tópicos se configurado
         if (GITHUB_CONFIG.filterByTopics.length > 0) {
           return repo.topics.some((topic) =>
             GITHUB_CONFIG.filterByTopics.includes(topic),
           );
         }
-
         return true;
       });
 
-      // Se tem repositórios em destaque, priorizar eles
       if (GITHUB_CONFIG.featuredRepos.length > 0) {
         const featured = filteredRepos.filter((repo) =>
           GITHUB_CONFIG.featuredRepos.includes(repo.name),
@@ -79,19 +80,15 @@ export default function Projects() {
         filteredRepos = [...featured, ...others];
       }
 
-      // Limitar número de projetos
       filteredRepos = filteredRepos.slice(0, GITHUB_CONFIG.maxProjects);
 
-      // Mapear para formato de projeto
       const mappedProjects: Project[] = filteredRepos.map((repo) => {
         const technologies = new Set<string>();
 
-        // Adicionar linguagem principal
         if (repo.language) {
           technologies.add(repo.language);
         }
 
-        // Adicionar tecnologias baseadas nos tópicos
         repo.topics.forEach((topic) => {
           const tech = TOPIC_TO_TECH[topic.toLowerCase()];
           if (tech) {
@@ -110,6 +107,7 @@ export default function Projects() {
           technologies: Array.from(technologies).slice(0, 4),
           stars: repo.stargazers_count,
           forks: repo.forks_count,
+          language: repo.language,
         };
       });
 
@@ -124,7 +122,7 @@ export default function Projects() {
 
   if (loading) {
     return (
-      <section id="projects" className="py-20 dark:bg-gray-900 light:bg-white">
+      <section id="projects" className="py-24 dark:bg-gray-900 light:bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center">
             <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-500"></div>
@@ -136,8 +134,9 @@ export default function Projects() {
   }
 
   return (
-    <section id="projects" className="py-20 bg-gray-900 light:bg-white">
-      <div className="container mx-auto px-6">
+    <section id="projects" className="py-24 bg-gray-900 light:bg-white relative section-divider">
+      <div className="absolute inset-0 bg-grid-pattern" />
+      <div className="container mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -145,7 +144,10 @@ export default function Projects() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <span className="text-cyan-400 font-mono text-sm uppercase tracking-widest mb-3 block">
+            &lt;projects /&gt;
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
             {t('projects.title')}
           </h2>
           <div className="w-20 h-1 bg-linear-to-r from-blue-500 to-cyan-500 mx-auto rounded-full"></div>
@@ -164,7 +166,7 @@ export default function Projects() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{
                     duration: 0.5,
-                    delay: index * 0.1,
+                    delay: index * 0.08,
                     ease: 'easeOut',
                   }}
                   viewport={{ once: true, amount: 0.2 }}
@@ -172,43 +174,54 @@ export default function Projects() {
                     y: -8,
                     transition: { duration: 0.2 },
                   }}
-                  className="group relative dark:bg-gray-800 light:bg-white rounded-xl overflow-hidden border dark:border-gray-700 light:border-gray-200 hover:border-cyan-500 dark:hover:border-cyan-500 transition-all duration-300 flex flex-col"
+                  className="group relative glass-card rounded-2xl overflow-hidden hover:border-cyan-500/30 transition-all duration-300 flex flex-col"
                 >
-                  {/* Gradient Background Accent */}
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-blue-500 via-cyan-500 to-teal-500 light:from-blue-600 light:via-cyan-600 light:to-teal-600" />
+                  {/* Gradient header */}
+                  <div className="h-32 bg-linear-to-br from-blue-600/20 via-cyan-600/10 to-teal-600/20 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-grid-pattern opacity-50" />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="text-4xl font-bold text-white/10 font-mono group-hover:text-white/20 transition-colors">
+                        {project.title.charAt(0)}
+                      </span>
+                    </div>
+                    {project.language && (
+                      <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/30 backdrop-blur-sm text-xs text-gray-300">
+                        <span
+                          className="w-2.5 h-2.5 rounded-full"
+                          style={{ backgroundColor: languageColors[project.language] || '#8b949e' }}
+                        />
+                        {project.language}
+                      </div>
+                    )}
+                  </div>
 
-                  {/* Project Content */}
-                  <div className="relative p-5 pt-4 flex flex-col grow">
-                    {/* Title and Stats */}
+                  <div className="relative p-5 flex flex-col grow">
                     <div className="mb-3">
-                      <h3 className="text-xl font-bold dark:text-white light:text-gray-800 mb-2 group-hover:text-cyan-400 dark:group-hover:text-cyan-400 light:group-hover:text-cyan-600 transition-colors">
+                      <h3 className="text-lg font-bold dark:text-white light:text-gray-800 mb-2 group-hover:text-cyan-400 transition-colors">
                         {project.title}
                       </h3>
-
-                      <div className="flex items-center gap-4 text-gray-400 light:text-gray-600 text-sm">
+                      <div className="flex items-center gap-4 text-gray-500 text-xs">
                         <div className="flex items-center gap-1">
-                          <Star className="w-4 h-4" />
+                          <Star className="w-3.5 h-3.5" />
                           <span>{project.stars}</span>
                         </div>
                         <div className="flex items-center gap-1">
-                          <GitFork className="w-4 h-4" />
+                          <GitFork className="w-3.5 h-3.5" />
                           <span>{project.forks}</span>
                         </div>
                       </div>
                     </div>
 
-                    {/* Description */}
                     <p className="dark:text-gray-400 light:text-gray-600 mb-4 text-sm leading-relaxed line-clamp-3 grow">
                       {project.description}
                     </p>
 
-                    {/* Technologies */}
-                    <div className="flex flex-wrap gap-2 mb-4">
+                    <div className="flex flex-wrap gap-1.5 mb-4">
                       {project.technologies.length > 0 ? (
                         project.technologies.map((tech, techIndex) => (
                           <span
                             key={techIndex}
-                            className="px-3 py-1 dark:bg-gray-900 light:bg-blue-50 dark:text-cyan-400 light:text-blue-600 text-xs font-medium rounded-full"
+                            className="px-2.5 py-0.5 dark:bg-cyan-500/10 light:bg-blue-50 dark:text-cyan-400 light:text-blue-600 text-xs font-medium rounded-lg"
                           >
                             {tech}
                           </span>
@@ -218,17 +231,16 @@ export default function Projects() {
                       )}
                     </div>
 
-                    {/* Link */}
-                    <div className="pt-4 border-t dark:border-gray-700 light:border-gray-200 mt-auto">
+                    <div className="pt-4 border-t dark:border-gray-700/50 light:border-gray-200 mt-auto">
                       <a
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-linear-to-r from-blue-600 to-cyan-600 text-white rounded-lg text-sm font-medium hover:from-blue-700 hover:to-cyan-700 transition-all group"
+                        className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-linear-to-r from-blue-600 to-cyan-600 text-white rounded-xl text-sm font-medium hover:from-blue-500 hover:to-cyan-500 transition-all hover:shadow-lg hover:shadow-cyan-500/20 group/btn"
                       >
-                        <Github className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                        <Github className="w-4 h-4 group-hover/btn:scale-110 transition-transform" />
                         <span>{t('projects.viewProject')}</span>
-                        <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                        <ExternalLink className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 transition-transform" />
                       </a>
                     </div>
                   </div>
@@ -247,7 +259,7 @@ export default function Projects() {
                 href={`https://github.com/${GITHUB_CONFIG.username}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-transparent border-2 border-cyan-500 text-cyan-400 rounded-full font-semibold hover:bg-cyan-500/10 transition-all hover:scale-105"
+                className="inline-flex items-center gap-2 px-8 py-4 glass-card rounded-xl font-semibold text-cyan-400 hover:border-cyan-500/40 transition-all hover:scale-105"
               >
                 <Github className="w-5 h-5" />
                 {t('projects.viewMore')}
