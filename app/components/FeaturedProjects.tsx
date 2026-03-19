@@ -37,7 +37,7 @@ const projects: FeaturedProject[] = [
   {
     title: 'Shopee Deals API',
     descriptionKey: 'featured.shopeeApi.desc',
-    url: 'https://rapidapi.com/icaropecinalli/api/shopee-deals-flash-sale',
+    url: 'https://rapidapi.com/user/icaropecinalli',
     icon: Code2,
     gradient: 'from-orange-500 via-red-500 to-pink-500',
     glowColor: 'rgba(239, 68, 68, 0.3)',
@@ -104,7 +104,9 @@ export default function FeaturedProjects() {
               }}
             >
               {/* Gradient header */}
-              <div className={`h-40 bg-linear-to-br ${project.gradient} relative overflow-hidden`}>
+              <div
+                className={`h-40 bg-linear-to-br ${project.gradient} relative overflow-hidden`}
+              >
                 <div className="absolute inset-0 bg-black/20" />
                 <div className="absolute inset-0 bg-grid-pattern opacity-30" />
 
