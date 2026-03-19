@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -o \"\"text\"\":\"\"[^\"\"]*bat[^\"\"]*\"\" C:Usersicaro.claudeprojectsc--projetos-portfoliod438c56f-e1f4-4215-9af8-e01821da237f.jsonl)",
+      "Bash(node -e \":*)"
+    ]
+  }
+}
