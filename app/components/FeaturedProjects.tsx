@@ -35,7 +35,7 @@ const projects: FeaturedProject[] = [
     statusKey: 'featured.status.live',
   },
   {
-    title: 'Shopee Deals API',
+    title: 'Rapid API Services',
     descriptionKey: 'featured.shopeeApi.desc',
     url: 'https://rapidapi.com/user/icaropecinalli',
     icon: Code2,
