@@ -28,9 +28,9 @@ function SkillsOrrery() {
   useEffect(() => {
     const animate = () => {
       setRotations((prev) => ({
-        orbit1: (prev.orbit1 + 1.5) % 360,
-        orbit2: (prev.orbit2 - 0.8) % 360,
-        orbit3: (prev.orbit3 + 0.4) % 360,
+        orbit1: (prev.orbit1 + 0.75) % 360,
+        orbit2: (prev.orbit2 - 0.4) % 360,
+        orbit3: (prev.orbit3 + 0.2) % 360,
       }));
       animationRef.current = requestAnimationFrame(animate);
     };
