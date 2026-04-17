@@ -93,177 +93,184 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center relative dark:bg-gray-900 light:bg-gray-50 overflow-hidden"
+      className="min-h-screen flex items-center justify-center relative dark:bg-black light:bg-white overflow-hidden"
     >
       {/* Grid pattern background */}
-      <div className="absolute inset-0 bg-grid-pattern" />
+      <div className="absolute inset-0 bg-grid-pattern opacity-50" />
 
-      {/* Radial gradient overlay */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,rgba(3,7,18,0.5)_100%)] light:bg-[radial-gradient(ellipse_at_center,transparent_20%,rgba(249,250,251,0.6)_100%)]" />
-
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute -top-10 -right-40 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-[100px] opacity-20 light:opacity-30"
-          animate={{
-            x: mousePosition.x * 0.5,
-            y: mousePosition.y * 0.5,
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            x: { type: 'spring', stiffness: 50, damping: 20 },
-            y: { type: 'spring', stiffness: 50, damping: 20 },
-            scale: { duration: 4, repeat: Infinity, ease: 'easeInOut' },
-          }}
-        />
-        <motion.div
-          className="absolute -bottom-10 -left-40 w-96 h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-[100px] opacity-20 light:opacity-30 z-10"
-          animate={{
-            x: mousePosition.x * -0.3,
-            y: mousePosition.y * -0.3,
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            x: { type: 'spring', stiffness: 50, damping: 20 },
-            y: { type: 'spring', stiffness: 50, damping: 20 },
-            scale: {
-              duration: 5,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              delay: 0.5,
-            },
-          }}
-        />
-        <motion.div
-          className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-125 h-125 bg-indigo-500 rounded-full mix-blend-multiply filter blur-[120px] opacity-10 light:opacity-15"
-          animate={{
-            x: mousePosition.x * 0.4,
-            y: mousePosition.y * 0.4,
-            scale: [1, 1.15, 1],
-          }}
-          transition={{
-            x: { type: 'spring', stiffness: 50, damping: 20 },
-            y: { type: 'spring', stiffness: 50, damping: 20 },
-            scale: {
-              duration: 4.5,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              delay: 1,
-            },
-          }}
-        />
-      </div>
+      {/* Subtle radial gradient */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(10,10,10,0.3)_100%)] light:bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(250,250,250,0.3)_100%)]" />
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
-        <div className="text-center max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-          >
-            <span className="inline-block px-4 py-1.5 text-sm sm:text-base text-cyan-400 mb-6 font-mono border border-cyan-500/20 rounded-full bg-cyan-500/5">
-              {t('hero.greeting')}
-            </span>
-          </motion.div>
-
-          <motion.h1
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-4 sm:mb-6 px-4 tracking-tight"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
-          >
-            Icaro Pecinalli
-          </motion.h1>
-
-          <motion.div
-            className="mb-6 sm:mb-8 h-10 sm:h-12"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
-          >
-            <TypingEffect
-              texts={typingTexts}
-              className="text-2xl sm:text-3xl md:text-4xl font-bold bg-linear-to-r from-blue-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent animate-gradient-text"
-            />
-          </motion.div>
-
-          <motion.p
-            className="text-base sm:text-lg md:text-xl text-gray-400 mb-10 sm:mb-12 max-w-2xl mx-auto px-4 leading-relaxed"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6, ease: 'easeOut' }}
-          >
-            {t('hero.description')}
-          </motion.p>
-
-          <motion.div
-            className="flex items-center justify-center gap-3 sm:gap-5 mb-10 sm:mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-          >
-            {socialIcons.map((social, index) => (
-              <motion.a
-                key={index}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 sm:p-3.5 glass-card rounded-xl hover:border-cyan-500/40 transition-all duration-300"
-                aria-label={social.label}
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{
-                  duration: 0.4,
-                  delay: 0.9 + index * 0.1,
-                  type: 'spring',
-                  stiffness: 200,
-                }}
-                whileHover={{
-                  scale: 1.15,
-                  y: -4,
-                }}
-                whileTap={{ scale: 0.95 }}
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left side - Main content */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
+            >
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: 'easeOut' }}
+                className="mb-6"
               >
-                <social.icon className="w-5 h-5 sm:w-6 sm:h-6 dark:text-gray-300 light:text-slate-600 hover:text-cyan-400 transition-colors" />
-              </motion.a>
-            ))}
-          </motion.div>
+                <span className="text-sm font-display text-orange-500 tracking-widest uppercase">
+                  {'<'} Bem-vindo {'>'}
+                </span>
+              </motion.div>
 
-          <motion.div
-            className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 px-4"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.2 }}
-          >
-            <motion.a
-              href="#projects"
-              className="w-full sm:w-auto px-8 py-3.5 bg-linear-to-r from-blue-600 to-cyan-600 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-blue-500/30 transition-all text-center"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ type: 'spring', stiffness: 300 }}
+              <motion.h1
+                className="text-6xl md:text-8xl font-display font-bold text-white mb-4 leading-tight"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.1, ease: 'easeOut' }}
+              >
+                Icaro<br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-orange-500 to-blue-700">
+                  Pecinalli
+                </span>
+              </motion.h1>
+
+              <motion.div
+                className="mb-8 h-12"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
+              >
+                <TypingEffect
+                  texts={typingTexts}
+                  className="text-lg font-mono text-orange-500"
+                />
+              </motion.div>
+
+              <motion.p
+                className="text-base text-gray-300 mb-10 leading-relaxed max-w-md"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
+              >
+                {t('hero.description')}
+              </motion.p>
+
+              <motion.div
+                className="flex items-center gap-4 mb-12"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+              >
+                {socialIcons.map((social, index) => (
+                  <motion.a
+                    key={index}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-12 h-12 rounded-lg glass-card flex items-center justify-center transition-all duration-300"
+                    aria-label={social.label}
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{
+                      duration: 0.4,
+                      delay: 0.6 + index * 0.1,
+                      type: 'spring',
+                      stiffness: 200,
+                    }}
+                    whileHover={{
+                      scale: 1.2,
+                      backgroundColor: 'rgba(255, 107, 53, 0.15)',
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <social.icon className="w-5 h-5 text-orange-500 transition-colors" />
+                  </motion.a>
+                ))}
+              </motion.div>
+
+              <motion.div
+                className="flex flex-col sm:flex-row gap-4"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.7 }}
+              >
+                <motion.a
+                  href="#projects"
+                  className="px-8 py-4 bg-orange-500 text-white font-display font-bold text-lg rounded-lg hover:shadow-lg hover:shadow-orange-500/40 transition-all"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: 'spring', stiffness: 300 }}
+                >
+                  {t('hero.cta')}
+                </motion.a>
+                <motion.a
+                  href="/curriculo.pdf"
+                  download="Icaro_Pecinalli_Curriculo.pdf"
+                  className="px-8 py-4 glass-card rounded-lg font-display font-bold text-lg text-orange-500 hover:border-orange-500/40 transition-all flex items-center justify-center gap-2"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: 'spring', stiffness: 300 }}
+                >
+                  <Download className="w-5 h-5" />
+                  {t('hero.download')}
+                </motion.a>
+              </motion.div>
+            </motion.div>
+
+            {/* Right side - Visual element */}
+            <motion.div
+              className="hidden lg:flex items-center justify-center relative h-96"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
             >
-              {t('hero.cta')}
-            </motion.a>
-            <motion.a
-              href="/curriculo.pdf"
-              download="Icaro_Pecinalli_Curriculo.pdf"
-              className="w-full sm:w-auto px-8 py-3.5 glass-card rounded-xl font-semibold text-blue-400 hover:border-blue-500/40 transition-all text-center flex items-center justify-center gap-2"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ type: 'spring', stiffness: 300 }}
-            >
-              <Download className="w-5 h-5" />
-              {t('hero.download')}
-            </motion.a>
-            <motion.a
-              href="#contact"
-              className="w-full sm:w-auto px-8 py-3.5 glass-card rounded-xl font-semibold text-cyan-400 light:text-cyan-700 hover:border-cyan-500/40 transition-all text-center"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ type: 'spring', stiffness: 300 }}
-            >
-              {t('hero.contact')}
-            </motion.a>
-          </motion.div>
+              <div className="relative w-full h-full flex items-center justify-center">
+                {/* Animated gradient orb */}
+                <motion.div
+                  className="absolute w-64 h-64 rounded-full bg-gradient-to-br from-orange-500 to-orange-500 opacity-10 blur-3xl"
+                  animate={{
+                    scale: [1, 1.2, 1],
+                    y: [0, 30, 0],
+                  }}
+                  transition={{
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                  }}
+                />
+                <motion.div
+                  className="absolute w-72 h-72 rounded-full bg-gradient-to-br from-blue-700 to-blue-900 opacity-10 blur-3xl"
+                  animate={{
+                    scale: [1.2, 1, 1.2],
+                    y: [30, 0, 30],
+                  }}
+                  transition={{
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                    delay: 0.5,
+                  }}
+                />
+
+                {/* Center circle with monospace text */}
+                <motion.div
+                  className="relative z-10 w-48 h-48 rounded-full border-2 border-orange-500/30 flex items-center justify-center"
+                  animate={{
+                    rotate: 360,
+                  }}
+                  transition={{
+                    duration: 20,
+                    repeat: Infinity,
+                    ease: 'linear',
+                  }}
+                >
+                  <div className="text-center">
+                    <p className="font-display text-orange-500 text-sm tracking-widest">{'{ DEV }'}</p>
+                    <p className="text-gray-500 text-xs font-mono mt-2">creative</p>
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
 
@@ -281,10 +288,10 @@ export default function Hero() {
       >
         <a
           href="#about"
-          className="flex flex-col items-center gap-2 text-gray-500 hover:text-cyan-400 transition-colors group"
+          className="flex flex-col items-center gap-2 text-gray-500 hover:text-orange-500 transition-colors group"
         >
           <motion.span
-            className="text-xs font-medium uppercase tracking-widest"
+            className="text-xs font-mono uppercase tracking-widest"
             whileHover={{ y: -2 }}
             transition={{ type: 'spring', stiffness: 300 }}
           >
@@ -298,7 +305,7 @@ export default function Hero() {
               ease: 'easeInOut',
             }}
           >
-            <ArrowDown className="w-4 h-4 group-hover:text-cyan-400 transition-colors" />
+            <ArrowDown className="w-4 h-4 group-hover:text-orange-500 transition-colors" />
           </motion.div>
         </a>
       </motion.div>
