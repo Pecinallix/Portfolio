@@ -3,10 +3,18 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { motion } from 'framer-motion';
 import { useEffect, useState, useMemo } from 'react';
 
-function TypingEffect({ texts, className }: { texts: string[]; className?: string }) {
+function TypingEffect({
+  texts,
+  className,
+}: {
+  texts: string[];
+  className?: string;
+}) {
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
-  const [phase, setPhase] = useState<'typing' | 'paused' | 'deleting'>('typing');
+  const [phase, setPhase] = useState<'typing' | 'paused' | 'deleting'>(
+    'typing',
+  );
 
   useEffect(() => {
     const currentFullText = texts[currentTextIndex];
@@ -52,11 +60,7 @@ export default function Hero() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const typingTexts = useMemo(
-    () => [
-      'Full Stack Developer',
-      'React & Node.js',
-      'API Builder',
-    ],
+    () => ['Full Stack Developer', 'React & Node.js', 'API Builder'],
     [language],
   );
 
@@ -127,7 +131,8 @@ export default function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.1, ease: 'easeOut' }}
               >
-                Icaro<br />
+                Icaro
+                <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-orange-500 to-blue-700">
                   Pecinalli
                 </span>
@@ -264,8 +269,12 @@ export default function Hero() {
                   }}
                 >
                   <div className="text-center">
-                    <p className="font-display text-orange-500 text-sm tracking-widest">{'{ DEV }'}</p>
-                    <p className="text-gray-500 text-xs font-mono mt-2">creative</p>
+                    <p className="font-display text-orange-500 text-sm tracking-widest">
+                      {'{ DEV }'}
+                    </p>
+                    <p className="text-gray-500 text-xs font-mono mt-2">
+                      creative
+                    </p>
                   </div>
                 </motion.div>
               </div>
