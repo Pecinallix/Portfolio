@@ -18,11 +18,11 @@ function SkillsOrrery() {
     { name: 'TypeScript', orbit: 1, color: '#3178c6' },
     { name: 'Node.js', orbit: 1, color: '#68a063' },
     { name: 'Tailwind', orbit: 2, color: '#06b6d4' },
-    { name: 'Python', orbit: 2, color: '#13aa52' },
-    { name: 'Ubunto', orbit: 2, color: '#cccccc' },
+    { name: 'MongoDB', orbit: 2, color: '#13aa52' },
+    { name: 'Express', orbit: 2, color: '#cccccc' },
     { name: 'Git', orbit: 3, color: '#f1505f' },
     { name: 'REST API', orbit: 3, color: '#ff6b35' },
-    { name: 'C++', orbit: 3, color: '#00758f' },
+    { name: 'SQL', orbit: 3, color: '#00758f' },
   ];
 
   useEffect(() => {
