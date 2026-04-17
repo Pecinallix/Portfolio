@@ -11,6 +11,7 @@ interface FeaturedProject {
   glowColor: string;
   tags: string[];
   statusKey: string;
+  image: string;
 }
 
 const projects: FeaturedProject[] = [
@@ -23,6 +24,7 @@ const projects: FeaturedProject[] = [
     glowColor: 'rgba(255, 107, 53, 0.3)',
     tags: ['Web Game', 'Interactive', 'Vercel'],
     statusKey: 'featured.status.live',
+    image: '/secretforest.png',
   },
   {
     title: 'PromoRadar',
@@ -33,6 +35,7 @@ const projects: FeaturedProject[] = [
     glowColor: 'rgba(0, 78, 137, 0.3)',
     tags: ['WhatsApp Bot', 'Automation', 'Node.js'],
     statusKey: 'featured.status.live',
+    image: '/promoradar.png',
   },
   {
     title: 'Rapid API Services',
@@ -43,6 +46,7 @@ const projects: FeaturedProject[] = [
     glowColor: 'rgba(255, 107, 53, 0.4)',
     tags: ['REST API', 'RapidAPI', 'E-commerce'],
     statusKey: 'featured.status.live',
+    image: '/rapidapi.png',
   },
 ];
 
@@ -104,25 +108,21 @@ export default function FeaturedProjects() {
                 e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
               }}
             >
-              {/* Gradient header */}
-              <div
-                className={`h-40 bg-linear-to-br ${project.gradient} relative overflow-hidden`}
-              >
-                <div className="absolute inset-0 bg-black/20" />
-                <div className="absolute inset-0 bg-grid-pattern opacity-30" />
+              {/* Project image header */}
+              <div className="h-48 relative overflow-hidden bg-gray-900">
+                {/* Image */}
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
 
-                {/* Icon */}
-                <motion.div
-                  className="absolute inset-0 flex items-center justify-center"
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <project.icon className="w-16 h-16 text-white/80 group-hover:text-white transition-colors" />
-                </motion.div>
+                {/* Overlay gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
 
                 {/* Status badge */}
                 <div className="absolute top-3 right-3">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/30 backdrop-blur-sm text-xs text-white font-medium">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/50 backdrop-blur-sm text-xs text-white font-medium">
                     <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
                     {t(project.statusKey)}
                   </span>
@@ -139,7 +139,7 @@ export default function FeaturedProjects() {
 
               {/* Content */}
               <div className="p-6 flex flex-col grow">
-                <h3 className="text-xl font-bold text-white light:text-gray-800 mb-2 group-hover:text-cyan-400 transition-colors">
+                <h3 className="text-xl font-display font-bold text-white light:text-gray-800 mb-2 group-hover:text-orange-400 transition-colors">
                   {project.title}
                 </h3>
 
