@@ -34,24 +34,30 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b transition-all duration-300 ${
         isScrolled
-          ? 'dark:bg-gray-900/95 light:bg-white/95 dark:border-gray-700 light:border-gray-300 shadow-lg shadow-black/10'
-          : 'dark:bg-gray-900/80 light:bg-white/80 dark:border-gray-800 light:border-gray-200'
+          ? 'dark:bg-black/95 light:bg-white/98 dark:border-gray-800 light:border-gray-200 shadow-lg shadow-black/20'
+          : 'dark:bg-black/80 light:bg-white/90 dark:border-gray-900 light:border-gray-200'
       }`}
     >
       <nav className="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
         <div className="flex items-center justify-between rounded-4xl">
           <motion.a
             href="#home"
-            className="text-xl sm:text-2xl font-bold bg-linear-to-r from-blue-500 to-cyan-200 bg-clip-text  relative group"
+            className="text-xl sm:text-2xl font-display font-bold relative group"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             <motion.span
-              className="absolute -inset-2 bg-linear-to-r from-blue-500/10 to-cyan-500/10 rounded-full opacity-0 group-hover:opacity-100 blur"
+              className="absolute -inset-2 bg-gradient-to-r from-orange-500/15 to-blue-700/15 rounded-full opacity-0 group-hover:opacity-100 blur"
               layoutId="logo-glow"
             />
-            <span className="relative light:text-gray-700 dark:text-amber-50">
-              {'<Dev />'}
+            <span className="relative light:text-orange-600 dark:text-orange-500">
+              {'<'}
+            </span>
+            <span className="relative light:text-gray-800 dark:text-white">
+              Dev
+            </span>
+            <span className="relative light:text-blue-600 dark:text-blue-400">
+              {' />'}
             </span>
           </motion.a>
 
@@ -60,7 +66,7 @@ export default function Header() {
               <motion.a
                 key={index}
                 href={item.href}
-                className="dark:text-gray-300 light:text-gray-700 hover:text-cyan-400 transition-colors font-medium relative group px-3"
+                className="dark:text-gray-300 light:text-gray-700 hover:text-orange-500 transition-colors font-medium relative group px-3"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{
@@ -72,7 +78,7 @@ export default function Header() {
               >
                 {item.name}
                 <motion.span
-                  className="absolute bottom-0 left-0 h-0.5 bg-linear-to-r from-blue-500 to-cyan-500"
+                  className="absolute bottom-0 left-0 h-0.5 bg-orange-500"
                   initial={{ width: 0 }}
                   whileHover={{ width: '100%' }}
                   transition={{ duration: 0.3 }}
@@ -95,17 +101,10 @@ export default function Header() {
             </motion.div>
             <motion.a
               href="#contact"
-              className="px-6 py-2 rounded-full font-semibold relative overflow-hidden group"
+              className="px-6 py-2 rounded-full font-display font-semibold relative overflow-hidden group bg-orange-500 hover:shadow-lg hover:shadow-orange-500/40 transition-all"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              whileHover={{
-                scale: 1.08,
-                boxShadow: '0 10px 40px -5px rgba(6, 182, 212, 0.6)',
-                transition: {
-                  scale: { duration: 0.2, ease: 'easeOut' },
-                  boxShadow: { duration: 0.2, ease: 'easeOut' },
-                },
-              }}
+              whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.95 }}
               transition={{
                 opacity: { delay: 0.9 },
@@ -117,8 +116,6 @@ export default function Header() {
                 },
               }}
             >
-              <span className="absolute inset-0 bg-linear-to-r from-blue-600 to-cyan-600 transition-opacity duration-200 ease-out group-hover:opacity-0" />
-              <span className="absolute inset-0 bg-linear-to-r from-cyan-600 to-blue-600 opacity-0 transition-opacity duration-200 ease-out group-hover:opacity-100" />
               <span className="relative z-10 text-white">{t('nav.hire')}</span>
             </motion.a>
           </div>
@@ -177,7 +174,7 @@ export default function Header() {
                 key={index}
                 href={item.href}
                 onClick={closeMenu}
-                className="block dark:text-gray-300 light:text-gray-700 hover:text-cyan-400 transition-colors font-medium py-2"
+                className="block dark:text-gray-300 light:text-gray-700 hover:text-orange-500 transition-colors font-medium py-2"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: isOpen ? 1 : 0, x: isOpen ? 0 : -20 }}
                 transition={{ delay: index * 0.1 }}
@@ -188,7 +185,7 @@ export default function Header() {
             <motion.a
               href="#contact"
               onClick={closeMenu}
-              className="block w-full text-center px-6 py-3 bg-linear-to-r from-blue-600 to-cyan-600 text-white rounded-full font-semibold"
+              className="block w-full text-center px-6 py-3 bg-orange-500 text-white rounded-full font-display font-semibold hover:shadow-lg hover:shadow-orange-500/40 transition-all"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: isOpen ? 1 : 0, x: isOpen ? 0 : -20 }}
               transition={{ delay: navItems.length * 0.1 }}

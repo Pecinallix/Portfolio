@@ -86,26 +86,26 @@ export default function Contact() {
   ];
 
   const inputClasses =
-    'w-full px-4 py-3.5 glass-card rounded-xl focus:outline-none focus:ring-2 dark:focus:ring-cyan-500/50 light:focus:ring-cyan-600/50 transition-all dark:text-white light:text-slate-800 placeholder:text-gray-500';
+    'w-full px-4 py-3.5 glass-card rounded-xl focus:outline-none focus:ring-2 dark:focus:ring-orange-500/50 light:focus:ring-orange-600/50 transition-all dark:text-white light:text-slate-800 placeholder:text-gray-500';
 
   return (
-    <section id="contact" className="py-24 dark:bg-gray-800 light:bg-gray-50 relative">
-      <div className="absolute inset-0 bg-grid-pattern" />
+    <section id="contact" className="py-24 dark:bg-black light:bg-white relative">
+      <div className="absolute inset-0 bg-grid-pattern opacity-30" />
       <div className="container mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mb-20"
         >
-          <span className="text-cyan-400 font-mono text-sm uppercase tracking-widest mb-3 block">
-            &lt;contact /&gt;
+          <span className="text-orange-500 font-display text-sm uppercase tracking-widest mb-3 block">
+            {'<'} contact {'>'}
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+          <h2 className="text-5xl md:text-6xl font-display font-bold text-white mb-6 tracking-tight">
             {t('contact.title')}
           </h2>
-          <div className="w-20 h-1 bg-linear-to-r from-blue-500 to-cyan-500 mx-auto rounded-full"></div>
+          <div className="w-16 h-1 bg-gradient-to-r from-orange-500 to-blue-700 rounded-full"></div>
           <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
             {t('contact.subtitle')}
           </p>
@@ -119,7 +119,7 @@ export default function Contact() {
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-2xl font-bold text-white mb-3">
+            <h3 className="text-3xl font-display font-bold text-white mb-3">
               {t('contact.info')}
             </h3>
             <p className="text-gray-400 mb-8 leading-relaxed">{t('contact.description')}</p>
@@ -133,11 +133,11 @@ export default function Contact() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="flex items-center gap-4 p-4 glass-card rounded-xl hover:border-cyan-500/30 transition-all group"
+                  className="flex items-center gap-4 p-4 glass-card rounded-xl hover:border-orange-500/30 transition-all group"
                   whileHover={{ x: 4 }}
                 >
-                  <div className="p-3 bg-linear-to-br from-blue-500/20 to-cyan-500/20 rounded-xl group-hover:from-blue-500/30 group-hover:to-cyan-500/30 transition-colors">
-                    <info.icon className="w-5 h-5 dark:text-cyan-400 light:text-cyan-600" />
+                  <div className="p-3 bg-gradient-to-br from-orange-500/20 to-orange-600/20 rounded-xl group-hover:from-orange-500/30 group-hover:to-orange-600/30 transition-colors">
+                    <info.icon className="w-5 h-5 dark:text-orange-400 light:text-orange-600" />
                   </div>
                   <div>
                     <h4 className="text-white font-semibold text-sm mb-0.5">
@@ -159,10 +159,10 @@ export default function Contact() {
                   href="https://github.com/Pecinallix"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 glass-card rounded-xl hover:border-cyan-500/30 transition-all hover:scale-110 group"
+                  className="p-3 glass-card rounded-xl hover:border-orange-500/30 transition-all hover:scale-110 group"
                 >
                   <svg
-                    className="w-5 h-5 dark:text-gray-300 light:text-slate-600 group-hover:text-cyan-400 transition-colors"
+                    className="w-5 h-5 dark:text-gray-300 light:text-slate-600 group-hover:text-orange-400 transition-colors"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
@@ -173,10 +173,10 @@ export default function Contact() {
                   href="https://www.linkedin.com/in/icaropecinalli/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 glass-card rounded-xl hover:border-cyan-500/30 transition-all hover:scale-110 group"
+                  className="p-3 glass-card rounded-xl hover:border-orange-500/30 transition-all hover:scale-110 group"
                 >
                   <svg
-                    className="w-5 h-5 dark:text-gray-300 light:text-slate-600 group-hover:text-cyan-400 transition-colors"
+                    className="w-5 h-5 dark:text-gray-300 light:text-slate-600 group-hover:text-orange-400 transition-colors"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
@@ -294,7 +294,7 @@ export default function Contact() {
               <motion.button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full px-6 py-4 bg-linear-to-r from-blue-600 to-cyan-600 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-cyan-500/30 transition-all flex items-center justify-center gap-2 relative overflow-hidden group ${
+                className={`w-full px-6 py-4 bg-orange-500 text-white rounded-xl font-display font-bold hover:shadow-lg hover:shadow-orange-500/40 transition-all flex items-center justify-center gap-2 relative overflow-hidden group ${
                   isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
                 }`}
                 initial={{ opacity: 0, y: 20 }}
@@ -304,7 +304,7 @@ export default function Contact() {
                 whileHover={!isSubmitting ? { scale: 1.02 } : {}}
                 whileTap={!isSubmitting ? { scale: 0.98 } : {}}
               >
-                <motion.span className="absolute inset-0 bg-linear-to-r from-cyan-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <motion.span className="absolute inset-0 bg-orange-600 opacity-0 group-hover:opacity-100 transition-opacity" />
                 {isSubmitting ? (
                   <>
                     <motion.div

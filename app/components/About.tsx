@@ -10,46 +10,42 @@ export default function About() {
       icon: Code2,
       title: t('about.feature1.title'),
       description: t('about.feature1.desc'),
-      gradient: 'from-blue-500 to-cyan-500',
     },
     {
       icon: Lightbulb,
       title: t('about.feature2.title'),
       description: t('about.feature2.desc'),
-      gradient: 'from-cyan-500 to-teal-500',
     },
     {
       icon: Rocket,
       title: t('about.feature3.title'),
       description: t('about.feature3.desc'),
-      gradient: 'from-teal-500 to-emerald-500',
     },
     {
       icon: Users,
       title: t('about.feature4.title'),
       description: t('about.feature4.desc'),
-      gradient: 'from-indigo-500 to-blue-500',
     },
   ];
 
   return (
-    <section id="about" className="py-24 dark:bg-gray-900 light:bg-white relative section-divider">
-      <div className="absolute inset-0 bg-grid-pattern" />
+    <section id="about" className="py-24 dark:bg-gray-900 light:bg-gray-50 relative section-divider">
+      <div className="absolute inset-0 bg-grid-pattern opacity-30" />
       <div className="container mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mb-20"
         >
-          <span className="text-cyan-400 font-mono text-sm uppercase tracking-widest mb-3 block">
-            &lt;about /&gt;
+          <span className="text-orange-500 font-display text-sm uppercase tracking-widest mb-3 block">
+            {'<'} about {'>'}
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
-            {t('about.title')}
+          <h2 className="text-5xl md:text-6xl font-display font-bold text-white mb-6 tracking-tight leading-tight">
+            Sobre mim
           </h2>
-          <div className="w-20 h-1 bg-linear-to-r from-blue-500 to-cyan-500 mx-auto rounded-full"></div>
+          <div className="w-16 h-1 bg-gradient-to-r from-orange-500 to-blue-700 rounded-full"></div>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center mb-16">
@@ -60,7 +56,7 @@ export default function About() {
             viewport={{ once: true }}
           >
             <div className="relative group">
-              <div className="absolute -inset-1 bg-linear-to-r from-blue-600 to-cyan-600 rounded-2xl blur opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
+              <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-blue-700 rounded-2xl blur opacity-15 group-hover:opacity-25 transition-opacity duration-300"></div>
               <div className="relative glass-card rounded-2xl p-8">
                 <p className="text-gray-300 text-lg leading-relaxed mb-4">
                   {t('about.intro1')}
@@ -93,7 +89,7 @@ export default function About() {
                   transition: { duration: 0.2 },
                 }}
               >
-                <div className={`absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r ${feature.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+                <div className="absolute top-0 left-0 right-0 h-0.5 bg-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <motion.div
                   whileHover={{
                     rotate: [0, -10, 10, -10, 0],

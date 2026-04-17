@@ -19,8 +19,8 @@ const projects: FeaturedProject[] = [
     descriptionKey: 'featured.secretForest.desc',
     url: 'https://secret-forest.vercel.app/',
     icon: Gamepad2,
-    gradient: 'from-emerald-500 via-green-500 to-teal-500',
-    glowColor: 'rgba(16, 185, 129, 0.3)',
+    gradient: 'from-orange-500 to-orange-600',
+    glowColor: 'rgba(255, 107, 53, 0.3)',
     tags: ['Web Game', 'Interactive', 'Vercel'],
     statusKey: 'featured.status.live',
   },
@@ -29,8 +29,8 @@ const projects: FeaturedProject[] = [
     descriptionKey: 'featured.promoRadar.desc',
     url: 'https://promoradarofc.vercel.app/',
     icon: Bot,
-    gradient: 'from-blue-500 via-indigo-500 to-purple-500',
-    glowColor: 'rgba(99, 102, 241, 0.3)',
+    gradient: 'from-blue-700 to-blue-800',
+    glowColor: 'rgba(0, 78, 137, 0.3)',
     tags: ['WhatsApp Bot', 'Automation', 'Node.js'],
     statusKey: 'featured.status.live',
   },
@@ -39,8 +39,8 @@ const projects: FeaturedProject[] = [
     descriptionKey: 'featured.shopeeApi.desc',
     url: 'https://rapidapi.com/user/icaropecinalli',
     icon: Code2,
-    gradient: 'from-orange-500 via-red-500 to-pink-500',
-    glowColor: 'rgba(239, 68, 68, 0.3)',
+    gradient: 'from-orange-600 to-blue-700',
+    glowColor: 'rgba(255, 107, 53, 0.4)',
     tags: ['REST API', 'RapidAPI', 'E-commerce'],
     statusKey: 'featured.status.live',
   },
@@ -50,23 +50,24 @@ export default function FeaturedProjects() {
   const { t } = useLanguage();
 
   return (
-    <section className="py-24 dark:bg-gray-800 light:bg-gray-50 relative section-divider">
+    <section className="py-24 dark:bg-black light:bg-white relative section-divider">
+      <div className="absolute inset-0 bg-grid-pattern opacity-30" />
       <div className="container mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mb-20"
         >
-          <span className="text-cyan-400 font-mono text-sm uppercase tracking-widest mb-3 block">
-            &lt;featured /&gt;
+          <span className="text-orange-500 font-display text-sm uppercase tracking-widest mb-3 block">
+            {'<'} featured {'>'}
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+          <h2 className="text-5xl md:text-6xl font-display font-bold text-white mb-6 tracking-tight">
             {t('featured.title')}
           </h2>
-          <div className="w-20 h-1 bg-linear-to-r from-blue-500 to-cyan-500 mx-auto rounded-full"></div>
-          <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
+          <div className="w-16 h-1 bg-gradient-to-r from-orange-500 to-blue-700 rounded-full"></div>
+          <p className="text-gray-400 mt-6 max-w-2xl">
             {t('featured.subtitle')}
           </p>
         </motion.div>
@@ -96,11 +97,11 @@ export default function FeaturedProjects() {
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.boxShadow = `0 20px 60px -10px ${project.glowColor}`;
-                e.currentTarget.style.borderColor = 'rgba(6, 182, 212, 0.3)';
+                e.currentTarget.style.borderColor = 'rgba(255, 107, 53, 0.3)';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.boxShadow = 'none';
-                e.currentTarget.style.borderColor = 'rgba(59, 130, 246, 0.1)';
+                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
               }}
             >
               {/* Gradient header */}

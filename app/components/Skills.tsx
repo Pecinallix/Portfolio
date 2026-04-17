@@ -59,22 +59,23 @@ export default function Skills() {
   ];
 
   return (
-    <section id="skills" className="py-24 dark:bg-gray-800 light:bg-gray-50 relative section-divider">
+    <section id="skills" className="py-24 dark:bg-black light:bg-white relative section-divider">
+      <div className="absolute inset-0 bg-grid-pattern opacity-30" />
       <div className="container mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mb-20"
         >
-          <span className="text-cyan-400 font-mono text-sm uppercase tracking-widest mb-3 block">
-            &lt;skills /&gt;
+          <span className="text-orange-500 font-display text-sm uppercase tracking-widest mb-3 block">
+            {'<'} skills {'>'}
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+          <h2 className="text-5xl md:text-6xl font-display font-bold text-white mb-6 tracking-tight">
             {t('skills.title')}
           </h2>
-          <div className="w-20 h-1 bg-linear-to-r from-blue-500 to-cyan-500 mx-auto rounded-full"></div>
+          <div className="w-16 h-1 bg-gradient-to-r from-orange-500 to-blue-700 rounded-full"></div>
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-16">
@@ -92,12 +93,12 @@ export default function Skills() {
               className="glass-card p-6 rounded-2xl relative group overflow-hidden"
               whileHover={{ y: -4, transition: { duration: 0.2 } }}
             >
-              <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-blue-500 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute top-0 left-0 right-0 h-0.5 bg-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="flex items-center gap-3 mb-6">
-                <span className="text-cyan-400 font-mono text-lg bg-cyan-500/10 px-3 py-1 rounded-lg">
+                <span className="text-orange-500 font-display text-lg bg-orange-500/10 px-3 py-1 rounded-lg">
                   {category.icon}
                 </span>
-                <h3 className="text-2xl font-bold text-cyan-400 light:text-blue-600">
+                <h3 className="text-2xl font-display font-bold text-orange-500 light:text-orange-600">
                   {category.category}
                 </h3>
               </div>
@@ -142,7 +143,7 @@ export default function Skills() {
           viewport={{ once: true }}
           className="glass-card p-8 rounded-2xl"
         >
-          <h3 className="text-xl sm:text-2xl font-bold dark:text-white light:text-slate-800 mb-6 text-center">
+          <h3 className="text-xl sm:text-2xl font-display font-bold dark:text-white light:text-slate-800 mb-6 text-center">
             {t('skills.subtitle')}
           </h3>
           <div className="flex flex-wrap justify-center gap-2.5 sm:gap-3">
@@ -164,7 +165,7 @@ export default function Skills() {
                   transition: { duration: 0.2 },
                 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-4 py-2 text-sm sm:text-base dark:bg-gray-800/80 light:bg-blue-50 dark:text-cyan-400 light:text-blue-700 rounded-xl font-medium dark:hover:bg-cyan-500/20 dark:hover:text-cyan-300 light:hover:bg-blue-600 light:hover:text-white transition-all duration-200 cursor-pointer border border-transparent dark:hover:border-cyan-500/30 light:hover:border-blue-500/30"
+                className="px-4 py-2 text-sm sm:text-base dark:bg-gray-800/60 light:bg-orange-50 dark:text-orange-400 light:text-orange-700 rounded-xl font-medium dark:hover:bg-orange-500/20 dark:hover:text-orange-300 light:hover:bg-orange-600 light:hover:text-white transition-all duration-200 cursor-pointer border border-transparent dark:hover:border-orange-500/30 light:hover:border-orange-500/30"
               >
                 {tech}
               </motion.span>
