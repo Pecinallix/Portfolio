@@ -105,7 +105,8 @@ export default function FeaturedProjects() {
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.boxShadow = 'none';
-                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                const isLight = document.documentElement.classList.contains('light');
+                e.currentTarget.style.borderColor = isLight ? 'rgba(0, 0, 0, 0.3)' : 'rgba(255, 255, 255, 0.3)';
               }}
             >
               {/* Project image header */}
