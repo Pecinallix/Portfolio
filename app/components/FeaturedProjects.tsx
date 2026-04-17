@@ -95,7 +95,7 @@ export default function FeaturedProjects() {
                 y: -10,
                 transition: { duration: 0.25 },
               }}
-              className="group relative glass-card rounded-2xl overflow-hidden flex flex-col cursor-pointer"
+              className="group relative rounded-2xl border dark:border-white/30 light:border-black/30 overflow-hidden flex flex-col cursor-pointer"
               style={{
                 transition: 'box-shadow 0.3s ease, border-color 0.3s ease',
               }}
@@ -105,7 +105,7 @@ export default function FeaturedProjects() {
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.boxShadow = 'none';
-                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)';
               }}
             >
               {/* Project image header */}
