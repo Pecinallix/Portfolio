@@ -1,9 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <defs>
-    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#0a0a0a"/>
-      <stop offset="100%" style="stop-color:#1a1a1a"/>
-    </linearGradient>
     <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#ff6b35"/>
       <stop offset="100%" style="stop-color:#004e89"/>
@@ -17,19 +13,9 @@
     </filter>
   </defs>
 
-  <!-- Background -->
-  <rect width="64" height="64" rx="14" fill="url(#bgGradient)" stroke="url(#accentGradient)" stroke-width="2"/>
-
   <!-- Inner glow circle -->
-  <circle cx="32" cy="32" r="28" fill="none" stroke="url(#accentGradient)" stroke-width="1" opacity="0.2" filter="url(#glow)"/>
+  <circle cx="32" cy="32" r="28" fill="none" stroke="url(#accentGradient)" stroke-width="1.5" opacity="0.6" filter="url(#glow)"/>
 
   <!-- Main code symbol -->
   <text x="32" y="40" text-anchor="middle" font-family="'Space Mono', monospace" font-weight="bold" font-size="32" fill="url(#accentGradient)" letter-spacing="0" filter="url(#glow)">&lt;/&gt;</text>
-
-  <!-- Corner accent dot with glow -->
-  <circle cx="52" cy="14" r="4" fill="#ff6b35" opacity="0.9" filter="url(#glow)"/>
-  <circle cx="52" cy="14" r="6" fill="none" stroke="#ff6b35" stroke-width="0.8" opacity="0.4"/>
-
-  <!-- Bottom accent line -->
-  <line x1="14" y1="56" x2="50" y2="56" stroke="url(#accentGradient)" stroke-width="1.5" opacity="0.6" stroke-linecap="round"/>
 </svg>
