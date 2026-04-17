@@ -1,7 +1,150 @@
 import { ArrowDown, Github, Linkedin, Mail, Download } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { motion } from 'framer-motion';
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, useRef } from 'react';
+
+// Skills Orrery Component
+function SkillsOrrery() {
+  const [rotations, setRotations] = useState({ orbit1: 0, orbit2: 0, orbit3: 0 });
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const animationRef = useRef<number>();
+
+  const skills = [
+    { name: 'React', orbit: 1, color: '#61dafb' },
+    { name: 'TypeScript', orbit: 1, color: '#3178c6' },
+    { name: 'Node.js', orbit: 1, color: '#68a063' },
+    { name: 'Tailwind', orbit: 2, color: '#06b6d4' },
+    { name: 'MongoDB', orbit: 2, color: '#13aa52' },
+    { name: 'Express', orbit: 2, color: '#000000' },
+    { name: 'Git', orbit: 3, color: '#f1502f' },
+    { name: 'REST API', orbit: 3, color: '#ff6b35' },
+    { name: 'SQL', orbit: 3, color: '#00758f' },
+  ];
+
+  useEffect(() => {
+    const animate = () => {
+      setRotations((prev) => ({
+        orbit1: (prev.orbit1 + 1.5) % 360,
+        orbit2: (prev.orbit2 - 0.8) % 360,
+        orbit3: (prev.orbit3 + 0.4) % 360,
+      }));
+      animationRef.current = requestAnimationFrame(animate);
+    };
+    animationRef.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationRef.current!);
+  }, []);
+
+  const getSkillPosition = (skill: typeof skills[0]) => {
+    const skillsInOrbit = skills.filter((s) => s.orbit === skill.orbit);
+    const index = skillsInOrbit.indexOf(skill);
+    const angleOffset = (index / skillsInOrbit.length) * 360;
+
+    const orbitRadius = skill.orbit === 1 ? 80 : skill.orbit === 2 ? 140 : 200;
+    const rotation =
+      skill.orbit === 1 ? rotations.orbit1 :
+      skill.orbit === 2 ? rotations.orbit2 : rotations.orbit3;
+
+    const angle = ((rotation + angleOffset) * Math.PI) / 180;
+    const x = Math.cos(angle) * orbitRadius;
+    const y = Math.sin(angle) * orbitRadius;
+
+    return { x, y };
+  };
+
+  return (
+    <motion.div
+      className="hidden lg:flex items-center justify-center relative h-96"
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
+    >
+      <div className="relative w-full h-full flex items-center justify-center">
+        {/* Glowing auras */}
+        <motion.div
+          className="absolute w-64 h-64 rounded-full bg-gradient-to-br from-orange-500 to-orange-500 opacity-15 blur-3xl"
+          animate={{ scale: [1, 1.1, 1] }}
+          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="absolute w-80 h-80 rounded-full bg-gradient-to-br from-blue-700/40 to-transparent opacity-10 blur-3xl"
+          animate={{ scale: [1.1, 1, 1.1] }}
+          transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+        />
+
+        {/* SVG Orbits */}
+        <svg className="absolute inset-0 w-full h-full" style={{ pointerEvents: 'none' }}>
+          <defs>
+            <style>{`
+              .orbit-ring { fill: none; stroke: rgba(255, 107, 53, 0.1); stroke-width: 1; stroke-dasharray: 5,5; }
+            `}</style>
+          </defs>
+          <circle cx="50%" cy="50%" r="80" className="orbit-ring" />
+          <circle cx="50%" cy="50%" r="140" className="orbit-ring" />
+          <circle cx="50%" cy="50%" r="200" className="orbit-ring" />
+        </svg>
+
+        {/* Skills in orbits */}
+        {skills.map((skill, idx) => {
+          const pos = getSkillPosition(skill);
+          const isHovered = hoveredIndex === idx;
+
+          return (
+            <motion.div
+              key={idx}
+              className="absolute"
+              style={{
+                x: pos.x,
+                y: pos.y,
+              }}
+              animate={{
+                scale: isHovered ? 1.3 : 1,
+              }}
+              transition={{ duration: 0.2 }}
+              onMouseEnter={() => setHoveredIndex(idx)}
+              onMouseLeave={() => setHoveredIndex(null)}
+            >
+              <motion.div
+                className="px-3 py-1.5 glass-card rounded-full text-xs font-semibold text-white cursor-pointer relative whitespace-nowrap"
+                style={{ backgroundColor: `${skill.color}15`, borderColor: `${skill.color}40` }}
+                animate={{
+                  boxShadow: isHovered ? `0 0 20px ${skill.color}60` : 'none',
+                }}
+              >
+                <span style={{ color: skill.color }}>{skill.name}</span>
+              </motion.div>
+            </motion.div>
+          );
+        })}
+
+        {/* Center nucleus */}
+        <motion.div
+          className="relative z-20 w-32 h-32 rounded-full flex items-center justify-center"
+          style={{
+            background: 'radial-gradient(circle, rgba(255,107,53,0.1) 0%, transparent 70%)',
+            boxShadow: '0 0 40px rgba(255, 107, 53, 0.3)',
+          }}
+          animate={{
+            boxShadow: ['0 0 30px rgba(255, 107, 53, 0.2)', '0 0 50px rgba(255, 107, 53, 0.4)', '0 0 30px rgba(255, 107, 53, 0.2)'],
+          }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <div className="text-center">
+            <p className="font-display text-3xl text-orange-500 tracking-tight">
+              {'</>'}
+            </p>
+            <motion.p
+              className="text-gray-400 text-xs font-mono mt-2"
+              animate={{ opacity: [0.6, 1, 0.6] }}
+              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              creative dev
+            </motion.p>
+          </div>
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+}
 
 function TypingEffect({
   texts,
@@ -221,64 +364,8 @@ export default function Hero() {
               </motion.div>
             </motion.div>
 
-            {/* Right side - Visual element */}
-            <motion.div
-              className="hidden lg:flex items-center justify-center relative h-96"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
-            >
-              <div className="relative w-full h-full flex items-center justify-center">
-                {/* Animated gradient orb */}
-                <motion.div
-                  className="absolute w-64 h-64 rounded-full bg-gradient-to-br from-orange-500 to-orange-500 opacity-10 blur-3xl"
-                  animate={{
-                    scale: [1, 1.2, 1],
-                    y: [0, 30, 0],
-                  }}
-                  transition={{
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                  }}
-                />
-                <motion.div
-                  className="absolute w-72 h-72 rounded-full bg-gradient-to-br from-blue-700 to-blue-900 opacity-10 blur-3xl"
-                  animate={{
-                    scale: [1.2, 1, 1.2],
-                    y: [30, 0, 30],
-                  }}
-                  transition={{
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                    delay: 0.5,
-                  }}
-                />
-
-                {/* Center circle with monospace text */}
-                <motion.div
-                  className="relative z-10 w-48 h-48 rounded-full border-2 border-orange-500/30 flex items-center justify-center"
-                  animate={{
-                    rotate: 360,
-                  }}
-                  transition={{
-                    duration: 20,
-                    repeat: Infinity,
-                    ease: 'linear',
-                  }}
-                >
-                  <div className="text-center">
-                    <p className="font-display text-orange-500 text-sm tracking-widest">
-                      {'{ DEV }'}
-                    </p>
-                    <p className="text-gray-500 text-xs font-mono mt-2">
-                      creative
-                    </p>
-                  </div>
-                </motion.div>
-              </div>
-            </motion.div>
+            {/* Right side - Orrery of Skills */}
+            <SkillsOrrery />
           </div>
         </div>
       </div>
