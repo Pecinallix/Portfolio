@@ -5,9 +5,13 @@ import { useEffect, useState, useMemo, useRef } from 'react';
 
 // Skills Orrery Component
 function SkillsOrrery() {
-  const [rotations, setRotations] = useState({ orbit1: 0, orbit2: 0, orbit3: 0 });
+  const [rotations, setRotations] = useState({
+    orbit1: 0,
+    orbit2: 0,
+    orbit3: 0,
+  });
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number | undefined>(undefined);
 
   const skills = [
     { name: 'React', orbit: 1, color: '#61dafb' },
@@ -15,8 +19,8 @@ function SkillsOrrery() {
     { name: 'Node.js', orbit: 1, color: '#68a063' },
     { name: 'Tailwind', orbit: 2, color: '#06b6d4' },
     { name: 'MongoDB', orbit: 2, color: '#13aa52' },
-    { name: 'Express', orbit: 2, color: '#000000' },
-    { name: 'Git', orbit: 3, color: '#f1502f' },
+    { name: 'Express', orbit: 2, color: '#cccccc' },
+    { name: 'Git', orbit: 3, color: '#f1505f' },
     { name: 'REST API', orbit: 3, color: '#ff6b35' },
     { name: 'SQL', orbit: 3, color: '#00758f' },
   ];
@@ -34,15 +38,18 @@ function SkillsOrrery() {
     return () => cancelAnimationFrame(animationRef.current!);
   }, []);
 
-  const getSkillPosition = (skill: typeof skills[0]) => {
+  const getSkillPosition = (skill: (typeof skills)[0]) => {
     const skillsInOrbit = skills.filter((s) => s.orbit === skill.orbit);
     const index = skillsInOrbit.indexOf(skill);
     const angleOffset = (index / skillsInOrbit.length) * 360;
 
     const orbitRadius = skill.orbit === 1 ? 80 : skill.orbit === 2 ? 140 : 200;
     const rotation =
-      skill.orbit === 1 ? rotations.orbit1 :
-      skill.orbit === 2 ? rotations.orbit2 : rotations.orbit3;
+      skill.orbit === 1
+        ? rotations.orbit1
+        : skill.orbit === 2
+          ? rotations.orbit2
+          : rotations.orbit3;
 
     const angle = ((rotation + angleOffset) * Math.PI) / 180;
     const x = Math.cos(angle) * orbitRadius;
@@ -63,16 +70,19 @@ function SkillsOrrery() {
         <motion.div
           className="absolute w-64 h-64 rounded-full bg-gradient-to-br from-orange-500 to-orange-500 opacity-15 blur-3xl"
           animate={{ scale: [1, 1.1, 1] }}
-          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div
           className="absolute w-80 h-80 rounded-full bg-gradient-to-br from-blue-700/40 to-transparent opacity-10 blur-3xl"
           animate={{ scale: [1.1, 1, 1.1] }}
-          transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+          transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
         />
 
         {/* SVG Orbits */}
-        <svg className="absolute inset-0 w-full h-full" style={{ pointerEvents: 'none' }}>
+        <svg
+          className="absolute inset-0 w-full h-full"
+          style={{ pointerEvents: 'none' }}
+        >
           <defs>
             <style>{`
               .orbit-ring { fill: none; stroke: rgba(255, 107, 53, 0.1); stroke-width: 1; stroke-dasharray: 5,5; }
@@ -105,7 +115,10 @@ function SkillsOrrery() {
             >
               <motion.div
                 className="px-3 py-1.5 glass-card rounded-full text-xs font-semibold text-white cursor-pointer relative whitespace-nowrap"
-                style={{ backgroundColor: `${skill.color}15`, borderColor: `${skill.color}40` }}
+                style={{
+                  backgroundColor: `${skill.color}15`,
+                  borderColor: `${skill.color}40`,
+                }}
                 animate={{
                   boxShadow: isHovered ? `0 0 20px ${skill.color}60` : 'none',
                 }}
@@ -120,11 +133,16 @@ function SkillsOrrery() {
         <motion.div
           className="relative z-20 w-32 h-32 rounded-full flex items-center justify-center"
           style={{
-            background: 'radial-gradient(circle, rgba(255,107,53,0.1) 0%, transparent 70%)',
+            background:
+              'radial-gradient(circle, rgba(255,107,53,0.1) 0%, transparent 70%)',
             boxShadow: '0 0 40px rgba(255, 107, 53, 0.3)',
           }}
           animate={{
-            boxShadow: ['0 0 30px rgba(255, 107, 53, 0.2)', '0 0 50px rgba(255, 107, 53, 0.4)', '0 0 30px rgba(255, 107, 53, 0.2)'],
+            boxShadow: [
+              '0 0 30px rgba(255, 107, 53, 0.2)',
+              '0 0 50px rgba(255, 107, 53, 0.4)',
+              '0 0 30px rgba(255, 107, 53, 0.2)',
+            ],
           }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
         >
