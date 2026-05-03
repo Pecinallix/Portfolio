@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ExternalLink, Gamepad2, Bot, Code2 } from 'lucide-react';
+import { ExternalLink, Gamepad2, Bot, Code2, Shield } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 interface FeaturedProject {
@@ -48,6 +48,17 @@ const projects: FeaturedProject[] = [
     statusKey: 'featured.status.live',
     image: '/rapidapi.png',
   },
+  {
+    title: 'String Guardian',
+    descriptionKey: 'featured.stringGuardian.desc',
+    url: 'https://github.com/Pecinallix/string-guardian',
+    icon: Shield,
+    gradient: 'from-violet-600 to-purple-800',
+    glowColor: 'rgba(124, 58, 237, 0.35)',
+    tags: ['Claude Code', 'Node.js', 'Python', 'Open Source'],
+    statusKey: 'featured.status.openSource',
+    image: '/stringguardian.png',
+  },
 ];
 
 export default function FeaturedProjects() {
@@ -76,7 +87,7 @@ export default function FeaturedProjects() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 md:gap-8">
           {projects.map((project, index) => (
             <motion.a
               key={index}
