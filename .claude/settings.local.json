@@ -2,7 +2,13 @@
   "permissions": {
     "allow": [
       "Bash(grep -o \"\"text\"\":\"\"[^\"\"]*bat[^\"\"]*\"\" C:Usersicaro.claudeprojectsc--projetos-portfoliod438c56f-e1f4-4215-9af8-e01821da237f.jsonl)",
-      "Bash(node -e \":*)"
+      "Bash(node -e \":*)",
+      "PowerShell(Get-ChildItem -Path \"c:\\\\projetos\\\\portfolio\\\\app\" -Recurse | Where-Object { $_.PSIsContainer } | Select-Object FullName | Format-Table -AutoSize -Wrap)",
+      "Bash(curl -s https://api.github.com/repos/Pecinallix/string-guardian)",
+      "Bash(curl -s https://api.github.com/repos/Pecinallix/string-guardian/readme)",
+      "Bash(python -c \"import sys,json,base64; d=json.load\\(sys.stdin\\); print\\(base64.b64decode\\(d['content']\\).decode\\('utf-8'\\)\\)\")",
+      "Bash(curl -L -o \"c:/projetos/portfolio/public/stringguardian.png\" \"https://github.com/user-attachments/assets/96b7a49f-edbf-4a48-b063-5a9a89fc1dd7\")",
+      "Bash(curl -I -L \"https://github.com/user-attachments/assets/96b7a49f-edbf-4a48-b063-5a9a89fc1dd7\")"
     ]
   }
 }

@@ -70,6 +70,9 @@ export const translations = {
     'featured.subtitle': 'Projetos pessoais que estao no ar e em constante evolucao',
     'featured.visit': 'Visitar',
     'featured.status.live': 'Online',
+    'featured.status.openSource': 'Open Source',
+    'featured.stringGuardian.desc':
+      'Plugin para Claude Code que detecta e preserva automaticamente o encoding de arquivos com caracteres acentuados. Sem configuração. Sem passos manuais. Simplesmente funciona.',
     'featured.secretForest.desc':
       'Jogo web interativo estilo aventura ambientado em uma floresta misteriosa. Explore, descubra segredos e viva uma experiencia imersiva direto no navegador.',
     'featured.promoRadar.desc':
@@ -168,6 +171,9 @@ export const translations = {
     'featured.subtitle': 'Personal projects that are live and constantly evolving',
     'featured.visit': 'Visit',
     'featured.status.live': 'Live',
+    'featured.status.openSource': 'Open Source',
+    'featured.stringGuardian.desc':
+      'Claude Code plugin that automatically detects and preserves file encoding for accented characters. No configuration. No manual steps. It just works.',
     'featured.secretForest.desc':
       'Interactive adventure-style web game set in a mysterious forest. Explore, discover secrets and live an immersive experience right in your browser.',
     'featured.promoRadar.desc':
@@ -266,6 +272,9 @@ export const translations = {
     'featured.subtitle': 'Projets personnels en ligne et en constante evolution',
     'featured.visit': 'Visiter',
     'featured.status.live': 'En ligne',
+    'featured.status.openSource': 'Open Source',
+    'featured.stringGuardian.desc':
+      "Plugin Claude Code qui détecte et préserve automatiquement l'encodage des fichiers avec des caractères accentués. Sans configuration. Sans étapes manuelles. Ça fonctionne.",
     'featured.secretForest.desc':
       "Jeu web interactif de style aventure dans une foret mysterieuse. Explorez, decouvrez des secrets et vivez une experience immersive directement dans votre navigateur.",
     'featured.promoRadar.desc':
