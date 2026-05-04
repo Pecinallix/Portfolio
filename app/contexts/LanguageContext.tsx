@@ -80,6 +80,26 @@ export const translations = {
     'featured.shopeeApi.desc':
       'API REST publicada no RapidAPI para consultar ofertas e flash sales da Shopee. Disponivel para desenvolvedores integrarem em seus projetos.',
 
+    // GitHub Stats
+    'stats.title': 'Atividade no GitHub',
+    'stats.subtitle': 'Estatísticas e atividade recente do meu perfil público no GitHub',
+    'stats.repos': 'Repositórios',
+    'stats.stars': 'Estrelas',
+    'stats.forks': 'Forks',
+    'stats.followers': 'Seguidores',
+    'stats.languages': 'Linguagens Utilizadas',
+    'stats.activity': 'Atividade Recente',
+    'stats.loading': 'Carregando estatísticas...',
+    'stats.viewProfile': 'Ver Perfil no GitHub',
+    'stats.pushed': 'Enviou',
+    'stats.opened_pr': 'Abriu PR',
+    'stats.merged_pr': 'Mesclou PR',
+    'stats.closed_pr': 'Fechou PR',
+    'stats.created_repo': 'Criou repositório',
+    'stats.created_branch': 'Criou branch',
+    'stats.opened_issue': 'Abriu issue',
+    'stats.closed_issue': 'Fechou issue',
+
     // Projects
     'projects.title': 'Repositorios GitHub',
     'projects.subtitle':
@@ -181,6 +201,26 @@ export const translations = {
     'featured.shopeeApi.desc':
       'REST API published on RapidAPI to query Shopee deals and flash sales. Available for developers to integrate into their projects.',
 
+    // GitHub Stats
+    'stats.title': 'GitHub Activity',
+    'stats.subtitle': 'Stats and recent activity from my public GitHub profile',
+    'stats.repos': 'Repositories',
+    'stats.stars': 'Stars',
+    'stats.forks': 'Forks',
+    'stats.followers': 'Followers',
+    'stats.languages': 'Languages Used',
+    'stats.activity': 'Recent Activity',
+    'stats.loading': 'Loading stats...',
+    'stats.viewProfile': 'View GitHub Profile',
+    'stats.pushed': 'Pushed',
+    'stats.opened_pr': 'Opened PR',
+    'stats.merged_pr': 'Merged PR',
+    'stats.closed_pr': 'Closed PR',
+    'stats.created_repo': 'Created repository',
+    'stats.created_branch': 'Created branch',
+    'stats.opened_issue': 'Opened issue',
+    'stats.closed_issue': 'Closed issue',
+
     // Projects
     'projects.title': 'GitHub Repositories',
     'projects.subtitle':
@@ -281,6 +321,26 @@ export const translations = {
       'Bots automatises qui recherchent les meilleures promotions 24h/24, 7j/7, et les publient en temps reel dans un groupe WhatsApp.',
     'featured.shopeeApi.desc':
       'API REST publiee sur RapidAPI pour consulter les offres et flash sales de Shopee. Disponible pour les developpeurs a integrer dans leurs projets.',
+
+    // GitHub Stats
+    'stats.title': 'Activité GitHub',
+    'stats.subtitle': 'Statistiques et activité récente de mon profil GitHub public',
+    'stats.repos': 'Dépôts',
+    'stats.stars': 'Étoiles',
+    'stats.forks': 'Forks',
+    'stats.followers': 'Abonnés',
+    'stats.languages': 'Langages Utilisés',
+    'stats.activity': 'Activité Récente',
+    'stats.loading': 'Chargement des stats...',
+    'stats.viewProfile': 'Voir le profil GitHub',
+    'stats.pushed': 'A poussé',
+    'stats.opened_pr': 'Ouvert PR',
+    'stats.merged_pr': 'Fusionné PR',
+    'stats.closed_pr': 'Fermé PR',
+    'stats.created_repo': 'Créé un dépôt',
+    'stats.created_branch': 'Créé une branche',
+    'stats.opened_issue': 'Ouvert issue',
+    'stats.closed_issue': 'Fermé issue',
 
     // Projects
     'projects.title': 'Depots GitHub',

@@ -6,6 +6,7 @@ import About from '../components/About';
 import Skills from '../components/Skills';
 import FeaturedProjects from '../components/FeaturedProjects';
 import Projects from '../components/Projects';
+import GitHubStats from '../components/GitHubStats';
 import Contact from '../components/Contact';
 import WelcomeScreen from '../components/WelcomeScreen';
 
@@ -50,6 +51,7 @@ export default function Home() {
         <About />
         <Skills />
         <FeaturedProjects />
+        <GitHubStats />
         <Projects />
         <Contact />
       </main>
