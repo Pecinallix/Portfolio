@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ExternalLink, Gamepad2, Bot, Code2, Shield } from 'lucide-react';
+import { ExternalLink, Gamepad2, Bot, Sparkles, Shield } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 interface FeaturedProject {
@@ -38,15 +38,15 @@ const projects: FeaturedProject[] = [
     image: '/promoradar.png',
   },
   {
-    title: 'Rapid API Services',
-    descriptionKey: 'featured.shopeeApi.desc',
-    url: 'https://rapidapi.com/user/icaropecinalli',
-    icon: Code2,
-    gradient: 'from-orange-600 to-blue-700',
-    glowColor: 'rgba(255, 107, 53, 0.4)',
-    tags: ['REST API', 'RapidAPI', 'E-commerce'],
+    title: 'FindMyAI',
+    descriptionKey: 'featured.findMyAi.desc',
+    url: 'https://www.findmyai.com.br/pt',
+    icon: Sparkles,
+    gradient: 'from-violet-500 to-cyan-600',
+    glowColor: 'rgba(139, 92, 246, 0.35)',
+    tags: ['AI Directory', 'SaaS', 'Next.js'],
     statusKey: 'featured.status.live',
-    image: '/rapidapi.png',
+    image: '/findmyai.png',
   },
   {
     title: 'String Guardian',
