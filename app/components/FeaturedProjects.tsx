@@ -38,17 +38,6 @@ const projects: FeaturedProject[] = [
     image: '/promoradar.png',
   },
   {
-    title: 'FindMyAI',
-    descriptionKey: 'featured.findMyAi.desc',
-    url: 'https://www.findmyai.com.br/pt',
-    icon: Sparkles,
-    gradient: 'from-violet-500 to-cyan-600',
-    glowColor: 'rgba(139, 92, 246, 0.35)',
-    tags: ['AI Directory', 'SaaS', 'Next.js'],
-    statusKey: 'featured.status.live',
-    image: '/findmyai.png',
-  },
-  {
     title: 'String Guardian',
     descriptionKey: 'featured.stringGuardian.desc',
     url: 'https://github.com/Pecinallix/string-guardian',
@@ -58,6 +47,17 @@ const projects: FeaturedProject[] = [
     tags: ['Claude Code', 'Node.js', 'Python', 'Open Source'],
     statusKey: 'featured.status.openSource',
     image: '/stringguardian.png',
+  },
+  {
+    title: 'FindMyAI',
+    descriptionKey: 'featured.findMyAi.desc',
+    url: 'https://www.findmyai.com.br',
+    icon: Sparkles,
+    gradient: 'from-violet-500 to-cyan-600',
+    glowColor: 'rgba(139, 92, 246, 0.35)',
+    tags: ['AI Directory', 'SaaS', 'Next.js'],
+    statusKey: 'featured.status.live',
+    image: '/findmyai.png',
   },
 ];
 
