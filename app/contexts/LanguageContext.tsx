@@ -77,8 +77,8 @@ export const translations = {
       'Jogo web interativo estilo aventura ambientado em uma floresta misteriosa. Explore, descubra segredos e viva uma experiencia imersiva direto no navegador.',
     'featured.promoRadar.desc':
       'Bots automatizados que buscam as melhores promocoes 24h por dia, 7 dias por semana, e postam em tempo real no grupo do WhatsApp.',
-    'featured.shopeeApi.desc':
-      'API REST publicada no RapidAPI para consultar ofertas e flash sales da Shopee. Disponivel para desenvolvedores integrarem em seus projetos.',
+    'featured.findMyAi.desc':
+      'Diretorio de ferramentas de inteligencia artificial para o mercado brasileiro. Encontre a IA ideal para cada necessidade.',
 
     // GitHub Stats
     'stats.title': 'Atividade no GitHub',
@@ -198,8 +198,8 @@ export const translations = {
       'Interactive adventure-style web game set in a mysterious forest. Explore, discover secrets and live an immersive experience right in your browser.',
     'featured.promoRadar.desc':
       'Automated bots that search for the best deals 24/7 and post them in real time to a WhatsApp group.',
-    'featured.shopeeApi.desc':
-      'REST API published on RapidAPI to query Shopee deals and flash sales. Available for developers to integrate into their projects.',
+    'featured.findMyAi.desc':
+      'Directory of artificial intelligence tools for the Brazilian market. Find the ideal AI for every need.',
 
     // GitHub Stats
     'stats.title': 'GitHub Activity',
@@ -319,8 +319,8 @@ export const translations = {
       "Jeu web interactif de style aventure dans une foret mysterieuse. Explorez, decouvrez des secrets et vivez une experience immersive directement dans votre navigateur.",
     'featured.promoRadar.desc':
       'Bots automatises qui recherchent les meilleures promotions 24h/24, 7j/7, et les publient en temps reel dans un groupe WhatsApp.',
-    'featured.shopeeApi.desc':
-      'API REST publiee sur RapidAPI pour consulter les offres et flash sales de Shopee. Disponible pour les developpeurs a integrer dans leurs projets.',
+    'featured.findMyAi.desc':
+      "Repertoire d'outils d'intelligence artificielle pour le marche bresilien. Trouvez l'IA ideale pour chaque besoin.",
 
     // GitHub Stats
     'stats.title': 'Activité GitHub',
