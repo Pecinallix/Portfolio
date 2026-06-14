@@ -1,10 +1,23 @@
-import { ArrowDown, Github, Linkedin, Mail, Download } from 'lucide-react';
+import { ArrowDown, ArrowRight, Github, Linkedin, Mail, Download } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
-import { motion } from 'framer-motion';
+import {
+  motion,
+  useMotionValue,
+  useSpring,
+  useTransform,
+  useMotionTemplate,
+  type MotionValue,
+} from 'framer-motion';
 import { useEffect, useState, useMemo, useRef } from 'react';
 
 // Skills Orrery Component
-function SkillsOrrery() {
+function SkillsOrrery({
+  parallaxX,
+  parallaxY,
+}: {
+  parallaxX: MotionValue<number>;
+  parallaxY: MotionValue<number>;
+}) {
   const [rotations, setRotations] = useState({
     orbit1: 0,
     orbit2: 0,
@@ -61,6 +74,7 @@ function SkillsOrrery() {
   return (
     <motion.div
       className="hidden lg:flex items-center justify-center relative h-96"
+      style={{ x: parallaxX, y: parallaxY }}
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
@@ -218,7 +232,29 @@ function TypingEffect({
 
 export default function Hero() {
   const { t, language } = useLanguage();
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  // Pointer tracking via motion values (no React re-renders → smooth parallax)
+  const pointerX = useMotionValue(0.5); // normalized 0..1
+  const pointerY = useMotionValue(0.5);
+  const centeredX = useMotionValue(0); // centered -0.5..0.5
+  const centeredY = useMotionValue(0);
+
+  const springConfig = { stiffness: 60, damping: 18, mass: 0.6 };
+  const smoothX = useSpring(centeredX, springConfig);
+  const smoothY = useSpring(centeredY, springConfig);
+
+  // Layered parallax depths
+  const orbFarX = useTransform(smoothX, [-0.5, 0.5], [-28, 28]);
+  const orbFarY = useTransform(smoothY, [-0.5, 0.5], [-28, 28]);
+  const orbNearX = useTransform(smoothX, [-0.5, 0.5], [40, -40]);
+  const orbNearY = useTransform(smoothY, [-0.5, 0.5], [40, -40]);
+  const orreryX = useTransform(smoothX, [-0.5, 0.5], [18, -18]);
+  const orreryY = useTransform(smoothY, [-0.5, 0.5], [18, -18]);
+
+  // Cursor spotlight
+  const spotX = useTransform(pointerX, (v) => `${v * 100}%`);
+  const spotY = useTransform(pointerY, (v) => `${v * 100}%`);
+  const spotlight = useMotionTemplate`radial-gradient(600px circle at ${spotX} ${spotY}, rgba(255,107,53,0.10), transparent 65%)`;
 
   const typingTexts = useMemo(
     () => ['Full Stack Developer', 'React & Node.js', 'API Builder'],
@@ -227,15 +263,17 @@ export default function Hero() {
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: (e.clientX / window.innerWidth - 0.5) * 20,
-        y: (e.clientY / window.innerHeight - 0.5) * 20,
-      });
+      const nx = e.clientX / window.innerWidth;
+      const ny = e.clientY / window.innerHeight;
+      pointerX.set(nx);
+      pointerY.set(ny);
+      centeredX.set(nx - 0.5);
+      centeredY.set(ny - 0.5);
     };
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  }, [pointerX, pointerY, centeredX, centeredY]);
 
   const socialIcons = [
     {
@@ -258,13 +296,55 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center relative dark:bg-black light:bg-white overflow-hidden"
+      className="min-h-screen flex items-center justify-center relative dark:bg-black light:bg-white overflow-hidden noise-overlay"
     >
+      {/* Aurora orbs with parallax depth */}
+      <motion.div
+        className="absolute top-1/4 -left-20 w-[32rem] h-[32rem] rounded-full bg-gradient-to-br from-orange-500/25 to-transparent blur-3xl pointer-events-none"
+        style={{ x: orbFarX, y: orbFarY }}
+        animate={{ scale: [1, 1.12, 1], opacity: [0.5, 0.7, 0.5] }}
+        transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      <motion.div
+        className="absolute bottom-1/4 -right-24 w-[34rem] h-[34rem] rounded-full bg-gradient-to-br from-blue-700/25 to-transparent blur-3xl pointer-events-none"
+        style={{ x: orbNearX, y: orbNearY }}
+        animate={{ scale: [1.1, 1, 1.1], opacity: [0.4, 0.6, 0.4] }}
+        transition={{ duration: 16, repeat: Infinity, ease: 'easeInOut' }}
+      />
+
       {/* Grid pattern background */}
       <div className="absolute inset-0 bg-grid-pattern opacity-50" />
 
+      {/* Cursor spotlight */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none mix-blend-screen"
+        style={{ background: spotlight }}
+      />
+
       {/* Subtle radial gradient */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(10,10,10,0.3)_100%)] light:bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(250,250,250,0.3)_100%)]" />
+
+      {/* Floating particles */}
+      {[
+        { left: '12%', top: '22%', d: 7, delay: 0 },
+        { left: '82%', top: '30%', d: 9, delay: 1.2 },
+        { left: '70%', top: '70%', d: 8, delay: 0.6 },
+        { left: '25%', top: '78%', d: 10, delay: 1.8 },
+        { left: '45%', top: '15%', d: 6, delay: 2.4 },
+      ].map((p, i) => (
+        <motion.span
+          key={i}
+          className="absolute w-1 h-1 rounded-full bg-orange-500/50 pointer-events-none"
+          style={{ left: p.left, top: p.top }}
+          animate={{ y: [0, -24, 0], opacity: [0, 1, 0] }}
+          transition={{
+            duration: p.d,
+            delay: p.delay,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+        />
+      ))}
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <div className="max-w-6xl mx-auto">
@@ -281,7 +361,11 @@ export default function Hero() {
                 transition={{ duration: 0.6, ease: 'easeOut' }}
                 className="mb-6"
               >
-                <span className="text-sm font-display text-orange-500 tracking-widest uppercase">
+                <span className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full glass-card text-xs font-display tracking-widest uppercase text-orange-500">
+                  <span className="relative flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 animate-ping" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-green-400" />
+                  </span>
                   {'<'} Bem-vindo {'>'}
                 </span>
               </motion.div>
@@ -294,9 +378,7 @@ export default function Hero() {
               >
                 Icaro
                 <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-orange-500 to-blue-700">
-                  Pecinalli
-                </span>
+                <span className="animate-gradient-text">Pecinalli</span>
               </motion.h1>
 
               <motion.div
@@ -361,12 +443,15 @@ export default function Hero() {
               >
                 <motion.a
                   href="#projects"
-                  className="px-8 py-4 bg-orange-500 text-white font-display font-bold text-lg rounded-lg hover:shadow-lg hover:shadow-orange-500/40 transition-all"
+                  className="group relative overflow-hidden px-8 py-4 bg-orange-500 text-white font-display font-bold text-lg rounded-lg hover:shadow-lg hover:shadow-orange-500/40 transition-all flex items-center justify-center gap-2"
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: 'spring', stiffness: 300 }}
                 >
-                  {t('hero.cta')}
+                  {/* Shimmer sweep */}
+                  <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+                  <span className="relative">{t('hero.cta')}</span>
+                  <ArrowRight className="relative w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </motion.a>
                 <motion.a
                   href="/curriculo.pdf"
@@ -383,7 +468,7 @@ export default function Hero() {
             </motion.div>
 
             {/* Right side - Orrery of Skills */}
-            <SkillsOrrery />
+            <SkillsOrrery parallaxX={orreryX} parallaxY={orreryY} />
           </div>
         </div>
       </div>
