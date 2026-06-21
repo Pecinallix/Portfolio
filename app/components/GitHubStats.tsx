@@ -10,9 +10,12 @@ import {
   GitPullRequest,
   GitBranch,
   AlertCircle,
+  ArrowUpRight,
 } from 'lucide-react';
 import { GITHUB_CONFIG, LANGUAGE_COLORS } from '../config/github';
 import { useLanguage } from '../contexts/LanguageContext';
+
+const ease = [0.16, 1, 0.3, 1] as const;
 
 interface UserStats {
   repos: number;
@@ -31,7 +34,6 @@ interface LanguageStat {
 interface ActivityItem {
   id: string;
   icon: typeof GitCommit;
-  iconColor: string;
   description: string;
   repo: string;
   repoUrl: string;
@@ -84,7 +86,6 @@ function parseEvent(event: any, t: (k: string) => string): Omit<ActivityItem, 't
 
   switch (event.type) {
     case 'PushEvent': {
-      // payload.size is the real count; payload.commits array is capped by the API
       const count: number = event.payload.size ?? event.payload.commits?.length ?? 0;
       if (count === 0) return null;
       const branch: string = ((event.payload.ref as string) ?? '').replace('refs/heads/', '');
@@ -93,7 +94,6 @@ function parseEvent(event: any, t: (k: string) => string): Omit<ActivityItem, 't
       return {
         id: event.id,
         icon: GitCommit,
-        iconColor: '#3fb950',
         description: `${t('stats.pushed')} ${count} commit${count !== 1 ? 's' : ''}${branchPart}${msg ? ` · ${msg}` : ''}`,
         repo,
         repoUrl,
@@ -104,35 +104,24 @@ function parseEvent(event: any, t: (k: string) => string): Omit<ActivityItem, 't
       const title: string = event.payload.pull_request?.title ?? '';
       const merged: boolean = event.payload.pull_request?.merged ?? false;
       let description = '';
-      let iconColor = '#a371f7';
       if (action === 'opened') {
         description = `${t('stats.opened_pr')} · ${title}`;
       } else if (merged) {
         description = `${t('stats.merged_pr')} · ${title}`;
-        iconColor = '#8957e5';
       } else {
         description = `${t('stats.closed_pr')} · ${title}`;
-        iconColor = '#f85149';
       }
-      return { id: event.id, icon: GitPullRequest, iconColor, description, repo, repoUrl };
+      return { id: event.id, icon: GitPullRequest, description, repo, repoUrl };
     }
     case 'CreateEvent': {
       const refType: string = event.payload.ref_type;
       if (refType === 'repository') {
-        return {
-          id: event.id,
-          icon: GitBranch,
-          iconColor: '#58a6ff',
-          description: t('stats.created_repo'),
-          repo,
-          repoUrl,
-        };
+        return { id: event.id, icon: GitBranch, description: t('stats.created_repo'), repo, repoUrl };
       }
       if (refType === 'branch') {
         return {
           id: event.id,
           icon: GitBranch,
-          iconColor: '#79c0ff',
           description: `${t('stats.created_branch')} · ${event.payload.ref}`,
           repo,
           repoUrl,
@@ -147,7 +136,6 @@ function parseEvent(event: any, t: (k: string) => string): Omit<ActivityItem, 't
       return {
         id: event.id,
         icon: AlertCircle,
-        iconColor: '#e3b341',
         description: `${action === 'opened' ? t('stats.opened_issue') : t('stats.closed_issue')} · ${title}`,
         repo,
         repoUrl,
@@ -159,10 +147,10 @@ function parseEvent(event: any, t: (k: string) => string): Omit<ActivityItem, 't
 }
 
 const statCards = [
-  { key: 'repos' as const, labelKey: 'stats.repos', Icon: BookOpen, color: '#58a6ff', glow: 'rgba(88,166,255,0.15)' },
-  { key: 'stars' as const, labelKey: 'stats.stars', Icon: Star, color: '#e3b341', glow: 'rgba(227,179,65,0.15)' },
-  { key: 'forks' as const, labelKey: 'stats.forks', Icon: GitFork, color: '#3fb950', glow: 'rgba(63,185,80,0.15)' },
-  { key: 'followers' as const, labelKey: 'stats.followers', Icon: Users, color: '#a371f7', glow: 'rgba(163,113,247,0.15)' },
+  { key: 'repos' as const, labelKey: 'stats.repos', Icon: BookOpen },
+  { key: 'stars' as const, labelKey: 'stats.stars', Icon: Star },
+  { key: 'forks' as const, labelKey: 'stats.forks', Icon: GitFork },
+  { key: 'followers' as const, labelKey: 'stats.followers', Icon: Users },
 ];
 
 export default function GitHubStats() {
@@ -187,7 +175,6 @@ export default function GitHubStats() {
           eventsRes.json(),
         ]);
 
-        // Aggregate stats from own repos only
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const ownRepos = repos.filter((r: any) => !r.fork);
         setStats({
@@ -199,7 +186,6 @@ export default function GitHubStats() {
           followers: user.followers,
         });
 
-        // Language distribution
         const langCount: Record<string, number> = {};
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ownRepos.forEach((r: any) => {
@@ -218,7 +204,6 @@ export default function GitHubStats() {
             })),
         );
 
-        // Recent activity — deduplicate push events to same repo on same day
         const items: ActivityItem[] = [];
         const seen = new Set<string>();
         for (const event of events) {
@@ -243,197 +228,168 @@ export default function GitHubStats() {
   }, [language]);
 
   return (
-    <section className="py-24 dark:bg-black light:bg-white relative section-divider">
-      <div className="absolute inset-0 bg-grid-pattern opacity-20" />
-      <div className="container mx-auto px-6 relative z-10">
-
+    <section className="relative overflow-hidden bg-base-2 py-28 sm:py-36">
+      <div className="relative z-10 mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.7, ease }}
           viewport={{ once: true }}
-          className="mb-16"
+          className="mb-16 max-w-3xl"
         >
-          <span className="text-green-400 font-display text-sm uppercase tracking-widest mb-3 block">
-            {'<'} github-stats {'>'}
-          </span>
-          <h2 className="text-5xl md:text-6xl font-display font-bold text-white light:text-gray-900 mb-6 tracking-tight">
+          <div className="mb-6 flex items-baseline gap-4">
+            <span className="index-num text-2xl">04</span>
+            <span className="kicker-plain">GitHub</span>
+          </div>
+          <h2 className="display mb-6 text-[clamp(2.5rem,6vw,4.5rem)] text-ink">
             {t('stats.title')}
           </h2>
-          <div className="w-16 h-1 bg-linear-to-r from-green-400 to-blue-500 rounded-full" />
-          <p className="text-gray-400 light:text-gray-500 mt-6 max-w-2xl">
-            {t('stats.subtitle')}
-          </p>
+          <p className="text-lg leading-relaxed text-muted">{t('stats.subtitle')}</p>
         </motion.div>
 
         {loading ? (
           <div className="flex items-center justify-center py-24">
             <div className="flex flex-col items-center gap-4">
-              <Github className="w-10 h-10 text-green-400 animate-pulse" />
-              <p className="text-gray-400 text-sm">{t('stats.loading')}</p>
+              <Github className="h-8 w-8 animate-pulse text-accent" />
+              <p className="text-sm text-muted">{t('stats.loading')}</p>
             </div>
           </div>
         ) : (
           <>
             {/* Stat cards */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
-              {statCards.map(({ key, labelKey, Icon, color, glow }, i) => (
+            <div className="mb-16 grid grid-cols-2 border-t border-l border-line lg:grid-cols-4">
+              {statCards.map(({ key, labelKey, Icon }, i) => (
                 <motion.div
                   key={key}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: i * 0.08 }}
+                  transition={{ duration: 0.5, delay: i * 0.08, ease }}
                   viewport={{ once: true }}
-                  className="glass-card rounded-2xl p-6 flex flex-col gap-3 group"
-                  style={{ '--glow': glow } as React.CSSProperties}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.boxShadow = `0 0 30px ${glow}`;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.boxShadow = '';
-                  }}
+                  className="border-b border-r border-line p-7"
                 >
-                  <div className="flex items-center justify-between">
-                    <span className="text-gray-400 light:text-gray-500 text-sm font-medium">
-                      {t(labelKey)}
-                    </span>
-                    <Icon className="w-4 h-4" style={{ color }} />
+                  <div className="mb-4 flex items-center justify-between">
+                    <span className="text-xs uppercase tracking-[0.18em] text-faint">{t(labelKey)}</span>
+                    <Icon className="h-4 w-4 text-accent" strokeWidth={1.5} />
                   </div>
-                  <span
-                    className="text-4xl font-display font-bold tracking-tight"
-                    style={{ color }}
-                  >
+                  <span className="text-gilt display text-5xl sm:text-6xl">
                     {stats?.[key] ?? '—'}
                   </span>
                 </motion.div>
               ))}
             </div>
 
-            {/* Language distribution */}
-            {languages.length > 0 && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-                className="glass-card rounded-2xl p-6 mb-8"
-              >
-                <h3 className="text-white light:text-gray-800 font-display font-semibold mb-5 text-sm uppercase tracking-wider">
-                  {t('stats.languages')}
-                </h3>
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+              {/* Language distribution */}
+              {languages.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, ease }}
+                  viewport={{ once: true }}
+                  className="lux-card p-8"
+                >
+                  <h3 className="mb-7 text-xs uppercase tracking-[0.22em] text-faint">
+                    {t('stats.languages')}
+                  </h3>
 
-                {/* Stacked bar */}
-                <div className="flex h-3 rounded-full overflow-hidden mb-5 gap-px">
-                  {languages.map((lang, i) => (
-                    <motion.div
-                      key={lang.name}
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${lang.percentage}%` }}
-                      transition={{ duration: 0.6, delay: i * 0.07, ease: 'easeOut' }}
-                      viewport={{ once: true }}
-                      className="h-full first:rounded-l-full last:rounded-r-full"
-                      style={{ backgroundColor: lang.color, minWidth: lang.percentage > 2 ? undefined : '2px' }}
-                      title={`${lang.name}: ${lang.percentage}%`}
-                    />
-                  ))}
-                </div>
-
-                {/* Legend */}
-                <div className="flex flex-wrap gap-x-6 gap-y-2">
-                  {languages.map((lang) => (
-                    <div key={lang.name} className="flex items-center gap-2">
-                      <span
-                        className="w-2.5 h-2.5 rounded-full flex-shrink-0"
-                        style={{ backgroundColor: lang.color }}
+                  <div className="mb-7 flex h-2 gap-px overflow-hidden">
+                    {languages.map((lang, i) => (
+                      <motion.div
+                        key={lang.name}
+                        initial={{ width: 0 }}
+                        whileInView={{ width: `${lang.percentage}%` }}
+                        transition={{ duration: 0.7, delay: i * 0.07, ease }}
+                        viewport={{ once: true }}
+                        className="h-full"
+                        style={{ backgroundColor: lang.color, minWidth: lang.percentage > 2 ? undefined : '2px' }}
+                        title={`${lang.name}: ${lang.percentage}%`}
                       />
-                      <span className="text-gray-300 light:text-gray-600 text-sm">{lang.name}</span>
-                      <span className="text-gray-500 text-xs">{lang.percentage}%</span>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-
-            {/* Activity feed */}
-            {activity.length > 0 && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                viewport={{ once: true }}
-                className="glass-card rounded-2xl p-6"
-              >
-                <h3 className="text-white light:text-gray-800 font-display font-semibold mb-6 text-sm uppercase tracking-wider">
-                  {t('stats.activity')}
-                </h3>
-
-                <div className="relative">
-                  {/* Vertical timeline line */}
-                  <div className="absolute left-4 top-0 bottom-0 w-px bg-white/10 light:bg-black/10" />
-
-                  <div className="space-y-1">
-                    {activity.map((item, i) => {
-                      const Icon = item.icon;
-                      return (
-                        <motion.div
-                          key={item.id}
-                          initial={{ opacity: 0, x: -10 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.35, delay: i * 0.06 }}
-                          viewport={{ once: true }}
-                          className="flex items-start gap-4 pl-2 py-3 rounded-xl hover:bg-white/5 light:hover:bg-black/5 transition-colors group"
-                        >
-                          {/* Icon dot on timeline */}
-                          <div
-                            className="relative z-10 flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mt-0.5"
-                            style={{ backgroundColor: `${item.iconColor}20`, border: `1px solid ${item.iconColor}50` }}
-                          >
-                            <Icon className="w-2.5 h-2.5" style={{ color: item.iconColor }} />
-                          </div>
-
-                          {/* Content */}
-                          <div className="flex-1 min-w-0">
-                            <p className="text-gray-300 light:text-gray-700 text-sm leading-snug truncate">
-                              {item.description}
-                            </p>
-                            <div className="flex items-center gap-2 mt-1">
-                              <a
-                                href={item.repoUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-xs text-green-400 hover:text-green-300 transition-colors font-mono"
-                              >
-                                {item.repo}
-                              </a>
-                              <span className="text-gray-600 text-xs">·</span>
-                              <span className="text-gray-500 text-xs">{item.time}</span>
-                            </div>
-                          </div>
-                        </motion.div>
-                      );
-                    })}
+                    ))}
                   </div>
-                </div>
-              </motion.div>
-            )}
 
-            {/* Link to GitHub profile */}
+                  <div className="space-y-3">
+                    {languages.map((lang) => (
+                      <div key={lang.name} className="flex items-center gap-3">
+                        <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ backgroundColor: lang.color }} />
+                        <span className="flex-1 text-sm text-ink">{lang.name}</span>
+                        <span className="font-serif italic text-sm text-faint">{lang.percentage}%</span>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Activity feed */}
+              {activity.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.1, ease }}
+                  viewport={{ once: true }}
+                  className="lux-card p-8"
+                >
+                  <h3 className="mb-6 text-xs uppercase tracking-[0.22em] text-faint">
+                    {t('stats.activity')}
+                  </h3>
+
+                  <div className="relative">
+                    <div className="absolute bottom-2 left-[7px] top-2 w-px bg-line" />
+                    <div className="space-y-5">
+                      {activity.map((item, i) => {
+                        const Icon = item.icon;
+                        return (
+                          <motion.div
+                            key={item.id}
+                            initial={{ opacity: 0, x: -8 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.4, delay: i * 0.06, ease }}
+                            viewport={{ once: true }}
+                            className="group flex items-start gap-4"
+                          >
+                            <span className="relative z-10 mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-line-strong bg-surface">
+                              <Icon className="h-2.5 w-2.5 text-accent" />
+                            </span>
+                            <div className="min-w-0 flex-1">
+                              <p className="truncate text-sm leading-snug text-ink">{item.description}</p>
+                              <div className="mt-1 flex items-center gap-2">
+                                <a
+                                  href={item.repoUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="font-serif italic text-xs text-accent transition-colors hover:text-ink"
+                                >
+                                  {item.repo}
+                                </a>
+                                <span className="text-xs text-faint">·</span>
+                                <span className="text-xs text-faint">{item.time}</span>
+                              </div>
+                            </div>
+                          </motion.div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </div>
+
+            {/* Link to profile */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.6, ease }}
               viewport={{ once: true }}
-              className="text-center mt-10"
+              className="mt-12"
             >
               <a
                 href={`https://github.com/${GITHUB_CONFIG.username}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-8 py-4 glass-card rounded-xl font-semibold text-green-400 hover:border-green-500/40 transition-all hover:scale-105"
+                className="link-underline inline-flex items-center gap-2 text-sm"
               >
-                <Github className="w-5 h-5" />
                 {t('stats.viewProfile')}
+                <ArrowUpRight className="h-4 w-4" />
               </a>
             </motion.div>
           </>

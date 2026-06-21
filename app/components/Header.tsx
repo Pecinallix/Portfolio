@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import ThemeToggle from './ThemeToggle';
@@ -11,190 +11,135 @@ export default function Header() {
   const { t } = useLanguage();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 40);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const navItems = [
-    { name: t('nav.home'), href: '#home' },
-    { name: t('nav.about'), href: '#about' },
-    { name: t('nav.skills'), href: '#skills' },
-    { name: t('nav.projects'), href: '#projects' },
-    { name: t('nav.contact'), href: '#contact' },
+    { name: t('nav.about'), href: '#about', num: '01' },
+    { name: t('nav.skills'), href: '#skills', num: '02' },
+    { name: t('nav.projects'), href: '#projects', num: '03' },
+    { name: t('nav.contact'), href: '#contact', num: '04' },
   ];
-
-  const toggleMenu = () => setIsOpen(!isOpen);
 
   const closeMenu = () => setIsOpen(false);
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? 'dark:bg-black/95 light:bg-white/98 dark:border-gray-800 light:border-gray-200 shadow-lg shadow-black/20'
-          : 'dark:bg-black/80 light:bg-white/90 dark:border-gray-900 light:border-gray-200'
+          ? 'backdrop-blur-md bg-base/80 border-b border-line'
+          : 'bg-transparent border-b border-transparent'
       }`}
     >
-      <nav className="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
-        <div className="flex items-center justify-between rounded-4xl">
+      <nav className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
+        <div className="flex items-center justify-between h-16 sm:h-20">
+          {/* Wordmark */}
           <motion.a
             href="#home"
-            className="text-xl sm:text-2xl font-display font-bold relative group"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            className="group flex items-center gap-3"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
           >
-            <motion.span
-              className="absolute -inset-2 bg-gradient-to-r from-orange-500/15 to-blue-700/15 rounded-full opacity-0 group-hover:opacity-100 blur"
-              layoutId="logo-glow"
-            />
-            <span className="relative light:text-orange-600 dark:text-orange-500">
-              {'<'}
+            <span className="flex h-9 w-9 items-center justify-center border border-line-strong text-accent font-serif text-lg leading-none transition-colors group-hover:bg-accent group-hover:text-[var(--base)]">
+              íp
             </span>
-            <span className="relative light:text-gray-800 dark:text-white">
-              Dev
-            </span>
-            <span className="relative light:text-blue-600 dark:text-blue-400">
-              {' />'}
+            <span className="hidden sm:block leading-tight">
+              <span className="block font-serif text-[1.05rem] text-ink">Ícaro Pecinalli</span>
+              <span className="block text-[0.62rem] uppercase tracking-[0.24em] text-faint">
+                Full-Stack Developer
+              </span>
             </span>
           </motion.a>
 
-          <div className="hidden md:flex items-center gap-4">
-            {navItems.map((item, index) => (
-              <motion.a
-                key={index}
-                href={item.href}
-                className="dark:text-gray-300 light:text-gray-700 hover:text-orange-500 transition-colors font-medium relative group px-3"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  delay: index * 0.1 + 0.3,
-                  type: 'spring' as const,
-                  stiffness: 100,
-                }}
-                whileHover={{ y: -2 }}
-              >
-                {item.name}
-                <motion.span
-                  className="absolute bottom-0 left-0 h-0.5 bg-orange-500"
-                  initial={{ width: 0 }}
-                  whileHover={{ width: '100%' }}
-                  transition={{ duration: 0.3 }}
-                />
-              </motion.a>
-            ))}
-            <motion.div
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.7, type: 'spring' as const }}
-            >
+          {/* Desktop nav */}
+          <div className="hidden md:flex items-center gap-9">
+            <ul className="flex items-center gap-9">
+              {navItems.map((item, index) => (
+                <motion.li
+                  key={item.href}
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.15 + index * 0.07 }}
+                >
+                  <a
+                    href={item.href}
+                    className="group flex items-baseline gap-1.5 text-sm text-muted transition-colors hover:text-ink"
+                  >
+                    <span className="font-serif italic text-xs text-accent opacity-70">
+                      {item.num}
+                    </span>
+                    <span className="relative">
+                      {item.name}
+                      <span className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-accent transition-transform duration-400 group-hover:scale-x-100" />
+                    </span>
+                  </a>
+                </motion.li>
+              ))}
+            </ul>
+
+            <div className="flex items-center gap-3 pl-6 border-l border-line">
               <LanguageToggle />
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.8, type: 'spring' as const }}
-            >
               <ThemeToggle />
-            </motion.div>
-            <motion.a
-              href="#contact"
-              className="px-6 py-2 rounded-full font-display font-semibold relative overflow-hidden group bg-orange-500 hover:shadow-lg hover:shadow-orange-500/40 transition-all"
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{
-                opacity: { delay: 0.9 },
-                y: {
-                  delay: 0.9,
-                  type: 'spring' as const,
-                  stiffness: 260,
-                  damping: 20,
-                },
-              }}
-            >
-              <span className="relative z-10 text-white">{t('nav.hire')}</span>
-            </motion.a>
+              <a
+                href="#contact"
+                className="btn-gold px-5 py-2 text-sm"
+              >
+                {t('nav.hire')}
+              </a>
+            </div>
           </div>
 
+          {/* Mobile controls */}
           <div className="md:hidden flex items-center gap-2">
-            <motion.div
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.4, type: 'spring' as const }}
-            >
-              <LanguageToggle />
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.5, type: 'spring' as const }}
-            >
-              <ThemeToggle />
-            </motion.div>
-            <motion.button
-              onClick={toggleMenu}
-              className="dark:text-white light:text-slate-800 p-2 dark:hover:bg-gray-800 light:hover:bg-gray-200 rounded-lg transition-colors"
+            <LanguageToggle />
+            <ThemeToggle />
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="p-2 text-ink"
               aria-label="Toggle menu"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              initial={{ opacity: 0, rotate: -180 }}
-              animate={{ opacity: 1, rotate: 0 }}
-              transition={{ delay: 0.6, type: 'spring' as const }}
             >
-              <motion.div
-                animate={{ rotate: isOpen ? 90 : 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                {isOpen ? (
-                  <X className="w-6 h-6" />
-                ) : (
-                  <Menu className="w-6 h-6" />
-                )}
-              </motion.div>
-            </motion.button>
+              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
           </div>
         </div>
-
-        <motion.div
-          initial={false}
-          animate={{
-            height: isOpen ? 'auto' : 0,
-            opacity: isOpen ? 1 : 0,
-          }}
-          transition={{ duration: 0.3 }}
-          className="md:hidden overflow-hidden"
-        >
-          <div className="py-4 space-y-4">
-            {navItems.map((item, index) => (
-              <motion.a
-                key={index}
-                href={item.href}
-                onClick={closeMenu}
-                className="block dark:text-gray-300 light:text-gray-700 hover:text-orange-500 transition-colors font-medium py-2"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: isOpen ? 1 : 0, x: isOpen ? 0 : -20 }}
-                transition={{ delay: index * 0.1 }}
-              >
-                {item.name}
-              </motion.a>
-            ))}
-            <motion.a
-              href="#contact"
-              onClick={closeMenu}
-              className="block w-full text-center px-6 py-3 bg-orange-500 text-white rounded-full font-display font-semibold hover:shadow-lg hover:shadow-orange-500/40 transition-all"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: isOpen ? 1 : 0, x: isOpen ? 0 : -20 }}
-              transition={{ delay: navItems.length * 0.1 }}
-            >
-              {t('nav.hire')}
-            </motion.a>
-          </div>
-        </motion.div>
       </nav>
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="md:hidden overflow-hidden bg-base/95 backdrop-blur-md border-b border-line"
+          >
+            <div className="px-5 py-6 space-y-1">
+              {navItems.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={closeMenu}
+                  className="flex items-baseline gap-3 py-3 text-lg font-serif text-ink border-b border-line"
+                >
+                  <span className="font-serif italic text-sm text-accent">{item.num}</span>
+                  {item.name}
+                </a>
+              ))}
+              <a
+                href="#contact"
+                onClick={closeMenu}
+                className="btn-gold mt-5 block w-full py-3.5 text-center text-sm"
+              >
+                {t('nav.hire')}
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

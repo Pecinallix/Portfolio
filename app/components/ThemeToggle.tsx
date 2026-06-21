@@ -8,22 +8,18 @@ export default function ThemeToggle() {
   return (
     <motion.button
       onClick={toggleTheme}
-      className="p-3 light:bg-gray-200 dark:bg-gray-800 rounded-full hover:scale-110 transition-all"
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.95 }}
+      className="flex h-9 w-9 items-center justify-center border border-line text-muted transition-colors hover:border-line-strong hover:text-accent"
+      whileTap={{ scale: 0.92 }}
       aria-label="Toggle theme"
     >
-      <motion.div
-        initial={false}
-        animate={{ rotate: theme === 'dark' ? 0 : 180 }}
+      <motion.span
+        key={theme}
+        initial={{ rotate: -90, opacity: 0 }}
+        animate={{ rotate: 0, opacity: 1 }}
         transition={{ duration: 0.3 }}
       >
-        {theme === 'dark' ? (
-          <Sun className="w-5 h-5 text-yellow-400" />
-        ) : (
-          <Moon className="w-5 h-5 text-[#2d5cb3]" />
-        )}
-      </motion.div>
+        {theme === 'dark' ? <Sun className="h-4 w-4" strokeWidth={1.5} /> : <Moon className="h-4 w-4" strokeWidth={1.5} />}
+      </motion.span>
     </motion.button>
   );
 }
