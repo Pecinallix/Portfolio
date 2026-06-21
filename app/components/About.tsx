@@ -2,149 +2,107 @@ import { motion } from 'framer-motion';
 import { Code2, Lightbulb, Rocket, Users } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
+const ease = [0.16, 1, 0.3, 1] as const;
+
 export default function About() {
   const { t } = useLanguage();
 
   const features = [
-    {
-      icon: Code2,
-      title: t('about.feature1.title'),
-      description: t('about.feature1.desc'),
-    },
-    {
-      icon: Lightbulb,
-      title: t('about.feature2.title'),
-      description: t('about.feature2.desc'),
-    },
-    {
-      icon: Rocket,
-      title: t('about.feature3.title'),
-      description: t('about.feature3.desc'),
-    },
-    {
-      icon: Users,
-      title: t('about.feature4.title'),
-      description: t('about.feature4.desc'),
-    },
+    { icon: Code2, num: '01', title: t('about.feature1.title'), description: t('about.feature1.desc') },
+    { icon: Lightbulb, num: '02', title: t('about.feature2.title'), description: t('about.feature2.desc') },
+    { icon: Rocket, num: '03', title: t('about.feature3.title'), description: t('about.feature3.desc') },
+    { icon: Users, num: '04', title: t('about.feature4.title'), description: t('about.feature4.desc') },
+  ];
+
+  const stats = [
+    { value: '3+', label: t('about.stat1') },
+    { value: '16+', label: t('about.stat2') },
+    { value: '8+', label: t('about.stat3') },
+    { value: '100%', label: t('about.stat4') },
   ];
 
   return (
-    <section id="about" className="py-24 dark:bg-gray-900 light:bg-gray-50 relative section-divider">
-      <div className="absolute inset-0 bg-grid-pattern opacity-30" />
-      <div className="container mx-auto px-6 relative z-10">
+    <section id="about" className="relative overflow-hidden bg-base py-28 sm:py-36">
+      <div className="pointer-events-none absolute -left-40 top-1/3 h-[36rem] w-[36rem] glow-soft rounded-full" />
+
+      <div className="relative z-10 mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.7, ease }}
           viewport={{ once: true }}
-          className="mb-20"
+          className="mb-16 flex items-baseline gap-4"
         >
-          <span className="text-orange-500 font-display text-sm uppercase tracking-widest mb-3 block">
-            {'<'} about {'>'}
-          </span>
-          <h2 className="text-5xl md:text-6xl font-display font-bold text-white mb-6 tracking-tight leading-tight">
-            Sobre mim
-          </h2>
-          <div className="w-16 h-1 bg-gradient-to-r from-orange-500 to-blue-700 rounded-full"></div>
+          <span className="index-num text-2xl">01</span>
+          <span className="kicker-plain">Sobre</span>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center mb-16">
+        <div className="grid grid-cols-1 gap-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-24">
+          {/* Prose */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease }}
             viewport={{ once: true }}
           >
-            <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-blue-700 rounded-2xl blur opacity-15 group-hover:opacity-25 transition-opacity duration-300"></div>
-              <div className="relative glass-card rounded-2xl p-8">
-                <p className="text-gray-300 text-lg leading-relaxed mb-4">
-                  {t('about.intro1')}
-                </p>
-                <p className="text-gray-300 text-lg leading-relaxed mb-4">
-                  {t('about.intro2')}
-                </p>
-                <p className="text-gray-300 text-lg leading-relaxed">
-                  {t('about.intro3')}
-                </p>
-              </div>
-            </div>
+            <h2 className="display mb-10 text-[clamp(2.5rem,6vw,4.5rem)] text-ink">
+              Construo software com{' '}
+              <span className="text-gilt serif-italic">intenção</span>.
+            </h2>
+            <p className="mb-6 font-serif text-2xl leading-relaxed text-ink">
+              {t('about.intro1')}
+            </p>
+            <p className="mb-6 text-lg leading-relaxed text-muted">
+              {t('about.intro2')}
+            </p>
+            <p className="text-lg leading-relaxed text-muted">
+              {t('about.intro3')}
+            </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {features.map((feature, index) => (
+          {/* Feature list */}
+          <div className="lg:pt-4">
+            {features.map((f, i) => (
               <motion.div
-                key={index}
+                key={f.num}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.5,
-                  delay: index * 0.1,
-                  ease: 'easeOut',
-                }}
-                viewport={{ once: true, amount: 0.2 }}
-                className="glass-card p-6 rounded-2xl relative group overflow-hidden"
-                whileHover={{
-                  y: -4,
-                  transition: { duration: 0.2 },
-                }}
+                transition={{ duration: 0.6, delay: i * 0.08, ease }}
+                viewport={{ once: true }}
+                className="group flex gap-5 border-t border-line py-7 transition-colors last:border-b hover:bg-surface/40"
               >
-                <div className="absolute top-0 left-0 right-0 h-0.5 bg-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <motion.div
-                  whileHover={{
-                    rotate: [0, -10, 10, -10, 0],
-                    transition: { duration: 0.5 },
-                  }}
-                  className="inline-block"
-                >
-                  <div className={`inline-flex p-2.5 rounded-xl bg-linear-to-br ${feature.gradient} bg-opacity-10 mb-3`}>
-                    <feature.icon className="w-8 h-8 text-white opacity-90" />
+                <span className="index-num pt-1 text-lg">{f.num}</span>
+                <div className="flex-1">
+                  <div className="mb-2 flex items-center gap-3">
+                    <f.icon className="h-5 w-5 text-accent" strokeWidth={1.5} />
+                    <h3 className="font-serif text-xl text-ink">{f.title}</h3>
                   </div>
-                </motion.div>
-                <h3 className="text-white light:text-gray-800 font-semibold mb-2 relative z-10">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-400 light:text-gray-600 text-sm relative z-10 leading-relaxed">
-                  {feature.description}
-                </p>
+                  <p className="text-sm leading-relaxed text-muted">{f.description}</p>
+                </div>
               </motion.div>
             ))}
           </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-          {[
-            { value: '3+', label: t('about.stat1') },
-            { value: '16+', label: t('about.stat2') },
-            { value: '8+', label: t('about.stat3') },
-            { value: '100%', label: t('about.stat4') },
-          ].map((stat, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{
-                duration: 0.4,
-                delay: index * 0.1,
-                ease: 'easeOut',
-              }}
-              viewport={{ once: true, amount: 0.3 }}
-              className="glass-card p-5 sm:p-6 rounded-2xl text-center relative overflow-hidden group"
-              whileHover={{
-                y: -4,
-                transition: { duration: 0.2 },
-              }}
+        {/* Stats */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease }}
+          viewport={{ once: true }}
+          className="mt-24 grid grid-cols-2 border-t border-line md:grid-cols-4"
+        >
+          {stats.map((s, i) => (
+            <div
+              key={i}
+              className={`px-2 py-8 ${i !== 0 ? 'md:border-l md:border-line' : ''} ${i % 2 !== 0 ? 'border-l border-line md:border-l' : ''}`}
             >
-              <div className="absolute inset-0 bg-linear-to-br from-blue-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="text-3xl sm:text-4xl font-bold bg-linear-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-1 sm:mb-2 relative z-10">
-                {stat.value}
-              </div>
-              <div className="text-gray-400 light:text-gray-600 text-sm sm:text-base relative z-10">
-                {stat.label}
-              </div>
-            </motion.div>
+              <div className="text-gilt display mb-2 text-5xl sm:text-6xl">{s.value}</div>
+              <div className="text-xs uppercase tracking-[0.18em] text-faint">{s.label}</div>
+            </div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

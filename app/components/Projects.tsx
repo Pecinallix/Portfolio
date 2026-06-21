@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, Star, GitFork } from 'lucide-react';
+import { ArrowUpRight, Github, Star, GitFork } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { GITHUB_CONFIG, TOPIC_TO_TECH } from '../config/github';
 import { useLanguage } from '../contexts/LanguageContext';
+
+const ease = [0.16, 1, 0.3, 1] as const;
 
 interface GitHubRepo {
   id: number;
@@ -122,11 +124,11 @@ export default function Projects() {
 
   if (loading) {
     return (
-      <section id="projects" className="py-24 dark:bg-gray-900 light:bg-white">
-        <div className="container mx-auto px-6">
-          <div className="text-center">
-            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-500"></div>
-            <p className="text-gray-400 mt-4">{t('projects.loading')}</p>
+      <section id="projects" className="bg-base py-28">
+        <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
+          <div className="flex flex-col items-center gap-4 py-16">
+            <Github className="h-8 w-8 animate-pulse text-accent" />
+            <p className="text-sm text-muted">{t('projects.loading')}</p>
           </div>
         </div>
       </section>
@@ -134,146 +136,115 @@ export default function Projects() {
   }
 
   return (
-    <section id="projects" className="py-24 bg-gray-900 light:bg-white relative section-divider">
-      <div className="absolute inset-0 bg-grid-pattern" />
-      <div className="container mx-auto px-6 relative z-10">
+    <section id="projects" className="relative overflow-hidden bg-base py-28 sm:py-36">
+      <div className="relative z-10 mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.7, ease }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mb-16 max-w-3xl"
         >
-          <span className="text-cyan-400 font-mono text-sm uppercase tracking-widest mb-3 block">
-            &lt;projects /&gt;
-          </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+          <div className="mb-6 flex items-baseline gap-4">
+            <span className="index-num text-2xl">05</span>
+            <span className="kicker-plain">Repositórios</span>
+          </div>
+          <h2 className="display mb-6 text-[clamp(2.5rem,6vw,4.5rem)] text-ink">
             {t('projects.title')}
           </h2>
-          <div className="w-20 h-1 bg-linear-to-r from-blue-500 to-cyan-500 mx-auto rounded-full"></div>
-          <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
-            {t('projects.subtitle')}
-          </p>
+          <p className="text-lg leading-relaxed text-muted">{t('projects.subtitle')}</p>
         </motion.div>
 
         {projects.length > 0 ? (
           <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-6">
+            <div className="grid grid-cols-1 border-t border-l border-line sm:grid-cols-2 lg:grid-cols-3">
               {projects.map((project, index) => (
-                <motion.div
+                <motion.a
                   key={index}
-                  initial={{ opacity: 0, y: 20 }}
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 0.5,
-                    delay: index * 0.08,
-                    ease: 'easeOut',
-                  }}
+                  transition={{ duration: 0.5, delay: (index % 3) * 0.08, ease }}
                   viewport={{ once: true, amount: 0.2 }}
-                  whileHover={{
-                    y: -8,
-                    transition: { duration: 0.2 },
-                  }}
-                  className="group relative glass-card rounded-2xl overflow-hidden hover:border-cyan-500/30 transition-all duration-300 flex flex-col"
+                  className="group relative flex flex-col border-b border-r border-line p-7 transition-colors hover:bg-surface"
                 >
-                  {/* Gradient header */}
-                  <div className="h-32 bg-linear-to-br from-blue-600/20 via-cyan-600/10 to-teal-600/20 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-grid-pattern opacity-50" />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-4xl font-bold text-white/10 font-mono group-hover:text-white/20 transition-colors">
-                        {project.title.charAt(0)}
+                  <div className="mb-5 flex items-start justify-between">
+                    <span className="index-num text-base">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <ArrowUpRight className="h-5 w-5 text-faint transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent" strokeWidth={1.5} />
+                  </div>
+
+                  <h3 className="display mb-3 text-2xl text-ink transition-colors group-hover:text-accent">
+                    {project.title}
+                  </h3>
+
+                  <p className="mb-6 line-clamp-3 grow text-sm leading-relaxed text-muted">
+                    {project.description}
+                  </p>
+
+                  <div className="mb-5 flex flex-wrap gap-x-4 gap-y-1">
+                    {project.technologies.length > 0 ? (
+                      project.technologies.map((tech) => (
+                        <span key={tech} className="text-[0.68rem] uppercase tracking-[0.14em] text-faint">
+                          {tech}
+                        </span>
+                      ))
+                    ) : (
+                      <span className="text-[0.68rem] uppercase tracking-[0.14em] text-faint">
+                        {t('projects.noTags')}
                       </span>
-                    </div>
-                    {project.language && (
-                      <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/30 backdrop-blur-sm text-xs text-gray-300">
-                        <span
-                          className="w-2.5 h-2.5 rounded-full"
-                          style={{ backgroundColor: languageColors[project.language] || '#8b949e' }}
-                        />
-                        {project.language}
-                      </div>
                     )}
                   </div>
 
-                  <div className="relative p-5 flex flex-col grow">
-                    <div className="mb-3">
-                      <h3 className="text-lg font-bold dark:text-white light:text-gray-800 mb-2 group-hover:text-cyan-400 transition-colors">
-                        {project.title}
-                      </h3>
-                      <div className="flex items-center gap-4 text-gray-500 text-xs">
-                        <div className="flex items-center gap-1">
-                          <Star className="w-3.5 h-3.5" />
-                          <span>{project.stars}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <GitFork className="w-3.5 h-3.5" />
-                          <span>{project.forks}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <p className="dark:text-gray-400 light:text-gray-600 mb-4 text-sm leading-relaxed line-clamp-3 grow">
-                      {project.description}
-                    </p>
-
-                    <div className="flex flex-wrap gap-1.5 mb-4">
-                      {project.technologies.length > 0 ? (
-                        project.technologies.map((tech, techIndex) => (
-                          <span
-                            key={techIndex}
-                            className="px-2.5 py-0.5 dark:bg-cyan-500/10 light:bg-blue-50 dark:text-cyan-400 light:text-blue-600 text-xs font-medium rounded-lg"
-                          >
-                            {tech}
-                          </span>
-                        ))
-                      ) : (
-                        <span className="text-gray-500 text-xs">{t('projects.noTags')}</span>
-                      )}
-                    </div>
-
-                    <div className="pt-4 border-t dark:border-gray-700/50 light:border-gray-200 mt-auto">
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-linear-to-r from-blue-600 to-cyan-600 text-white rounded-xl text-sm font-medium hover:from-blue-500 hover:to-cyan-500 transition-all hover:shadow-lg hover:shadow-cyan-500/20 group/btn"
-                      >
-                        <Github className="w-4 h-4 group-hover/btn:scale-110 transition-transform" />
-                        <span>{t('projects.viewProject')}</span>
-                        <ExternalLink className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 transition-transform" />
-                      </a>
-                    </div>
+                  <div className="flex items-center gap-5 border-t border-line pt-4 text-xs text-faint">
+                    {project.language && (
+                      <span className="flex items-center gap-1.5">
+                        <span
+                          className="h-2 w-2 rounded-full"
+                          style={{ backgroundColor: languageColors[project.language] || '#8b949e' }}
+                        />
+                        {project.language}
+                      </span>
+                    )}
+                    <span className="flex items-center gap-1">
+                      <Star className="h-3.5 w-3.5" /> {project.stars}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <GitFork className="h-3.5 w-3.5" /> {project.forks}
+                    </span>
                   </div>
-                </motion.div>
+                </motion.a>
               ))}
             </div>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.6, ease }}
               viewport={{ once: true }}
-              className="text-center mt-12"
+              className="mt-12"
             >
               <a
                 href={`https://github.com/${GITHUB_CONFIG.username}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-8 py-4 glass-card rounded-xl font-semibold text-cyan-400 hover:border-cyan-500/40 transition-all hover:scale-105"
+                className="link-underline inline-flex items-center gap-2 text-sm"
               >
-                <Github className="w-5 h-5" />
                 {t('projects.viewMore')}
+                <ArrowUpRight className="h-4 w-4" />
               </a>
             </motion.div>
           </>
         ) : (
-          <div className="text-center py-12">
-            <Github className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-            <p className="text-gray-500">
+          <div className="py-12 text-center">
+            <Github className="mx-auto mb-4 h-12 w-12 text-faint" />
+            <p className="text-muted">
               Nenhum projeto encontrado. Verifique a configuração em{' '}
-              <code className="bg-gray-800 px-2 py-1 rounded">
-                app/config/github.ts
-              </code>
+              <code className="bg-surface px-2 py-1 text-accent">app/config/github.ts</code>
             </p>
           </div>
         )}

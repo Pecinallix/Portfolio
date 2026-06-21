@@ -1,78 +1,57 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { Globe } from 'lucide-react';
 import { useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const languages = [
-  { code: 'pt', label: 'PT', flag: '🇧🇷', name: 'Português' },
-  { code: 'en', label: 'EN', flag: '🇺🇸', name: 'English' },
-  { code: 'fr', label: 'FR', flag: '🇫🇷', name: 'Français' },
+  { code: 'pt', label: 'PT', name: 'Português' },
+  { code: 'en', label: 'EN', name: 'English' },
+  { code: 'fr', label: 'FR', name: 'Français' },
 ] as const;
 
 export default function LanguageToggle() {
   const { language, setLanguage } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
 
-  const currentLanguage = languages.find((lang) => lang.code === language);
+  const current = languages.find((lang) => lang.code === language);
 
   return (
     <div className="relative">
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 p-2 dark:bg-gray-800 light:bg-gray-100 rounded-lg dark:hover:bg-gray-700 light:hover:bg-gray-200 transition-colors"
-        whileHover={{ scale: 1.05 }}
+        className="flex h-9 items-center gap-1.5 border border-line px-3 text-xs uppercase tracking-[0.14em] text-muted transition-colors hover:border-line-strong hover:text-accent"
         whileTap={{ scale: 0.95 }}
         aria-label="Change language"
       >
-        <Globe className="w-5 h-5 dark:text-gray-300 light:text-gray-700" />
-        <span className="text-sm font-medium dark:text-gray-300 light:text-gray-700">
-          {currentLanguage?.label}
-        </span>
+        {current?.label}
       </motion.button>
 
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Overlay para fechar ao clicar fora */}
-            <div
-              className="fixed inset-0 z-40"
-              onClick={() => setIsOpen(false)}
-            />
-
+            <div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)} />
             <motion.div
-              initial={{ opacity: 0, y: -10, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -10, scale: 0.95 }}
+              initial={{ opacity: 0, y: -6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
               transition={{ duration: 0.15 }}
-              className="absolute right-0 mt-2 w-48 dark:bg-gray-800 light:bg-white rounded-lg shadow-lg border dark:border-gray-700 light:border-gray-200 overflow-hidden z-50"
+              className="absolute right-0 z-50 mt-2 w-44 border border-line bg-surface"
             >
               {languages.map((lang) => (
-                <motion.button
+                <button
                   key={lang.code}
                   onClick={() => {
                     setLanguage(lang.code);
                     setIsOpen(false);
                   }}
-                  className={`w-full flex items-center gap-3 px-4 py-3 transition-colors ${
+                  className={`flex w-full items-center justify-between px-4 py-3 text-left transition-colors ${
                     language === lang.code
-                      ? 'dark:bg-blue-600 light:bg-blue-600 text-white'
-                      : 'dark:hover:bg-gray-700 light:hover:bg-gray-100 dark:text-gray-300 light:text-gray-700'
+                      ? 'bg-accent-soft text-accent'
+                      : 'text-muted hover:bg-surface-2 hover:text-ink'
                   }`}
-                  whileHover={{ x: 4 }}
-                  transition={{ duration: 0.15 }}
                 >
-                  <span className="text-2xl">{lang.flag}</span>
-                  <div className="flex flex-col items-start">
-                    <span className="text-sm font-medium">{lang.name}</span>
-                    <span className="text-xs opacity-75">{lang.label}</span>
-                  </div>
-                  {language === lang.code && (
-                    <motion.div
-                      layoutId="activeLanguage"
-                      className="ml-auto w-2 h-2 bg-white rounded-full"
-                    />
-                  )}
-                </motion.button>
+                  <span className="font-serif text-sm">{lang.name}</span>
+                  <span className="text-[0.6rem] uppercase tracking-[0.2em] text-faint">{lang.label}</span>
+                </button>
               ))}
             </motion.div>
           </>
