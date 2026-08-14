@@ -12,7 +12,6 @@ import './app.css';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { LanguageProvider } from './contexts/LanguageContext';
 import MotionWrapper from './components/MotionWrapper';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export const links: Route.LinksFunction = () => [
   { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
@@ -46,7 +45,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <ScrollRestoration />
         <Scripts />
       </body>
-      <SpeedInsights />
     </html>
   );
 }
