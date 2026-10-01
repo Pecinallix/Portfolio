@@ -17,10 +17,11 @@ export default function Header() {
   }, []);
 
   const navItems = [
-    { name: t('nav.about'), href: '#about', num: '01' },
-    { name: t('nav.skills'), href: '#skills', num: '02' },
-    { name: t('nav.projects'), href: '#projects', num: '03' },
-    { name: t('nav.contact'), href: '#contact', num: '04' },
+    { name: t('nav.experience'), href: '#experience', num: '01' },
+    { name: t('nav.projects'), href: '#projects', num: '02' },
+    { name: t('nav.skills'), href: '#skills', num: '03' },
+    { name: t('nav.about'), href: '#about', num: '04' },
+    { name: t('nav.contact'), href: '#contact', num: '05' },
   ];
 
   const closeMenu = () => setIsOpen(false);
@@ -49,14 +50,14 @@ export default function Header() {
             <span className="hidden sm:block leading-tight">
               <span className="block font-serif text-[1.05rem] text-ink">Ícaro Pecinalli</span>
               <span className="block text-[0.62rem] uppercase tracking-[0.24em] text-faint">
-                Full-Stack Developer
+                {t('nav.role')}
               </span>
             </span>
           </motion.a>
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-9">
-            <ul className="flex items-center gap-9">
+            <ul className="flex items-center gap-7 lg:gap-9">
               {navItems.map((item, index) => (
                 <motion.li
                   key={item.href}

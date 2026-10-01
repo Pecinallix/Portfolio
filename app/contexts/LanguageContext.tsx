@@ -1,7 +1,9 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
 
-type Language = 'pt' | 'en' | 'fr';
+export type Language = 'pt' | 'en';
+
+const LANGUAGES: Language[] = ['pt', 'en'];
 
 interface LanguageContextType {
   language: Language;
@@ -16,366 +18,187 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
 export const translations = {
   pt: {
     // Header
-    'nav.home': 'Início',
-    'nav.about': 'Sobre',
-    'nav.skills': 'Skills',
+    'nav.experience': 'Experiência',
     'nav.projects': 'Projetos',
+    'nav.skills': 'Skills',
+    'nav.about': 'Sobre',
     'nav.contact': 'Contato',
     'nav.hire': 'Contratar',
-
-    // Welcome
-    'welcome.loading': 'Carregando...',
-    'welcome.msg': 'Bem-Vindo!',
+    'nav.role': 'Desenvolvedor Full Stack',
 
     // Hero
-    'hero.greeting': 'Olá! Sou',
-    'hero.title': 'Desenvolvedor Full Stack',
+    'hero.kicker': 'Portfólio',
+    'hero.location': 'Araruama, RJ · Brasil',
+    'hero.available': 'Disponível · Remoto ou mudança',
+    'hero.headline': 'Desenvolvedor Full Stack que coloca produto no ar.',
     'hero.description':
-      'Transformo ideias em soluções digitais inovadoras com código limpo e design moderno.',
-    'hero.cta': 'Ver Projetos',
-    'hero.download': 'Baixar Currículo',
-    'hero.contact': 'Entre em Contato',
+      'React, Node.js e PostgreSQL, do layout à VPS. Hoje mantenho um MMO no navegador, um diretório com mais de 13 mil IAs e bots de ofertas rodando 24/7.',
+    'hero.cta': 'Ver projetos',
+    'hero.download': 'Baixar currículo',
+    'hero.focus': 'Foco',
+    'hero.base': 'Base',
+    'hero.scroll': 'Role',
+    'hero.photoAlt': 'Foto de Ícaro Pecinalli',
 
-    // About
-    'about.title': 'Sobre Mim',
-    'about.intro1':
-      'Olá! Sou Ícaro Pecinalli, desenvolvedor apaixonado por tecnologia e inovação, com foco em criar aplicações web modernas e eficientes que fazem a diferença.',
-    'about.intro2':
-      'Com experiência em desenvolvimento Front End, domino tecnologias como React, Node.js, TypeScript e outras ferramentas modernas. Estou sempre em busca de novos desafios e oportunidades para crescer profissionalmente.',
-    'about.intro3':
-      'Meu objetivo é transformar ideias em soluções digitais de alta qualidade, combinando código limpo, boas práticas e uma experiência de usuário excepcional.',
-    'about.feature1.title': 'Código Limpo',
-    'about.feature1.desc':
-      'Escrevo código maintível, escalável e seguindo as melhores práticas da indústria.',
-    'about.feature2.title': 'Soluções Criativas',
-    'about.feature2.desc':
-      'Transformo ideias complexas em soluções elegantes e funcionais.',
-    'about.feature3.title': 'Performance',
-    'about.feature3.desc':
-      'Otimização e performance são prioridades em cada projeto que desenvolvo.',
-    'about.feature4.title': 'Trabalho em Equipe',
-    'about.feature4.desc':
-      'Colaboração efetiva e comunicação clara com times multidisciplinares.',
-    'about.stat1': 'Anos de Experiência',
-    'about.stat2': 'Projetos Concluídos',
-    'about.stat3': 'Clientes Satisfeitos',
-    'about.stat4': 'Dedicação',
-
-    // Skills
-    'skills.title': 'Habilidades & Tecnologias',
-    'skills.subtitle': 'Tecnologias que Trabalho',
-
-    // Featured Projects
-    'featured.title': 'Projetos Ativos',
-    'featured.subtitle': 'Projetos pessoais que estao no ar e em constante evolucao',
-    'featured.visit': 'Visitar',
-    'featured.status.live': 'Online',
-    'featured.status.openSource': 'Open Source',
-    'featured.stringGuardian.desc':
-      'Plugin para Claude Code que detecta e preserva automaticamente o encoding de arquivos com caracteres acentuados. Sem configuração. Sem passos manuais. Simplesmente funciona.',
-    'featured.secretForest.desc':
-      'Jogo web interativo estilo aventura ambientado em uma floresta misteriosa. Explore, descubra segredos e viva uma experiencia imersiva direto no navegador.',
-    'featured.promoRadar.desc':
-      'Bots automatizados que buscam as melhores promocoes 24h por dia, 7 dias por semana, e postam em tempo real no grupo do WhatsApp.',
-    'featured.findMyAi.desc':
-      'Diretorio de ferramentas de inteligencia artificial para o mercado brasileiro. Encontre a IA ideal para cada necessidade.',
-
-    // GitHub Stats
-    'stats.title': 'Atividade no GitHub',
-    'stats.subtitle': 'Estatísticas e atividade recente do meu perfil público no GitHub',
-    'stats.repos': 'Repositórios',
-    'stats.stars': 'Estrelas',
-    'stats.forks': 'Forks',
-    'stats.followers': 'Seguidores',
-    'stats.languages': 'Linguagens Utilizadas',
-    'stats.activity': 'Atividade Recente',
-    'stats.loading': 'Carregando estatísticas...',
-    'stats.viewProfile': 'Ver Perfil no GitHub',
-    'stats.pushed': 'Enviou',
-    'stats.opened_pr': 'Abriu PR',
-    'stats.merged_pr': 'Mesclou PR',
-    'stats.closed_pr': 'Fechou PR',
-    'stats.created_repo': 'Criou repositório',
-    'stats.created_branch': 'Criou branch',
-    'stats.opened_issue': 'Abriu issue',
-    'stats.closed_issue': 'Fechou issue',
+    // Experience
+    'experience.kicker': 'Experiência',
+    'experience.title': 'Onde construí',
+    'experience.titleAccent': 'coisas reais',
+    'experience.education': 'Formação',
 
     // Projects
-    'projects.title': 'Repositorios GitHub',
+    'projects.kicker': 'Projetos',
+    'projects.title': 'Produtos no ar',
     'projects.subtitle':
-      'Meus projetos mais recentes do GitHub, demonstrando minhas habilidades e expertise',
-    'projects.viewProject': 'Ver Projeto',
-    'projects.viewMore': 'Ver Mais no GitHub',
-    'projects.noTags': 'Sem tags',
-    'projects.loading': 'Carregando projetos...',
+      'Projetos que eu idealizei, construí e mantenho em produção — com usuários reais e infraestrutura própria.',
+    'projects.visit': 'Visitar',
+    'projects.noLink': 'Site em manutenção',
+    'projects.side.title': 'Open source & estudos',
+    'projects.side.more': 'Ver todos no GitHub',
+
+    // Skills
+    'skills.kicker': 'Habilidades',
+    'skills.title': 'Ferramentas que uso em produção',
+    'skills.marquee': 'Stack do dia a dia',
+
+    // About
+    'about.kicker': 'Sobre',
+    'about.title': 'Construo software com',
+    'about.titleAccent': 'intenção',
+    'about.p1':
+      'Sou desenvolvedor full stack em Araruama (RJ), formado em Análise e Desenvolvimento de Sistemas. Gosto de construir produtos inteiros: do layout à VPS, passando por banco de dados, deploy e suporte a usuários reais.',
+    'about.p2':
+      'O Ragnarok Online atravessa a minha carreira: comecei fazendo sites e scripts para servidores do jogo e hoje mantenho o meu próprio MMO no navegador. Agora procuro um time onde eu possa somar essa mentalidade de dono a uma engenharia mais madura.',
+    'about.stat.years': 'Anos de experiência',
+    'about.stat.products': 'Produtos em produção',
+    'about.stat.bots': 'Bots rodando 24/7',
+    'about.stat.tools': 'IAs catalogadas',
 
     // Contact
-    'contact.title': 'Entre em Contato',
-    'contact.subtitle':
-      'Tem um projeto em mente? Vamos conversar e transformar suas ideias em realidade',
-    'contact.info': 'Informações de Contato',
+    'contact.kicker': 'Contato',
+    'contact.title': 'Vamos',
+    'contact.titleAccent': 'conversar',
+    'contact.subtitle': 'Procurando um dev full stack? Me chame por e-mail, WhatsApp ou pelo formulário.',
     'contact.description':
-      'Estou sempre aberto a discutir novos projetos, ideias criativas ou oportunidades para fazer parte da sua visão.',
-    'contact.email': 'Email',
-    'contact.phone': 'Telefone',
+      'Estou aberto a vagas full stack — remotas ou com mudança. Também aceito projetos freelance.',
+    'contact.email': 'E-mail',
+    'contact.phone': 'WhatsApp',
     'contact.location': 'Localização',
-    'contact.social': 'Me siga nas redes',
+    'contact.social': 'Redes',
     'contact.form.name': 'Nome',
     'contact.form.namePlaceholder': 'Seu nome',
-    'contact.form.email': 'Email',
+    'contact.form.email': 'E-mail',
     'contact.form.emailPlaceholder': 'seu@email.com',
     'contact.form.subject': 'Assunto',
-    'contact.form.subjectPlaceholder': 'Como posso ajudar?',
+    'contact.form.subjectPlaceholder': 'Vaga, projeto ou dúvida',
     'contact.form.message': 'Mensagem',
     'contact.form.messagePlaceholder': 'Escreva sua mensagem...',
     'contact.form.sending': 'Enviando...',
-    'contact.form.send': 'Enviar Mensagem',
-    'contact.form.success':
-      '✓ Mensagem enviada com sucesso! Entrarei em contato em breve.',
+    'contact.form.send': 'Enviar mensagem',
+    'contact.form.success': '✓ Mensagem enviada! Respondo assim que possível.',
     'contact.form.error':
-      '✗ Erro ao enviar mensagem. Por favor, tente novamente ou use o email diretamente.',
+      '✗ Não consegui enviar. Tente de novo ou escreva direto para o meu e-mail.',
+
+    // Footer
+    'footer.cta': 'Vamos conversar',
+    'footer.top': 'Voltar ao topo ↑',
+    'footer.tagline': 'Desenvolvedor full stack — produtos do layout à VPS.',
+    'footer.nav': 'Navegação',
+    'footer.social': 'Social',
+    'footer.base': 'Base',
+    'footer.rights': 'Todos os direitos reservados.',
   },
   en: {
     // Header
-    'nav.home': 'Home',
-    'nav.about': 'About',
-    'nav.skills': 'Skills',
+    'nav.experience': 'Experience',
     'nav.projects': 'Projects',
+    'nav.skills': 'Skills',
+    'nav.about': 'About',
     'nav.contact': 'Contact',
-    'nav.hire': 'Hire Me',
-
-    // Welcome
-    'welcome.loading': 'Loading...',
-    'welcome.msg': 'Welcome!',
+    'nav.hire': 'Hire me',
+    'nav.role': 'Full Stack Developer',
 
     // Hero
-    'hero.greeting': "Hello! I'm",
-    'hero.title': 'Full Stack Developer',
+    'hero.kicker': 'Portfolio',
+    'hero.location': 'Araruama, RJ · Brazil',
+    'hero.available': 'Available · Remote or relocation',
+    'hero.headline': 'Full stack developer who ships products.',
     'hero.description':
-      'I transform ideas into innovative digital solutions with clean code and modern design.',
-    'hero.cta': 'View Projects',
-    'hero.download': 'Download Resume',
-    'hero.contact': 'Get in Touch',
+      'React, Node.js and PostgreSQL, from layout to VPS. Today I run a browser MMO, a directory of 13,000+ AI tools and deal bots running 24/7.',
+    'hero.cta': 'View projects',
+    'hero.download': 'Download resume',
+    'hero.focus': 'Focus',
+    'hero.base': 'Based in',
+    'hero.scroll': 'Scroll',
+    'hero.photoAlt': 'Photo of Ícaro Pecinalli',
 
-    // About
-    'about.title': 'About Me',
-    'about.intro1':
-      "Hello! I'm Ícaro Pecinalli, a developer passionate about technology and innovation, focused on creating modern and efficient web applications that make a difference.",
-    'about.intro2':
-      "With Front End development experience, I master technologies like React, Node.js, TypeScript and other modern tools. I'm always looking for new challenges and opportunities to grow professionally.",
-    'about.intro3':
-      'My goal is to transform ideas into high-quality digital solutions, combining clean code, best practices and exceptional user experience.',
-    'about.feature1.title': 'Clean Code',
-    'about.feature1.desc':
-      'I write maintainable, scalable code following industry best practices.',
-    'about.feature2.title': 'Creative Solutions',
-    'about.feature2.desc':
-      'I transform complex ideas into elegant and functional solutions.',
-    'about.feature3.title': 'Performance',
-    'about.feature3.desc':
-      'Optimization and performance are priorities in every project I develop.',
-    'about.feature4.title': 'Teamwork',
-    'about.feature4.desc':
-      'Effective collaboration and clear communication with multidisciplinary teams.',
-    'about.stat1': 'Years of Experience',
-    'about.stat2': 'Completed Projects',
-    'about.stat3': 'Satisfied Clients',
-    'about.stat4': 'Dedication',
-
-    // Skills
-    'skills.title': 'Skills & Technologies',
-    'skills.subtitle': 'Technologies I Work With',
-
-    // Featured Projects
-    'featured.title': 'Active Projects',
-    'featured.subtitle': 'Personal projects that are live and constantly evolving',
-    'featured.visit': 'Visit',
-    'featured.status.live': 'Live',
-    'featured.status.openSource': 'Open Source',
-    'featured.stringGuardian.desc':
-      'Claude Code plugin that automatically detects and preserves file encoding for accented characters. No configuration. No manual steps. It just works.',
-    'featured.secretForest.desc':
-      'Interactive adventure-style web game set in a mysterious forest. Explore, discover secrets and live an immersive experience right in your browser.',
-    'featured.promoRadar.desc':
-      'Automated bots that search for the best deals 24/7 and post them in real time to a WhatsApp group.',
-    'featured.findMyAi.desc':
-      'Directory of artificial intelligence tools for the Brazilian market. Find the ideal AI for every need.',
-
-    // GitHub Stats
-    'stats.title': 'GitHub Activity',
-    'stats.subtitle': 'Stats and recent activity from my public GitHub profile',
-    'stats.repos': 'Repositories',
-    'stats.stars': 'Stars',
-    'stats.forks': 'Forks',
-    'stats.followers': 'Followers',
-    'stats.languages': 'Languages Used',
-    'stats.activity': 'Recent Activity',
-    'stats.loading': 'Loading stats...',
-    'stats.viewProfile': 'View GitHub Profile',
-    'stats.pushed': 'Pushed',
-    'stats.opened_pr': 'Opened PR',
-    'stats.merged_pr': 'Merged PR',
-    'stats.closed_pr': 'Closed PR',
-    'stats.created_repo': 'Created repository',
-    'stats.created_branch': 'Created branch',
-    'stats.opened_issue': 'Opened issue',
-    'stats.closed_issue': 'Closed issue',
+    // Experience
+    'experience.kicker': 'Experience',
+    'experience.title': 'Where I built',
+    'experience.titleAccent': 'real things',
+    'experience.education': 'Education',
 
     // Projects
-    'projects.title': 'GitHub Repositories',
+    'projects.kicker': 'Projects',
+    'projects.title': 'Live products',
     'projects.subtitle':
-      'My latest GitHub projects, showcasing my skills and expertise',
-    'projects.viewProject': 'View Project',
-    'projects.viewMore': 'View More on GitHub',
-    'projects.noTags': 'No tags',
-    'projects.loading': 'Loading projects...',
+      'Products I designed, built and keep running in production — with real users and my own infrastructure.',
+    'projects.visit': 'Visit',
+    'projects.noLink': 'Website under maintenance',
+    'projects.side.title': 'Open source & side projects',
+    'projects.side.more': 'See everything on GitHub',
+
+    // Skills
+    'skills.kicker': 'Skills',
+    'skills.title': 'Tools I use in production',
+    'skills.marquee': 'Everyday stack',
+
+    // About
+    'about.kicker': 'About',
+    'about.title': 'I build software with',
+    'about.titleAccent': 'intent',
+    'about.p1':
+      'I’m a full stack developer from Araruama, Rio de Janeiro, with a degree in Systems Analysis and Development. I like building whole products: from layout to VPS, including databases, deploys and supporting real users.',
+    'about.p2':
+      'Ragnarok Online runs through my career: I started building websites and scripts for game servers, and today I run my own browser MMO. Now I’m looking for a team where I can bring that ownership mindset to a more mature engineering practice.',
+    'about.stat.years': 'Years of experience',
+    'about.stat.products': 'Products in production',
+    'about.stat.bots': 'Bots running 24/7',
+    'about.stat.tools': 'AI tools catalogued',
 
     // Contact
-    'contact.title': 'Get in Touch',
-    'contact.subtitle':
-      "Have a project in mind? Let's talk and turn your ideas into reality",
-    'contact.info': 'Contact Information',
+    'contact.kicker': 'Contact',
+    'contact.title': 'Let’s',
+    'contact.titleAccent': 'talk',
+    'contact.subtitle': 'Looking for a full stack developer? Reach me by e-mail, WhatsApp or the form.',
     'contact.description':
-      "I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision.",
-    'contact.email': 'Email',
-    'contact.phone': 'Phone',
+      'I’m open to full stack positions — remote or with relocation. I also take freelance projects.',
+    'contact.email': 'E-mail',
+    'contact.phone': 'WhatsApp',
     'contact.location': 'Location',
-    'contact.social': 'Follow me',
+    'contact.social': 'Social',
     'contact.form.name': 'Name',
     'contact.form.namePlaceholder': 'Your name',
-    'contact.form.email': 'Email',
-    'contact.form.emailPlaceholder': 'your@email.com',
+    'contact.form.email': 'E-mail',
+    'contact.form.emailPlaceholder': 'you@email.com',
     'contact.form.subject': 'Subject',
-    'contact.form.subjectPlaceholder': 'How can I help?',
+    'contact.form.subjectPlaceholder': 'Position, project or question',
     'contact.form.message': 'Message',
     'contact.form.messagePlaceholder': 'Write your message...',
     'contact.form.sending': 'Sending...',
-    'contact.form.send': 'Send Message',
-    'contact.form.success':
-      "✓ Message sent successfully! I'll get back to you soon.",
+    'contact.form.send': 'Send message',
+    'contact.form.success': '✓ Message sent! I’ll get back to you soon.',
     'contact.form.error':
-      '✗ Error sending message. Please try again or use email directly.',
-  },
-  fr: {
-    // Header
-    'nav.home': 'Accueil',
-    'nav.about': 'À propos',
-    'nav.skills': 'Compétences',
-    'nav.projects': 'Projets',
-    'nav.contact': 'Contact',
-    'nav.hire': 'Me recruter',
+      '✗ Couldn’t send it. Please try again or e-mail me directly.',
 
-    // Welcome
-    'welcome.loading': 'Chargement...',
-    'welcome.msg': 'Accueillir!',
-
-    // Hero
-    'hero.greeting': 'Bonjour! Je suis',
-    'hero.title': 'Développeur Full Stack',
-    'hero.description':
-      'Je transforme les idées en solutions numériques innovantes avec du code propre et un design moderne.',
-    'hero.cta': 'Voir les projets',
-    'hero.download': 'Télécharger CV',
-    'hero.contact': 'Me contacter',
-
-    // About
-    'about.title': 'À propos de moi',
-    'about.intro1':
-      "Bonjour! Je suis Ícaro Pecinalli, développeur passionné par la technologie et l'innovation, axé sur la création d'applications web modernes et efficaces qui font la différence.",
-    'about.intro2':
-      "Avec une expérience en développement Front End, je maîtrise des technologies comme React, Node.js, TypeScript et d'autres outils modernes. Je suis toujours à la recherche de nouveaux défis et d'opportunités de croissance professionnelle.",
-    'about.intro3':
-      'Mon objectif est de transformer les idées en solutions numériques de haute qualité, en combinant code propre, bonnes pratiques et expérience utilisateur exceptionnelle.',
-    'about.feature1.title': 'Code Propre',
-    'about.feature1.desc':
-      "J'écris du code maintenable et évolutif en suivant les meilleures pratiques de l'industrie.",
-    'about.feature2.title': 'Solutions Créatives',
-    'about.feature2.desc':
-      'Je transforme des idées complexes en solutions élégantes et fonctionnelles.',
-    'about.feature3.title': 'Performance',
-    'about.feature3.desc':
-      "L'optimisation et la performance sont des priorités dans chaque projet que je développe.",
-    'about.feature4.title': "Travail d'équipe",
-    'about.feature4.desc':
-      'Collaboration efficace et communication claire avec des équipes multidisciplinaires.',
-    'about.stat1': "Années d'expérience",
-    'about.stat2': 'Projets terminés',
-    'about.stat3': 'Clients satisfaits',
-    'about.stat4': 'Dévouement',
-
-    // Skills
-    'skills.title': 'Compétences & Technologies',
-    'skills.subtitle': 'Technologies avec lesquelles je travaille',
-
-    // Featured Projects
-    'featured.title': 'Projets Actifs',
-    'featured.subtitle': 'Projets personnels en ligne et en constante evolution',
-    'featured.visit': 'Visiter',
-    'featured.status.live': 'En ligne',
-    'featured.status.openSource': 'Open Source',
-    'featured.stringGuardian.desc':
-      "Plugin Claude Code qui détecte et préserve automatiquement l'encodage des fichiers avec des caractères accentués. Sans configuration. Sans étapes manuelles. Ça fonctionne.",
-    'featured.secretForest.desc':
-      "Jeu web interactif de style aventure dans une foret mysterieuse. Explorez, decouvrez des secrets et vivez une experience immersive directement dans votre navigateur.",
-    'featured.promoRadar.desc':
-      'Bots automatises qui recherchent les meilleures promotions 24h/24, 7j/7, et les publient en temps reel dans un groupe WhatsApp.',
-    'featured.findMyAi.desc':
-      "Repertoire d'outils d'intelligence artificielle pour le marche bresilien. Trouvez l'IA ideale pour chaque besoin.",
-
-    // GitHub Stats
-    'stats.title': 'Activité GitHub',
-    'stats.subtitle': 'Statistiques et activité récente de mon profil GitHub public',
-    'stats.repos': 'Dépôts',
-    'stats.stars': 'Étoiles',
-    'stats.forks': 'Forks',
-    'stats.followers': 'Abonnés',
-    'stats.languages': 'Langages Utilisés',
-    'stats.activity': 'Activité Récente',
-    'stats.loading': 'Chargement des stats...',
-    'stats.viewProfile': 'Voir le profil GitHub',
-    'stats.pushed': 'A poussé',
-    'stats.opened_pr': 'Ouvert PR',
-    'stats.merged_pr': 'Fusionné PR',
-    'stats.closed_pr': 'Fermé PR',
-    'stats.created_repo': 'Créé un dépôt',
-    'stats.created_branch': 'Créé une branche',
-    'stats.opened_issue': 'Ouvert issue',
-    'stats.closed_issue': 'Fermé issue',
-
-    // Projects
-    'projects.title': 'Depots GitHub',
-    'projects.subtitle':
-      'Mes derniers projets GitHub, demontrant mes competences et mon expertise',
-    'projects.viewProject': 'Voir le projet',
-    'projects.viewMore': 'Voir plus sur GitHub',
-    'projects.noTags': 'Pas de tags',
-    'projects.loading': 'Chargement des projets...',
-
-    // Contact
-    'contact.title': 'Me contacter',
-    'contact.subtitle':
-      'Vous avez un projet en tête? Discutons et transformons vos idées en réalité',
-    'contact.info': 'Informations de contact',
-    'contact.description':
-      "Je suis toujours ouvert à discuter de nouveaux projets, d'idées créatives ou d'opportunités pour faire partie de votre vision.",
-    'contact.email': 'Email',
-    'contact.phone': 'Téléphone',
-    'contact.location': 'Localisation',
-    'contact.social': 'Suivez-moi',
-    'contact.form.name': 'Nom',
-    'contact.form.namePlaceholder': 'Votre nom',
-    'contact.form.email': 'Email',
-    'contact.form.emailPlaceholder': 'votre@email.com',
-    'contact.form.subject': 'Sujet',
-    'contact.form.subjectPlaceholder': 'Comment puis-je vous aider?',
-    'contact.form.message': 'Message',
-    'contact.form.messagePlaceholder': 'Écrivez votre message...',
-    'contact.form.sending': 'Envoi en cours...',
-    'contact.form.send': 'Envoyer le message',
-    'contact.form.success':
-      '✓ Message envoyé avec succès! Je vous contacterai bientôt.',
-    'contact.form.error':
-      "✗ Erreur lors de l'envoi du message. Veuillez réessayer ou utiliser l'email directement.",
+    // Footer
+    'footer.cta': 'Let’s talk',
+    'footer.top': 'Back to top ↑',
+    'footer.tagline': 'Full stack developer — products from layout to VPS.',
+    'footer.nav': 'Navigation',
+    'footer.social': 'Social',
+    'footer.base': 'Based in',
+    'footer.rights': 'All rights reserved.',
   },
 };
 
@@ -384,10 +207,14 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const savedLanguage = localStorage.getItem('language') as Language;
-    if (savedLanguage && ['pt', 'en', 'fr'].includes(savedLanguage)) {
+    if (savedLanguage && LANGUAGES.includes(savedLanguage)) {
       setLanguageState(savedLanguage);
     }
   }, []);
+
+  useEffect(() => {
+    document.documentElement.lang = language === 'pt' ? 'pt-BR' : 'en';
+  }, [language]);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);

@@ -1,5 +1,6 @@
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { CONTACT, RESUME } from '../data/profile';
 import {
   motion,
   useMotionValue,
@@ -12,19 +13,32 @@ import { useEffect } from 'react';
 const ease = [0.16, 1, 0.3, 1] as const;
 
 const focus = [
-  { num: '01', label: 'Front-end', val: 'React · TypeScript' },
-  { num: '02', label: 'Back-end', val: 'Node.js · APIs' },
-  { num: '03', label: 'Interface', val: 'Tailwind · UX' },
+  { num: '01', label: 'Front-end', val: 'React · Next.js · Vue · TypeScript' },
+  { num: '02', label: 'Back-end', val: 'Node.js · Express · PostgreSQL' },
+  { num: '03', label: 'Infra', val: 'VPS Linux · nginx · CI/CD' },
 ];
 
 const socials = [
-  { label: 'GitHub', href: 'https://github.com/Pecinallix' },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/icaropecinalli/' },
-  { label: 'Email', href: 'mailto:icaropecinalli@gmail.com' },
+  { label: 'GitHub', href: CONTACT.github },
+  { label: 'LinkedIn', href: CONTACT.linkedin },
+  { label: 'Email', href: `mailto:${CONTACT.email}` },
 ];
 
+function AvailableBadge({ label }: { label: string }) {
+  return (
+    <div className="flex items-center gap-2.5">
+      <span className="relative flex h-2 w-2">
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
+        <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+      </span>
+      <span className="text-[0.7rem] uppercase tracking-[0.22em] text-muted">{label}</span>
+    </div>
+  );
+}
+
 export default function Hero() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const resume = RESUME[language];
 
   const pointerX = useMotionValue(0.5);
   const pointerY = useMotionValue(0.5);
@@ -75,16 +89,31 @@ export default function Hero() {
           transition={{ duration: 0.7, ease }}
           className="mb-10 flex flex-wrap items-center gap-x-5 gap-y-2 text-[0.7rem] uppercase tracking-[0.24em] text-faint"
         >
-          <span className="kicker-plain">Portfólio</span>
+          <span className="kicker-plain">{t('hero.kicker')}</span>
           <span className="hidden h-3 w-px bg-line sm:block" />
-          <span>Rio de Janeiro · BR</span>
-          <span className="hidden h-3 w-px bg-line sm:block" />
-          <span>Est. {new Date().getFullYear()}</span>
+          <span>{t('hero.location')}</span>
         </motion.div>
 
         <div className="grid grid-cols-1 items-end gap-12 lg:grid-cols-[1fr_22rem]">
           {/* Main column */}
           <div>
+            {/* Compact photo + availability (mobile / tablet) */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease }}
+              className="mb-8 flex items-center gap-5 lg:hidden"
+            >
+              <img
+                src="/perfil.webp"
+                alt={t('hero.photoAlt')}
+                width={80}
+                height={80}
+                className="h-20 w-20 border border-line-strong object-cover"
+              />
+              <AvailableBadge label={t('hero.available')} />
+            </motion.div>
+
             <h1 className="display text-[clamp(3.5rem,11vw,9rem)] text-ink">
               {['Ícaro', 'Pecinalli'].map((word, i) => (
                 <motion.span
@@ -102,8 +131,17 @@ export default function Hero() {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.45, ease }}
-              className="mt-8 max-w-xl font-serif text-xl leading-relaxed text-muted sm:text-2xl"
+              transition={{ duration: 0.8, delay: 0.4, ease }}
+              className="mt-8 max-w-2xl font-serif text-2xl leading-snug text-ink sm:text-3xl"
+            >
+              {t('hero.headline')}
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.5, ease }}
+              className="mt-5 max-w-xl text-lg leading-relaxed text-muted"
             >
               {t('hero.description')}
             </motion.p>
@@ -127,8 +165,8 @@ export default function Hero() {
                   <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </a>
                 <a
-                  href="/curriculo.pdf"
-                  download="Icaro_Pecinalli_Curriculo.pdf"
+                  href={resume.href}
+                  download={resume.filename}
                   className="btn-ghost px-7 py-3.5 text-sm"
                 >
                   {t('hero.download')}
@@ -160,19 +198,21 @@ export default function Hero() {
             className="hidden lg:block"
           >
             <div className="plate p-7">
-              <div className="flex items-center gap-2.5">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
-                </span>
-                <span className="text-[0.7rem] uppercase tracking-[0.22em] text-muted">
-                  Disponível para projetos
-                </span>
+              <div className="relative mb-6 aspect-square overflow-hidden border border-line">
+                <img
+                  src="/perfil.webp"
+                  alt={t('hero.photoAlt')}
+                  width={640}
+                  height={643}
+                  className="h-full w-full object-cover"
+                />
               </div>
+
+              <AvailableBadge label={t('hero.available')} />
 
               <div className="my-6 rule" />
 
-              <p className="mb-4 text-[0.65rem] uppercase tracking-[0.28em] text-faint">Foco</p>
+              <p className="mb-4 text-[0.65rem] uppercase tracking-[0.28em] text-faint">{t('hero.focus')}</p>
               <ul className="space-y-4">
                 {focus.map((f) => (
                   <li key={f.num} className="flex items-baseline gap-3">
@@ -189,7 +229,7 @@ export default function Hero() {
 
               <div className="flex items-end justify-between">
                 <div>
-                  <p className="mb-1 text-[0.65rem] uppercase tracking-[0.28em] text-faint">Base</p>
+                  <p className="mb-1 text-[0.65rem] uppercase tracking-[0.28em] text-faint">{t('hero.base')}</p>
                   <p className="font-serif text-ink">Araruama, RJ</p>
                 </div>
                 <span className="text-gilt font-serif text-4xl leading-none">íp</span>
@@ -201,13 +241,13 @@ export default function Hero() {
 
       {/* Scroll cue */}
       <motion.a
-        href="#about"
+        href="#experience"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2, duration: 0.8 }}
         className="absolute bottom-7 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-faint transition-colors hover:text-accent sm:flex"
       >
-        <span className="text-[0.62rem] uppercase tracking-[0.3em]">Role</span>
+        <span className="text-[0.62rem] uppercase tracking-[0.3em]">{t('hero.scroll')}</span>
         <motion.span animate={{ y: [0, 7, 0] }} transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}>
           <ArrowDown className="h-4 w-4" />
         </motion.span>

@@ -5,7 +5,6 @@ import { useLanguage } from '../contexts/LanguageContext';
 const languages = [
   { code: 'pt', label: 'PT', name: 'Português' },
   { code: 'en', label: 'EN', name: 'English' },
-  { code: 'fr', label: 'FR', name: 'Français' },
 ] as const;
 
 export default function LanguageToggle() {

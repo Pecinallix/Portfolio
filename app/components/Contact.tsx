@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Mail, MapPin, Phone, ArrowUpRight } from 'lucide-react';
 import { useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { CONTACT } from '../data/profile';
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -34,7 +35,7 @@ export default function Contact() {
           email: formData.email,
           subject: formData.subject,
           message: formData.message,
-          to: 'icaropecinalli@gmail.com',
+          to: CONTACT.email,
         }),
       });
 
@@ -62,9 +63,8 @@ export default function Contact() {
   };
 
   const contactInfo = [
-    { icon: Mail, title: t('contact.email'), value: 'icaropecinalli@gmail.com', link: 'mailto:icaropecinalli@gmail.com' },
-    { icon: Phone, title: t('contact.phone'), value: '+55 (22) 99267-9550', link: 'https://wa.link/edn4ap' },
-    { icon: MapPin, title: t('contact.location'), value: 'Rio de Janeiro, Araruama', link: '#' },
+    { icon: Mail, title: t('contact.email'), value: CONTACT.email, link: `mailto:${CONTACT.email}` },
+    { icon: Phone, title: t('contact.phone'), value: CONTACT.phone, link: CONTACT.whatsapp },
   ];
 
   const inputClasses =
@@ -85,12 +85,12 @@ export default function Contact() {
           className="mb-16 max-w-3xl"
         >
           <div className="mb-6 flex items-baseline gap-4">
-            <span className="index-num text-2xl">06</span>
-            <span className="kicker-plain">Contato</span>
+            <span className="index-num text-2xl">05</span>
+            <span className="kicker-plain">{t('contact.kicker')}</span>
           </div>
           <h2 className="display mb-6 text-[clamp(2.5rem,7vw,5rem)] text-ink">
-            Vamos criar algo{' '}
-            <span className="text-gilt serif-italic">memorável</span>.
+            {t('contact.title')}{' '}
+            <span className="text-gilt serif-italic">{t('contact.titleAccent')}</span>.
           </h2>
           <p className="text-lg leading-relaxed text-muted">{t('contact.subtitle')}</p>
         </motion.div>
@@ -114,7 +114,7 @@ export default function Contact() {
                   href={info.link}
                   target={info.link.startsWith('http') ? '_blank' : undefined}
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-5 border-t border-line py-5 last:border-b"
+                  className="group flex items-center gap-5 border-t border-line py-5"
                 >
                   <info.icon className="h-5 w-5 text-accent" strokeWidth={1.5} />
                   <div className="flex-1">
@@ -124,13 +124,20 @@ export default function Contact() {
                   <ArrowUpRight className="h-4 w-4 text-faint transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent" />
                 </a>
               ))}
+              <div className="flex items-center gap-5 border-y border-line py-5">
+                <MapPin className="h-5 w-5 text-accent" strokeWidth={1.5} />
+                <div>
+                  <div className="text-[0.62rem] uppercase tracking-[0.22em] text-faint">{t('contact.location')}</div>
+                  <div className="font-serif text-lg text-ink">{t('hero.location')}</div>
+                </div>
+              </div>
             </div>
 
             <div className="mt-10">
               <p className="mb-4 text-[0.62rem] uppercase tracking-[0.24em] text-faint">{t('contact.social')}</p>
               <div className="flex gap-6">
-                <a href="https://github.com/Pecinallix" target="_blank" rel="noopener noreferrer" className="link-underline text-sm">GitHub</a>
-                <a href="https://www.linkedin.com/in/icaropecinalli/" target="_blank" rel="noopener noreferrer" className="link-underline text-sm">LinkedIn</a>
+                <a href={CONTACT.github} target="_blank" rel="noopener noreferrer" className="link-underline text-sm">GitHub</a>
+                <a href={CONTACT.linkedin} target="_blank" rel="noopener noreferrer" className="link-underline text-sm">LinkedIn</a>
               </div>
             </div>
           </motion.div>
