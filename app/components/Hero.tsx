@@ -1,6 +1,6 @@
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
-import { CONTACT, RESUME } from '../data/profile';
+import { CONTACT, RESUME, asset } from '../data/profile';
 import {
   motion,
   useMotionValue,
@@ -105,7 +105,7 @@ export default function Hero() {
               className="mb-8 flex items-center gap-5 lg:hidden"
             >
               <img
-                src="/perfil.webp"
+                src={asset('perfil.webp')}
                 alt={t('hero.photoAlt')}
                 width={80}
                 height={80}
@@ -200,7 +200,7 @@ export default function Hero() {
             <div className="plate p-7">
               <div className="relative mb-6 aspect-square overflow-hidden border border-line">
                 <img
-                  src="/perfil.webp"
+                  src={asset('perfil.webp')}
                   alt={t('hero.photoAlt')}
                   width={640}
                   height={643}

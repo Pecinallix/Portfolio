@@ -37,7 +37,9 @@ Textos exclusivos do currículo (resumo, certificações, idiomas) ficam em `cv/
 
 ## Deploy
 
-O build é uma SPA estática (`ssr: false`): qualquer servidor de arquivos serve `build/client`.
+No ar em **https://pecinallix.github.io/Portfolio/**. Todo push na `main` publica sozinho pelo GitHub Actions (`.github/workflows/deploy.yml`); em Settings → Pages a *Source* deve ser **GitHub Actions**.
+
+O build é uma SPA estática (`ssr: false`), então qualquer servidor de arquivos serve `build/client`. Para rodar numa subpasta, defina `BASE_PATH` (ex.: `BASE_PATH=/Portfolio/ npm run build`).
 
 ```bash
 docker build -t portfolio .

@@ -14,7 +14,7 @@ import { LanguageProvider } from './contexts/LanguageContext';
 import MotionWrapper from './components/MotionWrapper';
 
 export const links: Route.LinksFunction = () => [
-  { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
+  { rel: 'icon', type: 'image/svg+xml', href: `${import.meta.env.BASE_URL}favicon.svg` },
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
   {
     rel: 'preconnect',

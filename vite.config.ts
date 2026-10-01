@@ -4,5 +4,7 @@ import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
+  // GitHub Pages serve o site em /<repo>/ — o workflow passa BASE_PATH.
+  base: process.env.BASE_PATH || '/',
   plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
 });

@@ -118,7 +118,7 @@ function render(lang: Language) {
     <h1>ÍCARO PECINALLI</h1>
     <div class="role">${esc(c.title)}</div>
     <div class="contact">
-      ${esc(CONTACT.phone)} | ${esc(CONTACT.email)} | ${esc(stripProtocol(CONTACT.linkedin))} | ${esc(stripProtocol(CONTACT.github))}
+      ${esc(CONTACT.phone)} | ${esc(CONTACT.email)} | ${esc(stripProtocol(CONTACT.linkedin))} | ${esc(stripProtocol(CONTACT.github))} | ${esc(stripProtocol(CONTACT.site))}
     </div>
     <div class="contact">${esc(c.location)}</div>
   </header>

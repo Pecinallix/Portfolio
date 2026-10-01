@@ -2,17 +2,21 @@ import type { Language } from '../contexts/LanguageContext';
 
 type Localized = Record<Language, string>;
 
+// Prefixa arquivos de public/ com o base path (o site pode rodar em /<repo>/ no GitHub Pages).
+export const asset = (path: string) => `${import.meta.env?.BASE_URL ?? "/"}${path}`;
+
 export const CONTACT = {
   email: 'icaropecinalli@gmail.com',
   phone: '+55 (22) 99267-9550',
   whatsapp: 'https://wa.link/edn4ap',
   github: 'https://github.com/Pecinallix',
   linkedin: 'https://www.linkedin.com/in/icaropecinalli/',
+  site: 'https://pecinallix.github.io/Portfolio/',
 };
 
 export const RESUME: Record<Language, { href: string; filename: string }> = {
-  pt: { href: '/curriculo.pdf', filename: 'Icaro_Pecinalli_Curriculo.pdf' },
-  en: { href: '/resume.pdf', filename: 'Icaro_Pecinalli_Resume.pdf' },
+  pt: { href: asset('curriculo.pdf'), filename: 'Icaro_Pecinalli_Curriculo.pdf' },
+  en: { href: asset('resume.pdf'), filename: 'Icaro_Pecinalli_Resume.pdf' },
 };
 
 export interface Experience {
@@ -155,7 +159,7 @@ export const featuredProjects: FeaturedProject[] = [
     title: 'FindMyAI',
     url: 'https://www.findmyai.com.br',
     linkLabel: 'findmyai.com.br',
-    image: '/findmyai.webp',
+    image: asset('findmyai.webp'),
     status: { pt: 'No ar', en: 'Live' },
     description: {
       pt: 'Diretório de ferramentas de inteligência artificial para o mercado brasileiro. Você descreve a tarefa e encontra a IA certa — com busca, comparador lado a lado e curadoria manual, sem posições pagas.',
@@ -168,7 +172,7 @@ export const featuredProjects: FeaturedProject[] = [
     title: 'Idle RO',
     url: 'https://idlero.com',
     linkLabel: 'idlero.com',
-    image: '/idlero.webp',
+    image: asset('idlero.webp'),
     status: { pt: 'No ar', en: 'Live' },
     description: {
       pt: 'MMO idle de fantasia no navegador, inspirado no Ragnarok Online: mundo persistente em tempo real, sem download, com PWA e app Android. Começou como Secret Forest, meu primeiro jogo web, e evoluiu até virar um MMO completo.',
@@ -179,7 +183,7 @@ export const featuredProjects: FeaturedProject[] = [
   },
   {
     title: 'PromoRadar',
-    image: '/promoradar.webp',
+    image: asset('promoradar.webp'),
     status: { pt: 'Em operação', en: 'Running' },
     description: {
       pt: 'Bots que vasculham marketplaces 24 horas por dia e publicam as melhores ofertas em tempo real em grupos do Telegram e do WhatsApp, com links de afiliado rastreados.',
@@ -192,7 +196,7 @@ export const featuredProjects: FeaturedProject[] = [
     title: 'String Guardian',
     url: 'https://github.com/Pecinallix/string-guardian',
     linkLabel: 'GitHub',
-    image: '/stringguardian.webp',
+    image: asset('stringguardian.webp'),
     status: { pt: 'Open source', en: 'Open source' },
     description: {
       pt: 'Plugin para Claude Code que detecta e preserva automaticamente o encoding de arquivos com caracteres acentuados. Sem configuração, sem passos manuais — simplesmente funciona.',
