@@ -36,7 +36,7 @@ export const experiences: Experience[] = [
   {
     company: 'Idle RO',
     role: { pt: 'Fundador & Desenvolvedor Full Stack', en: 'Founder & Full Stack Developer' },
-    period: { pt: 'jul 2026 — presente', en: 'Jul 2026 — present' },
+    period: { pt: 'jul 2026 - presente', en: 'Jul 2026 - present' },
     context: { pt: 'Produto próprio', en: 'Own product' },
     url: 'https://idlero.com',
     bullets: [
@@ -49,8 +49,8 @@ export const experiences: Experience[] = [
         en: 'Set up production on a Linux VPS (nginx, PM2, certbot, fail2ban) with a scripted deploy that validates migrations before restarting the API and swaps the build atomically.',
       },
       {
-        pt: 'CI no GitHub Actions (Vitest + build), fluxo develop → main por pull request e interface em 5 idiomas — cerca de 2.100 commits em três meses.',
-        en: 'CI on GitHub Actions (Vitest + build), develop → main flow through pull requests and a UI in 5 languages — around 2,100 commits in three months.',
+        pt: 'CI no GitHub Actions (Vitest + build), fluxo develop → main por pull request e interface em 5 idiomas, com cerca de 2.100 commits em três meses.',
+        en: 'CI on GitHub Actions (Vitest + build), develop → main flow through pull requests and a UI in 5 languages, with around 2,100 commits in three months.',
       },
       {
         pt: 'Desenvolvi um pipeline próprio que converte os arquivos originais do Ragnarok Online em sprites e mapas para o Phaser.',
@@ -62,7 +62,7 @@ export const experiences: Experience[] = [
   {
     company: 'FindMyAI',
     role: { pt: 'Fundador & Desenvolvedor Full Stack', en: 'Founder & Full Stack Developer' },
-    period: { pt: 'mai 2026 — presente', en: 'May 2026 — present' },
+    period: { pt: 'mai 2026 - presente', en: 'May 2026 - present' },
     context: { pt: 'Produto próprio', en: 'Own product' },
     url: 'https://www.findmyai.com.br',
     bullets: [
@@ -80,7 +80,7 @@ export const experiences: Experience[] = [
   {
     company: 'PromoRadar',
     role: { pt: 'Cofundador & Desenvolvedor Full Stack', en: 'Co-founder & Full Stack Developer' },
-    period: { pt: 'nov 2025 — presente', en: 'Nov 2025 — present' },
+    period: { pt: 'nov 2025 - presente', en: 'Nov 2025 - present' },
     context: { pt: 'Produto próprio', en: 'Own product' },
     bullets: [
       {
@@ -101,7 +101,7 @@ export const experiences: Experience[] = [
   {
     company: { pt: 'Servidores de Ragnarok Online', en: 'Ragnarok Online servers' },
     role: { pt: 'Desenvolvedor Front-end e Back-end', en: 'Front-end & Back-end Developer' },
-    period: { pt: 'dez 2024 — presente', en: 'Dec 2024 — present' },
+    period: { pt: 'dez 2024 - presente', en: 'Dec 2024 - present' },
     context: { pt: 'Freelance', en: 'Freelance' },
     bullets: [
       {
@@ -118,12 +118,12 @@ export const experiences: Experience[] = [
   {
     company: 'Grupo Altuori',
     role: { pt: 'Cofundador & Desenvolvedor', en: 'Co-founder & Developer' },
-    period: { pt: 'abr 2022 — out 2022', en: 'Apr 2022 — Oct 2022' },
+    period: { pt: 'abr 2022 - out 2022', en: 'Apr 2022 - Oct 2022' },
     context: { pt: 'Agência web', en: 'Web agency' },
     bullets: [
       {
-        pt: 'Mais de 8 sites para clientes reais — energia solar, escritório de advocacia, e-commerce de móveis — em HTML, CSS e JavaScript.',
-        en: '8+ websites for real clients — solar energy, a law firm, a furniture e-commerce — in HTML, CSS and JavaScript.',
+        pt: 'Mais de 8 sites para clientes reais (energia solar, escritório de advocacia, e-commerce de móveis) em HTML, CSS e JavaScript.',
+        en: '8+ websites for real clients (solar energy, a law firm, a furniture e-commerce) in HTML, CSS and JavaScript.',
       },
       {
         pt: 'Ciclo completo: levantamento de requisitos, negociação, desenvolvimento, hospedagem, entrega e suporte.',
@@ -140,7 +140,7 @@ export const education = {
     en: 'Associate Degree in Systems Analysis and Development',
   } as Localized,
   school: 'Universidade Estácio de Sá',
-  period: '2022 — 2024',
+  period: '2022 - 2024',
 };
 
 export interface FeaturedProject {
@@ -162,8 +162,8 @@ export const featuredProjects: FeaturedProject[] = [
     image: asset('findmyai.webp'),
     status: { pt: 'No ar', en: 'Live' },
     description: {
-      pt: 'Diretório de ferramentas de inteligência artificial para o mercado brasileiro. Você descreve a tarefa e encontra a IA certa — com busca, comparador lado a lado e curadoria manual, sem posições pagas.',
-      en: 'A directory of artificial intelligence tools for the Brazilian market. Describe the task and find the right AI — with search, side-by-side comparison and manual curation, no paid placements.',
+      pt: 'Diretório de ferramentas de inteligência artificial para o mercado brasileiro. Você descreve a tarefa e encontra a IA certa, com busca, comparador lado a lado e curadoria manual, sem posições pagas.',
+      en: 'A directory of artificial intelligence tools for the Brazilian market. Describe the task and find the right AI, with search, side-by-side comparison and manual curation, no paid placements.',
     },
     highlight: { pt: '13.000+ ferramentas · 26 categorias', en: '13,000+ tools · 26 categories' },
     tags: ['Next.js', 'TypeScript', 'Express', 'PostgreSQL'],
@@ -199,8 +199,8 @@ export const featuredProjects: FeaturedProject[] = [
     image: asset('stringguardian.webp'),
     status: { pt: 'Open source', en: 'Open source' },
     description: {
-      pt: 'Plugin para Claude Code que detecta e preserva automaticamente o encoding de arquivos com caracteres acentuados. Sem configuração, sem passos manuais — simplesmente funciona.',
-      en: 'A Claude Code plugin that automatically detects and preserves the encoding of files with accented characters. No configuration, no manual steps — it just works.',
+      pt: 'Plugin para Claude Code que detecta e preserva automaticamente o encoding de arquivos com caracteres acentuados. Sem configuração, sem passos manuais: simplesmente funciona.',
+      en: 'A Claude Code plugin that automatically detects and preserves the encoding of files with accented characters. No configuration, no manual steps: it just works.',
     },
     highlight: { pt: 'Plugin open source', en: 'Open-source plugin' },
     tags: ['Claude Code', 'Node.js', 'Python'],

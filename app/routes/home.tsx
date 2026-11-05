@@ -1,6 +1,7 @@
 import type { Route } from './+types/home';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
+import Swarm from '../components/Swarm';
 import Experience from '../components/Experience';
 import FeaturedProjects from '../components/FeaturedProjects';
 import Skills from '../components/Skills';
@@ -9,7 +10,7 @@ import Contact from '../components/Contact';
 import { useLanguage } from '../contexts/LanguageContext';
 import { CONTACT } from '../data/profile';
 
-const TITLE = 'Ícaro Pecinalli — Desenvolvedor Full Stack';
+const TITLE = 'Ícaro Pecinalli | Desenvolvedor Full Stack';
 const DESCRIPTION =
   'Desenvolvedor full stack (React, Node.js, PostgreSQL) que coloca produto no ar: Idle RO, FindMyAI e PromoRadar. Disponível para vagas remotas ou com mudança.';
 
@@ -44,6 +45,7 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
+        <Swarm />
         <Experience />
         <FeaturedProjects />
         <Skills />
@@ -105,7 +107,7 @@ export default function Home() {
 
           <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-line pt-8 sm:flex-row sm:items-center">
             <p className="text-xs text-faint">
-              &copy; {new Date().getFullYear()} Ícaro Pecinalli — {t('footer.rights')}
+              &copy; {new Date().getFullYear()} Ícaro Pecinalli. {t('footer.rights')}
             </p>
             <p className="text-xs italic text-faint font-serif">
               React Router · TypeScript · Tailwind CSS

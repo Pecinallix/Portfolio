@@ -40,6 +40,38 @@ export const translations = {
     'hero.scroll': 'Role',
     'hero.photoAlt': 'Foto de Ícaro Pecinalli',
 
+    // Swarm
+    'swarm.kicker': 'Método',
+    'swarm.title': 'Planejo como arquiteto, entrego como um',
+    'swarm.titleAccent': 'enxame',
+    'swarm.subtitle':
+      'É assim que organizo projetos grandes e como trabalho com agentes de IA no dia a dia: um planejador raiz quebra o problema, sub-planejadores cuidam de cada área e workers executam em paralelo. No fim de cada ciclo, testes e revisão decidem se segue.',
+    'swarm.root': 'Planner raiz',
+    'swarm.legend.root': 'Raiz',
+    'swarm.legend.planner': 'Sub-planner',
+    'swarm.legend.worker': 'Worker',
+    'swarm.legend.task': 'Tarefa',
+    'swarm.delegate': 'Delegar demanda',
+    'swarm.hint': 'Clique para delegar uma nova demanda',
+    'swarm.srDescription':
+      'Animação de um enxame de agentes: um planejador raiz distribui tarefas para quatro sub-planejadores (front-end, back-end, infra e bots), cujos workers executam as tarefas em paralelo e reportam o resultado de volta.',
+    'swarm.stat.active': 'Agentes ativos',
+    'swarm.stat.done': 'Tarefas entregues',
+    'swarm.stat.cycle': 'Ciclo',
+    'swarm.log': 'Registro ao vivo',
+    'swarm.you': 'você',
+    'swarm.ev.plan': 'nova tarefa',
+    'swarm.ev.claim': 'assumiu',
+    'swarm.ev.fail': 'teste falhou, volta pra fila',
+    'swarm.ev.judge': 'ciclo {n} aprovado → próximo',
+    'swarm.ev.user': 'nova demanda para todas as áreas',
+    'swarm.p1.title': 'Planejar',
+    'swarm.p1.text': 'Quebro o problema em áreas e tarefas pequenas, cada uma com um critério de pronto claro e verificável.',
+    'swarm.p2.title': 'Paralelizar',
+    'swarm.p2.text': 'Cada frente anda sozinha: front, back, infra e automação não ficam esperando umas pelas outras.',
+    'swarm.p3.title': 'Julgar',
+    'swarm.p3.text': 'Testes, CI e revisão decidem o que vai para produção. O que falha volta para a fila, não para o usuário.',
+
     // Experience
     'experience.kicker': 'Experiência',
     'experience.title': 'Onde construí',
@@ -50,7 +82,7 @@ export const translations = {
     'projects.kicker': 'Projetos',
     'projects.title': 'Produtos no ar',
     'projects.subtitle':
-      'Projetos que eu idealizei, construí e mantenho em produção — com usuários reais e infraestrutura própria.',
+      'Projetos que eu idealizei, construí e mantenho em produção, com usuários reais e infraestrutura própria.',
     'projects.visit': 'Visitar',
     'projects.noLink': 'Site em manutenção',
     'projects.side.title': 'Open source & estudos',
@@ -80,7 +112,7 @@ export const translations = {
     'contact.titleAccent': 'conversar',
     'contact.subtitle': 'Procurando um dev full stack? Me chame por e-mail, WhatsApp ou pelo formulário.',
     'contact.description':
-      'Estou aberto a vagas full stack — remotas ou com mudança. Também aceito projetos freelance.',
+      'Estou aberto a vagas full stack, remotas ou com mudança. Também aceito projetos freelance.',
     'contact.email': 'E-mail',
     'contact.phone': 'WhatsApp',
     'contact.location': 'Localização',
@@ -102,7 +134,7 @@ export const translations = {
     // Footer
     'footer.cta': 'Vamos conversar',
     'footer.top': 'Voltar ao topo ↑',
-    'footer.tagline': 'Desenvolvedor full stack — produtos do layout à VPS.',
+    'footer.tagline': 'Desenvolvedor full stack. Produtos do layout à VPS.',
     'footer.nav': 'Navegação',
     'footer.social': 'Social',
     'footer.base': 'Base',
@@ -132,6 +164,38 @@ export const translations = {
     'hero.scroll': 'Scroll',
     'hero.photoAlt': 'Photo of Ícaro Pecinalli',
 
+    // Swarm
+    'swarm.kicker': 'Method',
+    'swarm.title': 'I plan like an architect and ship like a',
+    'swarm.titleAccent': 'swarm',
+    'swarm.subtitle':
+      'This is how I organize large projects and how I work with AI agents every day: a root planner breaks the problem down, sub-planners own each area and workers execute in parallel. At the end of every cycle, tests and review decide whether it moves on.',
+    'swarm.root': 'Root planner',
+    'swarm.legend.root': 'Root',
+    'swarm.legend.planner': 'Sub-planner',
+    'swarm.legend.worker': 'Worker',
+    'swarm.legend.task': 'Task',
+    'swarm.delegate': 'Delegate work',
+    'swarm.hint': 'Click to delegate new work',
+    'swarm.srDescription':
+      'Animation of an agent swarm: a root planner hands tasks to four sub-planners (front end, back end, infra and bots), whose workers execute the tasks in parallel and report the results back.',
+    'swarm.stat.active': 'Active agents',
+    'swarm.stat.done': 'Tasks shipped',
+    'swarm.stat.cycle': 'Cycle',
+    'swarm.log': 'Live log',
+    'swarm.you': 'you',
+    'swarm.ev.plan': 'new task',
+    'swarm.ev.claim': 'claimed',
+    'swarm.ev.fail': 'test failed, back to queue',
+    'swarm.ev.judge': 'cycle {n} approved → next',
+    'swarm.ev.user': 'new request for every area',
+    'swarm.p1.title': 'Plan',
+    'swarm.p1.text': 'I break the problem into areas and small tasks, each with a clear, verifiable definition of done.',
+    'swarm.p2.title': 'Parallelize',
+    'swarm.p2.text': 'Every track moves on its own: front end, back end, infra and automation never wait on each other.',
+    'swarm.p3.title': 'Judge',
+    'swarm.p3.text': 'Tests, CI and review decide what reaches production. What fails goes back to the queue, not to the user.',
+
     // Experience
     'experience.kicker': 'Experience',
     'experience.title': 'Where I built',
@@ -142,7 +206,7 @@ export const translations = {
     'projects.kicker': 'Projects',
     'projects.title': 'Live products',
     'projects.subtitle':
-      'Products I designed, built and keep running in production — with real users and my own infrastructure.',
+      'Products I designed, built and keep running in production, with real users and my own infrastructure.',
     'projects.visit': 'Visit',
     'projects.noLink': 'Website under maintenance',
     'projects.side.title': 'Open source & side projects',
@@ -172,7 +236,7 @@ export const translations = {
     'contact.titleAccent': 'talk',
     'contact.subtitle': 'Looking for a full stack developer? Reach me by e-mail, WhatsApp or the form.',
     'contact.description':
-      'I’m open to full stack positions — remote or with relocation. I also take freelance projects.',
+      'I’m open to full stack positions, remote or with relocation. I also take freelance projects.',
     'contact.email': 'E-mail',
     'contact.phone': 'WhatsApp',
     'contact.location': 'Location',
@@ -194,7 +258,7 @@ export const translations = {
     // Footer
     'footer.cta': 'Let’s talk',
     'footer.top': 'Back to top ↑',
-    'footer.tagline': 'Full stack developer — products from layout to VPS.',
+    'footer.tagline': 'Full stack developer. Products from layout to VPS.',
     'footer.nav': 'Navigation',
     'footer.social': 'Social',
     'footer.base': 'Based in',

@@ -3,11 +3,11 @@
 @variant light (.light &);
 
 /* ============================================================
-   MIDNIGHT LUXE — design system
+   MIDNIGHT LUXE · design system
    Deep warm charcoal · champagne/bronze accent · editorial serif
    ============================================================ */
 
-/* Semantic tokens — DARK is the default theme */
+/* Semantic tokens: DARK is the default theme */
 :root {
   --base:        #14130f; /* deepest background (warm charcoal, not black) */
   --base-2:      #100f0c; /* footer / wells */

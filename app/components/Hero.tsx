@@ -241,7 +241,7 @@ export default function Hero() {
 
       {/* Scroll cue */}
       <motion.a
-        href="#experience"
+        href="#swarm"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2, duration: 0.8 }}

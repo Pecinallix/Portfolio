@@ -30,8 +30,8 @@ const copy = {
     experienceTitle: 'Experiência',
     openSourceTitle: 'Open source',
     openSource: [
-      'String Guardian — plugin para Claude Code que detecta e preserva o encoding de arquivos com acentos (Node.js, Python). github.com/Pecinallix/string-guardian',
-      'Conversor LUB ↔ LUA — ferramenta web que compila e decompila bytecode Lua no navegador (JavaScript). github.com/Pecinallix/Conversor-Lub-Lua',
+      'String Guardian: plugin para Claude Code que detecta e preserva o encoding de arquivos com acentos (Node.js, Python). github.com/Pecinallix/string-guardian',
+      'Conversor LUB ↔ LUA: ferramenta web que compila e decompila bytecode Lua no navegador (JavaScript). github.com/Pecinallix/Conversor-Lub-Lua',
     ],
     educationTitle: 'Formação',
     certificationsTitle: 'Certificações',
@@ -50,8 +50,8 @@ const copy = {
     experienceTitle: 'Experience',
     openSourceTitle: 'Open source',
     openSource: [
-      'String Guardian — Claude Code plugin that detects and preserves the encoding of files with accented characters (Node.js, Python). github.com/Pecinallix/string-guardian',
-      'LUB ↔ LUA Converter — web tool that compiles and decompiles Lua bytecode in the browser (JavaScript). github.com/Pecinallix/Conversor-Lub-Lua',
+      'String Guardian: Claude Code plugin that detects and preserves the encoding of files with accented characters (Node.js, Python). github.com/Pecinallix/string-guardian',
+      'LUB ↔ LUA Converter: web tool that compiles and decompiles Lua bytecode in the browser (JavaScript). github.com/Pecinallix/Conversor-Lub-Lua',
     ],
     educationTitle: 'Education',
     certificationsTitle: 'Certifications',
@@ -92,7 +92,7 @@ function render(lang: Language) {
 <html lang="${lang === 'pt' ? 'pt-BR' : 'en'}">
 <head>
 <meta charset="utf-8" />
-<title>Ícaro Pecinalli — ${esc(c.title)}</title>
+<title>Ícaro Pecinalli | ${esc(c.title)}</title>
 <style>
   @page { size: A4; margin: 14mm 15mm; }
   * { box-sizing: border-box; }

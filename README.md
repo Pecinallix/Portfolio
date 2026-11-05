@@ -1,4 +1,4 @@
-# Portfólio — Ícaro Pecinalli
+# Portfólio de Ícaro Pecinalli
 
 Portfólio pessoal de desenvolvedor full stack, em português e inglês, construído com React Router v7, TypeScript, Tailwind CSS v4 e Framer Motion.
 
